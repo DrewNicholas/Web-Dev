@@ -1,0 +1,54 @@
+# Assignment: Project One
+# Author: Drew Nicholas (dmnichoas@me.com)
+# Version: 09.15.2015.02
+# Purpose: Calculate the value of a home for River Falls Construction Company
+
+use 5.14.1;
+use warnings;
+
+my ($totalPrice, $lotNum, $bedrooms, $bathrooms, $garageSize);
+
+sub main {
+     setLotNum();
+     setBedroomNum();
+     setBathroomNum();
+     setGarageSize();
+     determinePrice();
+     printResults();
+}
+
+main();
+
+sub setLotNum {
+     print "Welcome to the River Falls Subdivision.\n";
+     print "What is the lot number for this house? ";
+     chomp ($lotNum = <STDIN>);
+}
+
+sub setBedroomNum {
+     print "How many bedrooms are there for lot number $lotNum? ";
+     chomp ($bedrooms = <STDIN>);
+}
+
+sub setBathroomNum {
+     print "How many bathrooms for the $bedrooms bedroom house on lot $lotNum? ";
+     chomp ($bathrooms = <STDIN>);
+}
+
+sub setGarageSize {
+     print "How many cars does the garage for the $bedrooms bedroom, $bathrooms bathroom house on lot $lotNum hold? ";
+     chomp ($garageSize = <STDIN>);
+}
+
+sub determinePrice {
+     use constant BASEPRICE => 50000;
+     use constant BEDPRICE => 17000;
+     use constant BATHPRICE => 12500;
+     use constant GARAGEPRICE => 6000;
+     $totalPrice = BASEPRICE + ($bedrooms * BEDPRICE) + ($bathrooms * BATHPRICE) + ($garageSize * GARAGEPRICE);
+}
+
+sub printResults {
+     system("cls");
+     print "\n\nThe price for the $bedrooms bedroom, $bathrooms bathroom, $garageSize car garage on lot $lotNum is $totalPrice dollars.\n";
+}
