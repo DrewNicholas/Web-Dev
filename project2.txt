@@ -36,7 +36,7 @@ main();
 
 sub setContinueInt {
 	if (defined $continueInt){
-		print "\n\nDo you want to enter another order now (0=no, 1=yes)? ";
+		print "\n\nDo you want to enter another order (0=no, 1=yes)? ";
 		chomp ($continueInt = <STDIN>);
 	}else {
 		$continueInt = 1;
