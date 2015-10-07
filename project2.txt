@@ -35,10 +35,10 @@ sub main {
 main();
 
 sub setContinueInt {
-	if (defined $continueInt){
+	if (defined $continueInt) {
 		print "\n\nDo you want to enter another order (0=no, 1=yes)? ";
 		chomp ($continueInt = <STDIN>);
-	}else {
+	} else {
 		$continueInt = 1;
 	}
 }
@@ -95,16 +95,16 @@ sub printResults {
 	if (($color == GOLD || $color == BLACK_WHITE) && ($woodType == OAK || $woodType == PINE)) {
 		if ($woodType != OAK) {
 			print "\nFor order number $orderNumber for $customerName, a pine sign saying $signMessage ";
-		}else {
+		} else {
 			print "\nFor order number $orderNumber for $customerName, an oak sign saying $signMessage ";
 		}
 		if ($color != GOLD) {
 			print "with black or white letters. ";
-		}else {
+		} else {
 			print "with gold letters. ";
 		}
 		print "Your total bill is $totalBill. ";
-	}else {
+	} else {
 		printError();
 	}
 }

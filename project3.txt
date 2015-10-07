@@ -9,5 +9,5 @@ use warnings;
 my ($variable);
 
 sub main {
-     doSomething();
+    
 }
