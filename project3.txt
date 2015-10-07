@@ -1,13 +1,76 @@
 # Assignment: Project 3
 # Author: Drew Nicholas (dmnicholas@me.com)
 # Version: 10.10.2015.01
-# Purpose:
+# Purpose: Cafe Noir market research
 
 use 5.14.1;
 use warnings;
 
-my ($variable);
+my ($continueInt, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items);
 
 sub main {
+    use constant YES => 1;
+    setContinueInt();
+    system("cls");
     
+}
+
+main();
+
+sub setContinueInt {
+     if (defined $continueInt) {
+          print "\nWould you like to continue (0=no, 1=yes)? ";
+          chomp ($continueInt = <STDIN>);
+     } else {
+          $continueInt = 1;
+     }
+}
+
+sub setAge {
+     use constant MIN_AGE => 10;
+     use constant MAX_AGE => 110;
+     while ($age < MIN_AGE || $age > MAX_AGE) {
+          print "What is the customer's age? ";
+          chomp ($age = <STDIN>);
+     }
+}
+
+sub setZip {
+     use constant MIN_ZIP => 00501;
+     use constant MAX_ZIP => 99950;
+     while ($zipCode < MIN_ZIP || $zipCode > MAX_ZIP) {
+          print "\nWhat is the customer's ZIP code? ";
+          chomp ($zipCode = <STDIN>);
+     }
+}
+
+sub setItems {
+     use constant MIN_ITEMS => 1;
+     use constant MAX_ITEMS => 12;
+     print "\nHow many items did the customer buy? ";
+     chomp ($items = <STDIN>);
+     for (my $i = 0; $i <2 && ($items < MIN_ITEMS || $items > MAX_ITEMS); $i++) {
+          print "\nHow many items did the customer buy? ";
+          chomp ($items = <STDIN>);
+     }
+}
+
+sub setAvgAge {
+     
+}
+
+sub setSameZipItems {
+     
+}
+
+sub setOtherZipItems {
+     
+}
+
+sub setUnder30Items {
+     
+}
+
+sub setOver30Items {
+     
 }
