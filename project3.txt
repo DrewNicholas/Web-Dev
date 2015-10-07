@@ -6,13 +6,20 @@
 use 5.14.1;
 use warnings;
 
-my ($continueInt, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items);
+my ($continueInt, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
 
 sub main {
     use constant YES => 1;
     setContinueInt();
+    $counter = 0;
     system("cls");
-    
+    while ($continueInt == YES) {
+          setItems();
+          setZip();
+          setAge();
+          setContinueInt();
+    }
+    printResults();
 }
 
 main();
@@ -33,6 +40,10 @@ sub setAge {
           print "What is the customer's age? ";
           chomp ($age = <STDIN>);
      }
+     setAvgAge();
+     setUnder30Items();
+     setOver30Items();
+     
 }
 
 sub setZip {
@@ -42,6 +53,8 @@ sub setZip {
           print "\nWhat is the customer's ZIP code? ";
           chomp ($zipCode = <STDIN>);
      }
+     setSameZipItems();
+     setOtherZipItems();
 }
 
 sub setItems {
@@ -56,21 +69,57 @@ sub setItems {
 }
 
 sub setAvgAge {
-     
+     $avgAge = (($avgAge * $counter) + $age) / ($counter++);
 }
 
 sub setSameZipItems {
-     
+     use constant SAME_ZIP => 54984;
+     if (!(defined $sameZipItems)) {
+          $sameZipItems = 0;
+     }
+     if ($zipCode == SAME_ZIP) {
+          $sameZipItems = $sameZipItems + $items;
+     }
 }
 
 sub setOtherZipItems {
-     
+     use constant SAME_ZIP =>54984;
+     if (!(defined $otherZipItems)) {
+          $otherZipItems = 0;
+     }
+     if ($zipCode != SAME_ZIP) {
+          $otherZipItems = $otherZipItems + $items;
+     }
 }
 
 sub setUnder30Items {
-     
+     use constant THIRTY => 30;
+     if (!(defined $under30Items)) {
+          $under30Items = 0;
+     }
+     if ($age < THIRTY) {
+          $under30Items = $under30Items + $items;
+     }   
 }
 
 sub setOver30Items {
+     use constant THIRTY => 30;
+     if (!(defined $over30Items)) {
+          $over30Items = 0;
+     }
+     if ($age >= THIRTY) {
+          $over30Items = $over30Items + $items;
+     }
+}
+
+sub printResults {
+     print "\nItems from local ZIP: $sameZipItems";
+     print "\nItems from other ZIPs: $otherZipItems";
+     print "\nItems bought by customers under 30: $under30Items";
+     print "\nItems bought by customers 30 and older: $over30Items";
+     print "\nAverage customer age: $avgAge";
+}
+
+sub printError {
      
 }
