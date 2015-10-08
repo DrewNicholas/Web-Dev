@@ -10,9 +10,7 @@ my ($orderNumber, $continueInt, $woodType, $numLetters, $color, $totalBill, $cou
 my ($signMessage, $customerName);
 
 use constant OAK => 1;
-use constant PINE => 0;
 use constant GOLD => 1;
-use constant BLACK_WHITE => 0;
 
 sub main {
 	use constant YES => 1;
@@ -92,20 +90,20 @@ sub calculateTotalBill {
 }
 
 sub printResults {
-	if (($color == GOLD || $color == BLACK_WHITE) && ($woodType == OAK || $woodType == PINE)) {
+	if (($color == GOLD || $color == 0) && ($woodType == OAK || $woodType == 0)) {
 		print "\nFor order number $orderNumber for $customerName, ";
 		if ($woodType != OAK) {
 			print "a pine ";
 		} else {
 			print "an oak ";
 		}
-		print "sign saying $signMessage ";
+		print "sign saying $signMessage with ";
 		if ($color != GOLD) {
-			print "with black or white letters. ";
+			print "black or white ";
 		} else {
-			print "with gold letters. ";
+			print "gold ";
 		}
-		print "Your total bill is $totalBill. ";
+		print "letters. Your total bill is $totalBill. ";
 	} else {
 		printError();
 	}
