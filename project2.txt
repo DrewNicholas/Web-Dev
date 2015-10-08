@@ -93,11 +93,13 @@ sub calculateTotalBill {
 
 sub printResults {
 	if (($color == GOLD || $color == BLACK_WHITE) && ($woodType == OAK || $woodType == PINE)) {
+		print "\nFor order number $orderNumber for $customerName, ";
 		if ($woodType != OAK) {
-			print "\nFor order number $orderNumber for $customerName, a pine sign saying $signMessage ";
+			print "a pine ";
 		} else {
-			print "\nFor order number $orderNumber for $customerName, an oak sign saying $signMessage ";
+			print "an oak ";
 		}
+		print "sign saying $signMessage ";
 		if ($color != GOLD) {
 			print "with black or white letters. ";
 		} else {

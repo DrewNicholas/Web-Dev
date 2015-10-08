@@ -6,8 +6,36 @@
 use 5.14.1;
 use warnings;
 
-my ($variable);
+my ($continueInt, $zipCode, $age, $items);
 
 sub main {
     
 }
+
+sub setContinueInt {
+     if (defined $continueInt){
+          print "Would you like to continue (0=no, 1=yes)? ";
+          chomp ($continueInt = <STDIN>);
+     }else {
+          $continueInt = 1;
+     }
+}
+
+sub setAge {
+     use constant MIN_AGE => 10;
+     use constant MAX_AGE => 110;
+     while ($age < MIN_AGE || $age > MAX_AGE) {
+         print "What is the customer's age? ";
+         chomp ($age = <STDIN>);
+     }
+}
+
+sub setZipCode {
+    use constant MIN_ZIP => 00501;
+    use constant MAX_ZIP => 99950;
+    while ($zipCode < MIN_ZIP || $zipCode > MAX_ZIP) {
+          print "What is the customer's ZIP code? ";
+          chomp ($zipCode = <STDIN>);
+    }
+}
+
