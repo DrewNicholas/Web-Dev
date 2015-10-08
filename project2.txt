@@ -1,6 +1,6 @@
 # Assignment: Project 2
 # Author: Drew Nicholas (dmnicholas@me.com)
-# Version 9.29.2015.01
+# Version 9.29.2015.02
 # Purpose: Calculate the price of home signs for Mark Daniels
 
 use 5.14.1;
