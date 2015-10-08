@@ -6,18 +6,21 @@
 use 5.14.1;
 use warnings;
 
-my ($continueInt, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
+my ($continueInt, $isCounted, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
+
+use constant YES => 1;
 
 sub main {
-    use constant YES => 1;
     setContinueInt();
     $counter = 0;
     system("cls");
     while ($continueInt == YES) {
           setItems();
-          setZip();
-          setAge();
-          setContinueInt();
+          if ($isCounted = YES) {
+               setZip();
+               setAge();
+               setContinueInt();
+          }
     }
     printResults();
 }
@@ -57,16 +60,27 @@ sub setZip {
 sub setItems {
      use constant MIN_ITEMS => 1;
      use constant MAX_ITEMS => 12;
-     print "\nHow many items did the customer buy? ";
-     chomp ($items = <STDIN>);
-     for (my $i = 0; $i <2 && ($items < MIN_ITEMS || $items > MAX_ITEMS); $i++) {
-          print "\nHow many items did the customer buy? ";
-          chomp ($items = <STDIN>);
+     use constant MAX_TRIES => 3;
+     my $tries = 0;
+     
+     $isCounted = YES;
+     $items = 0;
+     
+     for (my $i = 0; $i <= MAX_TRIES && ($items < MIN_ITEMS || $items > MAX_ITEMS); $i++) {
+          if ($tries < MAX_TRIES) {
+               print "\nHow many items did the customer buy? ";
+               chomp ($items = <STDIN>);
+          } else {
+               if ($items < MIN_ITEMS) {
+                    print "\nError with order size. This order will not be counted.";
+                    $isCounted = 0;
+               }
+          }
      }
 }
 
 sub setAvgAge {
-     $avgAge = (($avgAge * $counter) + $age) / ($counter++);
+     $avgAge = (($avgAge * $counter) + $age) / ($counter + 1);
 }
 
 sub setSameZipItems {
@@ -115,8 +129,5 @@ sub printResults {
      print "\nItems bought by customers under 30: $under30Items";
      print "\nItems bought by customers 30 and older: $over30Items";
      print "\nAverage customer age: $avgAge";
-}
-
-sub printError {
-     
+     sleep 5;         
 }
