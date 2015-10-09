@@ -6,7 +6,7 @@
 use 5.14.1;
 use warnings;
 
-my ($continueInt, $isCounted, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
+my ($continueInt, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
 
 use constant YES => 1;
 use constant THIRTY => 30;
