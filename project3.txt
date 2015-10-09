@@ -9,18 +9,18 @@ use warnings;
 my ($continueInt, $isCounted, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
 
 use constant YES => 1;
+use constant THIRTY => 30;
+use constant SAME_ZIP => 54984;
 
 sub main {
     setContinueInt();
     $counter = 0;
     system("cls");
     while ($continueInt == YES) {
+          setZip();
+          setAge();
           setItems();
-          if ($isCounted = YES) {
-               setZip();
-               setAge();
-               setContinueInt();
-          }
+          setContinueInt();      
     }
     printResults();
 }
@@ -29,62 +29,74 @@ main();
 
 sub setContinueInt {
      if (defined $continueInt) {
-          print "\nWould you like to continue (0=no, 1=yes)? ";
+          print "\nWould you like to enter another order (0=no, 1=yes)? ";
           chomp ($continueInt = <STDIN>);
      } else {
+          $continueInt = YES;
+     }
+}     
 
 sub setAge {
      use constant MIN_AGE => 10;
      use constant MAX_AGE => 110;
+     print "What is the customer's age? ";
+     chomp ($age = <STDIN>);
      while ($age < MIN_AGE || $age > MAX_AGE) {
           print "What is the customer's age? ";
           chomp ($age = <STDIN>);
      }
-     setAvgAge();
-     setUnder30Items();
-     setOver30Items();
-     
 }
 
 sub setZip {
      use constant MIN_ZIP => 00501;
      use constant MAX_ZIP => 99950;
+     print "\nWhat is the customer's ZIP code? ";
+     chomp ($zipCode = <STDIN>);
      while ($zipCode < MIN_ZIP || $zipCode > MAX_ZIP) {
-          print "\nWhat is the customer's ZIP code? ";
+          print "What is the customer's ZIP code? ";
           chomp ($zipCode = <STDIN>);
-     }
-     setSameZipItems();
-     setOtherZipItems();
+     } 
 }
 
 sub setItems {
      use constant MIN_ITEMS => 1;
      use constant MAX_ITEMS => 12;
      use constant MAX_TRIES => 3;
-     my $tries = 0;
      
-     $isCounted = YES;
      $items = 0;
      
      for (my $i = 0; $i <= MAX_TRIES && ($items < MIN_ITEMS || $items > MAX_ITEMS); $i++) {
-          if ($tries < MAX_TRIES) {
-               print "\nHow many items did the customer buy? ";
+          if ($i < MAX_TRIES) {
+               print "How many items did the customer buy? ";
                chomp ($items = <STDIN>);
           } else {
-               if ($items < MIN_ITEMS) {
-                    print "\nError with order size. This order will not be counted.";
-                    $isCounted = 0;
-               }
+               if ($items < MAX_ITEMS) {      
+                  printError();
+               }   
           }
      }
+     setUnder30Items();
+     setOver30Items();
+     setSameZipItems();
+     setOtherZipItems();
+     setAvgAge();
+}
+
+sub printError {
+     print "\nError with order size. This order will not be counted.";
+     $items = 0;
 }
 
 sub setAvgAge {
-     $avgAge = (($avgAge * $counter) + $age) / ($counter + 1);
+     if (!(defined $avgAge)) {
+          $avgAge = 0;
+     }
+     if ($items != 0) {
+          $avgAge = (($avgAge * $counter) + $age) / ($counter + 1);
+     }
 }
 
 sub setSameZipItems {
-     use constant SAME_ZIP => 54984;
      if (!(defined $sameZipItems)) {
           $sameZipItems = 0;
      }
@@ -94,7 +106,6 @@ sub setSameZipItems {
 }
 
 sub setOtherZipItems {
-     use constant SAME_ZIP =>54984;
      if (!(defined $otherZipItems)) {
           $otherZipItems = 0;
      }
@@ -104,7 +115,6 @@ sub setOtherZipItems {
 }
 
 sub setUnder30Items {
-     use constant THIRTY => 30;
      if (!(defined $under30Items)) {
           $under30Items = 0;
      }
@@ -114,7 +124,6 @@ sub setUnder30Items {
 }
 
 sub setOver30Items {
-     use constant THIRTY => 30;
      if (!(defined $over30Items)) {
           $over30Items = 0;
      }
@@ -128,6 +137,5 @@ sub printResults {
      print "\nItems from other ZIPs: $otherZipItems";
      print "\nItems bought by customers under 30: $under30Items";
      print "\nItems bought by customers 30 and older: $over30Items";
-     print "\nAverage customer age: $avgAge";
-     sleep 5;         
+     print "\nAverage customer age: $avgAge\n";
 }
