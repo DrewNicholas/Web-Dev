@@ -93,6 +93,7 @@ sub setAvgAge {
      }
      if ($items != 0) {
           $avgAge = (($avgAge * $counter) + $age) / ($counter + 1);
+          incrementCounter();
      }
 }
 
@@ -130,6 +131,10 @@ sub setOver30Items {
      if ($age >= THIRTY) {
           $over30Items = $over30Items + $items;
      }
+}
+
+sub incrementCounter {
+     $counter++;
 }
 
 sub printResults {
