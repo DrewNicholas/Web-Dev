@@ -1,0 +1,120 @@
+# Assignment: Project 2
+# Author: Drew Nicholas (dmnicholas@me.com)
+# Version 9.29.2015.02
+# Purpose: Calculate the price of home signs for Mark Daniels
+
+use 5.14.1;
+use warnings;
+
+my ($orderNumber, $continueInt, $woodType, $numLetters, $color, $totalBill, $counter);
+my ($signMessage, $customerName);
+
+use constant OAK => 1;
+use constant GOLD => 1;
+
+sub main {
+	use constant YES => 1;
+	setContinueInt();
+	system("cls");
+	while ($continueInt == YES) {
+		setOrderNumber();
+		setCustomerName();
+		setWoodType();
+		setNumberOfLetters();
+		setMessage();
+		setColor();
+		calculateTotalBill();
+		printResults();
+		setContinueInt();
+	}
+	printGoodbye();
+}
+
+main();
+
+sub setContinueInt {
+	if (defined $continueInt) {
+		print "\n\nDo you want to enter another order (0=no, 1=yes)? ";
+		chomp ($continueInt = <STDIN>);
+	} else {
+		$continueInt = 1;
+	}
+}
+
+sub setOrderNumber {
+	print "\n\nWhat is your order number? ";
+	chomp ($orderNumber = <STDIN>);
+}
+
+sub setCustomerName {
+	print "What is the customer name? ";
+	chomp ($customerName = <STDIN>);
+}
+
+sub setWoodType {
+	print "What type of wood do you want for your sign (0=Pine, 1=Oak)? ";
+	chomp ($woodType = <STDIN>);
+}
+
+sub setNumberOfLetters {
+	print "How many characters would you like on your sign? ";
+	chomp ($numLetters = <STDIN>);
+}
+
+sub setMessage {
+	print "What would you like your sign to say? ";
+	chomp ($signMessage = <STDIN>);
+}
+
+sub setColor {
+	print "What color would you like the characters to be (0=Black or White, 1=Gold)? ";
+	chomp ($color = <STDIN>);
+}
+
+sub calculateTotalBill {
+	use constant BASEPRICE => 30;
+	use constant OAK_PRICE => 15;
+	use constant STD_CHARACTERS => 6;
+	use constant ADD_CHARACTERS => 3;
+	use constant GOLD_PRICE => 12;
+	$totalBill = BASEPRICE;
+	if ($woodType == OAK) {
+		$totalBill = $totalBill + OAK_PRICE;
+	}
+	if ($numLetters >= STD_CHARACTERS) {
+		$totalBill = $totalBill + (ADD_CHARACTERS * ($numLetters - STD_CHARACTERS));
+	}
+	if ($color == GOLD) {
+		$totalBill = $totalBill + GOLD_PRICE;
+	}
+}
+
+sub printResults {
+	if (($color == GOLD || $color == 0) && ($woodType == OAK || $woodType == 0)) {
+		print "\nFor order number $orderNumber for $customerName, ";
+		if ($woodType != OAK) {
+			print "a pine ";
+		} else {
+			print "an oak ";
+		}
+		print "sign saying $signMessage with ";
+		if ($color != GOLD) {
+			print "black or white ";
+		} else {
+			print "gold ";
+		}
+		print "letters. Your total bill is $totalBill. ";
+	} else {
+		printError();
+	}
+}
+
+sub printGoodbye {
+	print "\n\n\t\t\t\tGoodbye. \n\n";
+	sleep 3;
+}
+
+sub printError {
+	system("cls");
+	print "Some wrong information was input! ";
+}

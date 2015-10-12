@@ -1,0 +1,146 @@
+# Assignment: Project 3
+# Author: Drew Nicholas (dmnicholas@me.com)
+# Version: 10.10.2015.01
+# Purpose: Cafe Noir market research
+
+use 5.14.1;
+use warnings;
+
+my ($continueInt, $age, $zipCode, $items, $avgAge, $sameZipItems, $otherZipItems, $under30Items, $over30Items, $counter);
+
+use constant YES => 1;
+use constant THIRTY => 30;
+use constant SAME_ZIP => 54984;
+
+sub main {
+    setContinueInt();
+    $counter = 0;
+    system("cls");
+    while ($continueInt == YES) {
+          setZip();
+          setAge();
+          setItems();
+          setContinueInt();      
+    }
+    printResults();
+}
+
+main();
+
+sub setContinueInt {
+     if (defined $continueInt) {
+          print "\nWould you like to enter another order (0=no, 1=yes)? ";
+          chomp ($continueInt = <STDIN>);
+     } else {
+          $continueInt = YES;
+     }
+}     
+
+sub setAge {
+     use constant MIN_AGE => 10;
+     use constant MAX_AGE => 110;
+     print "What is the customer's age? ";
+     chomp ($age = <STDIN>);
+     while ($age < MIN_AGE || $age > MAX_AGE) {
+          print "What is the customer's age? ";
+          chomp ($age = <STDIN>);
+     }
+}
+
+sub setZip {
+     use constant MIN_ZIP => 00501;
+     use constant MAX_ZIP => 99950;
+     print "\nWhat is the customer's ZIP code? ";
+     chomp ($zipCode = <STDIN>);
+     while ($zipCode < MIN_ZIP || $zipCode > MAX_ZIP) {
+          print "What is the customer's ZIP code? ";
+          chomp ($zipCode = <STDIN>);
+     } 
+}
+
+sub setItems {
+     use constant MIN_ITEMS => 1;
+     use constant MAX_ITEMS => 12;
+     use constant MAX_TRIES => 3;
+     
+     $items = 0;
+     
+     for (my $i = 0; $i <= MAX_TRIES && ($items < MIN_ITEMS || $items > MAX_ITEMS); $i++) {
+          if ($i < MAX_TRIES) {
+               print "How many items did the customer buy? ";
+               chomp ($items = <STDIN>);
+          } else {
+               if ($items < MAX_ITEMS) {      
+                  printError();
+               }   
+          }
+     }
+     setUnder30Items();
+     setOver30Items();
+     setSameZipItems();
+     setOtherZipItems();
+     setAvgAge();
+}
+
+sub printError {
+     print "\nError with order size. This order will not be counted.";
+     $items = 0;
+}
+
+sub setAvgAge {
+     if (!(defined $avgAge)) {
+          $avgAge = 0;
+     }
+     if ($items != 0) {
+          $avgAge = (($avgAge * $counter) + $age) / ($counter + 1);
+          incrementCounter();
+     }
+}
+
+sub setSameZipItems {
+     if (!(defined $sameZipItems)) {
+          $sameZipItems = 0;
+     }
+     if ($zipCode == SAME_ZIP) {
+          $sameZipItems = $sameZipItems + $items;
+     }
+}
+
+sub setOtherZipItems {
+     if (!(defined $otherZipItems)) {
+          $otherZipItems = 0;
+     }
+     if ($zipCode != SAME_ZIP) {
+          $otherZipItems = $otherZipItems + $items;
+     }
+}
+
+sub setUnder30Items {
+     if (!(defined $under30Items)) {
+          $under30Items = 0;
+     }
+     if ($age < THIRTY) {
+          $under30Items = $under30Items + $items;
+     }   
+}
+
+sub setOver30Items {
+     if (!(defined $over30Items)) {
+          $over30Items = 0;
+     }
+     if ($age >= THIRTY) {
+          $over30Items = $over30Items + $items;
+     }
+}
+
+sub incrementCounter {
+     $counter++;
+}
+
+sub printResults {
+     print "\nItems from local ZIP: $sameZipItems";
+     print "\nItems from other ZIPs: $otherZipItems";
+     print "\nItems bought by customers under 30: $under30Items";
+     print "\nItems bought by customers 30 and older: $over30Items";
+     print "\nAverage customer age: $avgAge\n";
+}
