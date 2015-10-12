@@ -20,6 +20,11 @@ sub main {
           setZip();
           setAge();
           setItems();
+          setUnder30Items();
+          setOver30Items();
+          setSameZipItems();
+          setOtherZipItems();
+          setAvgAge();
           setContinueInt();      
     }
     printResults();
@@ -75,11 +80,6 @@ sub setItems {
                }   
           }
      }
-     setUnder30Items();
-     setOver30Items();
-     setSameZipItems();
-     setOtherZipItems();
-     setAvgAge();
 }
 
 sub printError {
