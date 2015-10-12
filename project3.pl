@@ -70,7 +70,7 @@ sub setItems {
                print "How many items did the customer buy? ";
                chomp ($items = <STDIN>);
           } else {
-               if ($items < MAX_ITEMS) {      
+               if ($items < MIN_ITEMS) {      
                   printError();
                }   
           }
