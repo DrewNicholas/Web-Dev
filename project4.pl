@@ -6,11 +6,13 @@
 use 5.14.1;
 use warnings;
 
-my (@humanScore, @computerScore, @die);
+my (@die, @score, @counter, @scoreSize);
 my ($num, $continueInt, $turnScore, $player, $playerScoreSize, $computerScoreSize, $humanCounter, $computerCounter, $hTotalScore, $cTotalScore); #numeric
 my ($string);
 
 use constant LOSE_SCORE => 1;
+use constant HUMAN => 1;
+use constant COMPUTER =>2;
 
 sub main {
      use constant WIN => 100;
@@ -52,12 +54,16 @@ sub setContinueInt {
      }
 }
 
-sub setHumanScore {     
+sub setScoreSize {
+     $scoreSize[$player] = @score
+}
+
+sub setScore {
      if ($die[1] == LOSE_SCORE || $die[2] == LOSE_SCORE) {
           if ($die[1] == LOSE_SCORE && $die[2] == LOSE_SCORE) {
-               for (my $i = 0; $i < $playerScoreSize; $i++) {
-                    $humanScore[$i][$player] = 0;
-                    $humanCounter = 0;
+               for (my $i = 0; $i < $scoreSize[$player]; $i++) {
+                    $score[$i][$player] = 0;
+                    $counter[$player] = 0;
                }
           } else {
                $turnScore = 0;
@@ -66,50 +72,27 @@ sub setHumanScore {
           $turnScore = $die[1] + $die[2];
           setPlayerCounter();
      }
-     $humanScore[$humanCounter] = $turnScore;
+     $score[$counter[$player]][$player] = $turnScore;
 }
 
-sub setHumanCounter {
-     if (defined $humanCounter) {
-          $humanCounter++;
+sub setCounter {
+     if (defined $counter[$player]) {
+          $counter[$player]++;
      } else {
-          $humanCounter = 0;
-     }
-}
-
-sub setComputerScore {
-     if ($die[1] == LOSE_SCORE || $die[2] == LOSE_SCORE) {
-          if ($die[1] == LOSE_SCORE && $die[2] == LOSE_SCORE) {
-               for (my $i = 0; $i < $computerScoreSize; $i++) {
-                    $computerScore[$i] = 0;
-                    $computerCounter = 0;
-               }
-          } else {
-               $turnScore = 0;
-          }
-     } else {
-          $turnScore = $die[1] + $die[2];
-          setComputerCounter();
-     }
-     $computerScore[$computerCounter] = $turnScore;
-}
-
-sub setComputerCounter {
-     if (defined $computerCounter) {
-          $computerCounter++;
-     } else {
-          $computerCounter = 0;
+          $counter[$player] = 0;
      }
 }
 
 sub setPTotalScore {
+     $hTotalScore = 0;
      for (my $i = 0; $i < $playerScoreSize; $i++) {
-          $hTotalScore = $hTotalScore + $humanScore[$humanCounter];
+          $hTotalScore = $hTotalScore + $score[$counter[$player]][$player];
      }
 }
 
 sub setCTotalScore {
+     $cTotalScore = 0;
      for (my $i = 0; $i < $computerScoreSize; $i++) {
-          $cTotalScore = $cTotalScore + $computerScore[$computerCounter];
+          $cTotalScore = $cTotalScore + $score[$counter[$player]][$player];
      }
 }
