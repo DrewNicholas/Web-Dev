@@ -6,15 +6,20 @@
 use 5.14.1;
 use warnings;
 
-my (@playerScore, @computerScore, @die);
-my ($num, $continueInt,$turnScore, $playerScoreSize, $computerScoreSize, $playerCounter, $computerCounter, $pTotalScore, $cTotalScore); #numeric
+my (@humanScore, @computerScore, @die);
+my ($num, $continueInt, $turnScore, $player, $playerScoreSize, $computerScoreSize, $humanCounter, $computerCounter, $hTotalScore, $cTotalScore); #numeric
 my ($string);
 
 use constant LOSE_SCORE => 1;
 
 sub main {
      use constant WIN => 100;
-     while ($cTotalScore < WIN && $pTotalScore < WIN) {
+     setConputerCounter();
+     setPlayerCounter();
+     $hTotalScore = 0;
+     $cTotalScore = 0;
+     while ($cTotalScore < WIN && $hTotalScore < WIN) {
+          rollDie();
           
      }
 }
@@ -47,21 +52,29 @@ sub setContinueInt {
      }
 }
 
-sub setPlayerScore {     
+sub setHumanScore {     
      if ($die[1] == LOSE_SCORE || $die[2] == LOSE_SCORE) {
           if ($die[1] == LOSE_SCORE && $die[2] == LOSE_SCORE) {
                for (my $i = 0; $i < $playerScoreSize; $i++) {
-                    $playerScore[$i] = 0;
-                    $playerCounter = 0;
+                    $humanScore[$i][$player] = 0;
+                    $humanCounter = 0;
                }
           } else {
                $turnScore = 0;
           }
      } else {
           $turnScore = $die[1] + $die[2];
-          $playerCounter++;
+          setPlayerCounter();
      }
-     $playerScore[$playerCounter] = $turnScore;
+     $humanScore[$humanCounter] = $turnScore;
+}
+
+sub setHumanCounter {
+     if (defined $humanCounter) {
+          $humanCounter++;
+     } else {
+          $humanCounter = 0;
+     }
 }
 
 sub setComputerScore {
@@ -76,14 +89,22 @@ sub setComputerScore {
           }
      } else {
           $turnScore = $die[1] + $die[2];
-          $computerCounter++;
+          setComputerCounter();
      }
      $computerScore[$computerCounter] = $turnScore;
 }
 
+sub setComputerCounter {
+     if (defined $computerCounter) {
+          $computerCounter++;
+     } else {
+          $computerCounter = 0;
+     }
+}
+
 sub setPTotalScore {
      for (my $i = 0; $i < $playerScoreSize; $i++) {
-          $pTotalScore = $pTotalScore + $playerScore[$playerCounter];
+          $hTotalScore = $hTotalScore + $humanScore[$humanCounter];
      }
 }
 
