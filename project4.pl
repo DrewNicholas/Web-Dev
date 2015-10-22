@@ -16,13 +16,15 @@ use constant YES => 1;
 
 sub main {
      use constant WIN => 100;
-     $player = HUMAN;
+
      setCounter();
      while ($totalScore[COMPUTER] < WIN && $totalScore[HUMAN] < WIN) {
+          setPlayer();
           $rollAgain = YES;
           while ($rollAgain == YES) {
                 rollDie();
-                setScoreSize();
+                setTurnScore();
+                setRollAgain();
                 
           }
      }
@@ -36,6 +38,38 @@ sub rollDie {
      
      for (my $i = 0; $i < NUMBER_OF_DIE; $i++) {
           $die[$i] = int(rand(MAX_DIE) + 1);
+     }
+}
+
+sub setPlayer {
+     if ($player == HUMAN) {
+          $player = COMPUTER;
+     } elsif ($player == COMPUTER) {
+          $player = HUMAN
+     } else {
+          $player = HUMAN
+     }
+}
+
+sub setRollAgain {
+     if (defined $rollAgain) {
+          if ($turnScore == -1 || $turnScore == 0) {
+               print "Your turn is over.";
+               $rollAgain = 0;
+          } else {
+               $rollAgain = 2;
+               while ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain > 1) {
+                    print "\nWould you like to roll again(0=no, 1=yes)? ";
+                    chomp ($rollAgain = <STDIN>);
+                    if ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain >1) {
+                         say "Incorrect input. Please try again";
+                         sleep 1;
+                         system ("cls");
+                    }
+               }
+          }
+     } else {
+          $rollAgain = YES;
      }
 }
 
