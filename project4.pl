@@ -27,6 +27,9 @@ sub main {
                 setRollAgain();
                 
           }
+          setScoreSize();
+          setScore();
+          setTotalScore();
      }
 }
 
@@ -36,6 +39,7 @@ sub rollDie {
      use constant NUMBER_OF_DIE => 2;
      use constant MAX_DIE => 6;
      
+     print "\nRolling die...";
      for (my $i = 0; $i < NUMBER_OF_DIE; $i++) {
           $die[$i] = int(rand(MAX_DIE) + 1);
      }
@@ -44,28 +48,34 @@ sub rollDie {
 sub setPlayer {
      if ($player == HUMAN) {
           $player = COMPUTER;
-     } elsif ($player == COMPUTER) {
-          $player = HUMAN
+          print "Player is computer";
      } else {
-          $player = HUMAN
+          $player = HUMAN;
+          print "Player is human";
      }
 }
 
 sub setRollAgain {
+     use constant MAX_ROLL_AGAIN => 2;
+     
      if (defined $rollAgain) {
           if ($turnScore == -1 || $turnScore == 0) {
                print "Your turn is over.";
                $rollAgain = 0;
           } else {
                $rollAgain = 2;
-               while ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain > 1) {
-                    print "\nWould you like to roll again(0=no, 1=yes)? ";
-                    chomp ($rollAgain = <STDIN>);
-                    if ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain >1) {
-                         say "Incorrect input. Please try again";
-                         sleep 1;
-                         system ("cls");
+               if ($player == HUMAN) {
+                    while ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain > 1) {
+                         print "\nWould you like to roll again(0=no, 1=yes)? ";
+                         chomp ($rollAgain = <STDIN>);
+                         if ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain >1) {
+                              say "Incorrect input. Please try again";
+                              sleep 1;
+                              system ("cls");
+                         }               
                     }
+               } else {
+                    $rollAgain = int(rand(MAX_ROLL_AGAIN));
                }
           }
      } else {
@@ -105,8 +115,9 @@ sub setTurnScore {
           }
      } else {
           $turnScore = $die[1] + $die[2];
-          setPlayerCounter();
+          setCounter();
      }
+     print "Score for this turn is $turnScore. ";
 }
 
 sub setScore {
@@ -133,4 +144,5 @@ sub setTotalScore {
      for (my $i = 0; $i < $scoreSize; $i++) {
           $totalScore[$player] = $totalScore[$player] + $score[$counter[$player]][$player];
      }
+     print "\nTotal score for $player is $totalScore[$player]";
 }
