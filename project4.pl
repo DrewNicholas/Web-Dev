@@ -7,7 +7,7 @@ use 5.14.1;
 use warnings;
 
 my (@die, @score, @counter, @totalScore);
-my ($turnScore, $player, $scoreSize, $rollAgain); #numeric
+my ($turnScore, $player, $scoreSize, $rollAgain, $canContinue); #numeric
 
 use constant HUMAN => 0;
 use constant COMPUTER =>1;
@@ -24,6 +24,7 @@ sub main {
           while ($rollAgain == YES) {
                 rollDie();
                 setTurnScore();
+                setCanContinue
                 setRollAgain();
                 
           }
@@ -31,6 +32,7 @@ sub main {
           setScore();
           setTotalScore();
      }
+     printWinner();
 }
 
 main();
@@ -61,18 +63,19 @@ sub rollDie {
 sub setPlayer {
      if ($player == HUMAN) {
           $player = COMPUTER;
-          print "\nPlayer is computer";
+          print "\n\nPlayer is computer";
      } else {
           $player = HUMAN;
-          print "\nPlayer is human";
+          print "\n\nPlayer is human";
      }
+     sleep 1;
 }
 
 sub setRollAgain {
      use constant MAX_ROLL_AGAIN => 2;
      
      if (defined $rollAgain) {
-          if ($turnScore == -1 || $turnScore == 0) {
+          if ($canContinue != YES) {
                print "Your turn is over.";
                $rollAgain = 0;
           } else {
@@ -96,6 +99,14 @@ sub setRollAgain {
      }
 }
 
+sub setCanContinue {
+     if ($turnScore != 0) {
+          $canContinue = YES;
+     } else {
+          $canContinue = 0;
+     }
+}
+
 sub setScoreSize {
      $scoreSize = @score
 }
@@ -105,7 +116,7 @@ sub setTurnScore {
      
      if ($die[1] == LOSE_SCORE || $die[0] == LOSE_SCORE) {
           if ($die[1] == $die[0]) {
-               $turnScore = -1;
+               $turnScore = 0;
           } else {
                $turnScore = 0;
           }
@@ -114,6 +125,7 @@ sub setTurnScore {
           setCounter();
      }
      print "\nScore for this turn is $turnScore. ";
+     sleep 1;
 }
 
 sub setScore {
@@ -128,11 +140,7 @@ sub setScore {
 }
 
 sub setCounter {
-     if (defined $counter[$player]) {
           $counter[$player]++;
-     } else {
-          $counter[$player] = 0;
-     }
 }
 
 sub setTotalScore {
@@ -140,5 +148,23 @@ sub setTotalScore {
      for (my $i = 0; $i < $scoreSize; $i++) {
           $totalScore[$player] = $totalScore[$player] + $score[$counter[$player]][$player];
      }
-     print "\nTotal score for $player is $totalScore[$player]";
+     print "\nTotal score for ";
+     if ($player == HUMAN){
+          print "human ";
+     } else {
+          print "computer ";
+     }
+     print "is $totalScore[$player]";
+     sleep 1;
+}
+
+sub printWinner {
+     system ("cls");
+     print "\n\n\nThe winner is ";
+     if ($player == HUMAN) {
+          print "the human ";
+     } else {
+          print "the computer ";
+     }
+     print "with a score of $totalScore[$player]!\n\n";     
 }
