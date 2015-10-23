@@ -7,8 +7,7 @@ use 5.14.1;
 use warnings;
 
 my (@die, @score, @counter, @totalScore);
-my ($continueInt, $turnScore, $player, $scoreSize, $rollAgain); #numeric
-my ($string);
+my ($turnScore, $player, $scoreSize, $rollAgain); #numeric
 
 use constant HUMAN => 0;
 use constant COMPUTER =>1;
@@ -17,10 +16,11 @@ use constant YES => 1;
 sub main {
      use constant WIN => 100;
 
-     setCounter();
+     initializeElements();     
      while ($totalScore[COMPUTER] < WIN && $totalScore[HUMAN] < WIN) {
           setPlayer();
           $rollAgain = YES;
+          $turnScore = 0;
           while ($rollAgain == YES) {
                 rollDie();
                 setTurnScore();
@@ -35,6 +35,17 @@ sub main {
 
 main();
 
+sub initializeElements {
+     use constant PLAYERS => 2;
+     
+     $player = COMPUTER;
+     for (my $i = 0; $i < PLAYERS; $i++) {
+          $totalScore[$i] = 0;
+          $counter[$i] = 0;
+     }
+     
+}
+
 sub rollDie {
      use constant NUMBER_OF_DIE => 2;
      use constant MAX_DIE => 6;
@@ -43,15 +54,17 @@ sub rollDie {
      for (my $i = 0; $i < NUMBER_OF_DIE; $i++) {
           $die[$i] = int(rand(MAX_DIE) + 1);
      }
+     print "\nDie 1: $die[0]";
+     print "\nDie 2: $die[1]";
 }
 
 sub setPlayer {
      if ($player == HUMAN) {
           $player = COMPUTER;
-          print "Player is computer";
+          print "\nPlayer is computer";
      } else {
           $player = HUMAN;
-          print "Player is human";
+          print "\nPlayer is human";
      }
 }
 
@@ -83,23 +96,6 @@ sub setRollAgain {
      }
 }
 
-sub setContinueInt {
-     if (defined $continueInt) {
-		$continueInt = -1;
-		while ($continueInt !~ /[0-9]/ || $continueInt > 1 || $continueInt < 0) {
-			print "\n\nDo you want to continue (0=no, 1=yes)? ";
-			chomp ($continueInt = <STDIN>);
-			if ($continueInt !~ /[0-9]/ || $continueInt > 1 || $continueInt < 0) {
-				say "Incorrect input. Please try again";
-				sleep 1;
-				system ("cls");
-			}
-		}
-     } else {
-          $continueInt = 1;
-     }
-}
-
 sub setScoreSize {
      $scoreSize = @score
 }
@@ -107,17 +103,17 @@ sub setScoreSize {
 sub setTurnScore {
      use constant LOSE_SCORE => 1;
      
-     if ($die[1] == LOSE_SCORE || $die[2] == LOSE_SCORE) {
-          if ($die[1] == $die[2]) {
+     if ($die[1] == LOSE_SCORE || $die[0] == LOSE_SCORE) {
+          if ($die[1] == $die[0]) {
                $turnScore = -1;
           } else {
                $turnScore = 0;
           }
      } else {
-          $turnScore = $die[1] + $die[2];
+          $turnScore = $turnScore + $die[0] + $die[1];
           setCounter();
      }
-     print "Score for this turn is $turnScore. ";
+     print "\nScore for this turn is $turnScore. ";
 }
 
 sub setScore {
