@@ -24,13 +24,13 @@ sub main {
           while ($rollAgain == YES) {
                 rollDie();
                 setTurnScore();
-                setCanContinue
-                setRollAgain();
-                
+                setCanContinue();
+                setRollAgain();                
           }
           setScoreSize();
           setScore();
           setTotalScore();
+          setCounter();
      }
      printWinner();
 }
@@ -102,6 +102,8 @@ sub setRollAgain {
 sub setCanContinue {
      if ($turnScore != 0) {
           $canContinue = YES;
+     } elsif ($die[0] == $die[1]) {
+          $canContinue = 0;
      } else {
           $canContinue = 0;
      }
@@ -115,24 +117,19 @@ sub setTurnScore {
      use constant LOSE_SCORE => 1;
      
      if ($die[1] == LOSE_SCORE || $die[0] == LOSE_SCORE) {
-          if ($die[1] == $die[0]) {
-               $turnScore = 0;
-          } else {
-               $turnScore = 0;
-          }
+          $turnScore = 0;
      } else {
           $turnScore = $turnScore + $die[0] + $die[1];
-          setCounter();
      }
      print "\nScore for this turn is $turnScore. ";
      sleep 1;
 }
 
 sub setScore {
-     if ($turnScore == -1){
+     if ($turnScore == 0 && $die[1] == $die[0]) {
           for (my $i = 0; $i < $scoreSize; $i++) {
                     $score[$i][$player] = 0;
-                    $counter[$player] = 0;
+                    #$counter[$player] = 0;
           }
      } else {
           $score[$counter[$player]][$player] = $turnScore;
@@ -146,7 +143,7 @@ sub setCounter {
 sub setTotalScore {
      $totalScore[$player] = 0;
      for (my $i = 0; $i < $scoreSize; $i++) {
-          $totalScore[$player] = $totalScore[$player] + $score[$counter[$player]][$player];
+          $totalScore[$player] = $totalScore[$player] + $score[$i][$player];
      }
      print "\nTotal score for ";
      if ($player == HUMAN){
