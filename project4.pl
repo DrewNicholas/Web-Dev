@@ -31,6 +31,7 @@ sub main {
           setScore();
           setTotalScore();
           setCounter();
+          print "\n---------------------------------------------------------------";
      }
      printWinner();
 }
@@ -44,6 +45,7 @@ sub initializeElements {
      for (my $i = 0; $i < PLAYERS; $i++) {
           $totalScore[$i] = 0;
           $counter[$i] = 0;
+          $totalScore[$i] = 0;
      }
      
 }
@@ -63,11 +65,12 @@ sub rollDie {
 sub setPlayer {
      if ($player == HUMAN) {
           $player = COMPUTER;
-          print "\n\nPlayer is computer";
+          print "\n\nPlayer is computer ";
      } else {
           $player = HUMAN;
-          print "\n\nPlayer is human";
+          print "\n\nPlayer is human ";
      }
+     print "with a current total score of $totalScore[$player]";
      sleep 1;
 }
 
@@ -76,7 +79,7 @@ sub setRollAgain {
      
      if (defined $rollAgain) {
           if ($canContinue != YES) {
-               print "Your turn is over.";
+               print "Your turn is over.\n";
                $rollAgain = 0;
           } else {
                $rollAgain = 2;
@@ -87,11 +90,11 @@ sub setRollAgain {
                          if ($rollAgain !~ /[0-9]/ || $rollAgain < 0 || $rollAgain >1) {
                               say "Incorrect input. Please try again";
                               sleep 1;
-                              system ("cls");
                          }               
                     }
                } else {
                     $rollAgain = int(rand(MAX_ROLL_AGAIN));
+                    print "\n";
                }
           }
      } else {
@@ -141,10 +144,11 @@ sub setCounter {
 }
 
 sub setTotalScore {
-     $totalScore[$player] = 0;
-     for (my $i = 0; $i < $scoreSize; $i++) {
-          $totalScore[$player] = $totalScore[$player] + $score[$i][$player];
-     }
+     $totalScore[$player] = $totalScore[$player] + $turnScore;
+     #$totalScore[$player] = 0;
+     #for (my $i = 0; $i < $scoreSize; $i++) {
+          #$totalScore[$player] = $totalScore[$player] + $score[$i][$player];
+     #}
      print "\nTotal score for ";
      if ($player == HUMAN){
           print "human ";
