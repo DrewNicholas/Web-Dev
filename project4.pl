@@ -7,7 +7,7 @@ use 5.14.1;
 use warnings;
 
 my (@die, @score, @counter, @totalScore);
-my ($turnScore, $player, $rollAgain, $canContinue); #numeric
+my ($turnScore, $player, $rollAgain, $canContinue);
 
 use constant HUMAN => 0;
 use constant COMPUTER =>1;
@@ -121,7 +121,6 @@ sub setScore {
      if ($turnScore == 0 && $die[1] == $die[0]) {
           for (my $i = 0; $i < $scoreSize; $i++) {
                     $score[$i][$player] = 0;
-                    #$counter[$player] = 0;
           }
      } else {
           $score[$counter[$player]][$player] = $turnScore;
