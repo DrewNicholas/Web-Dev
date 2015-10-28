@@ -7,7 +7,7 @@ use 5.14.1;
 use warnings;
 
 my (@die, @score, @counter, @totalScore);
-my ($turnScore, $player, $scoreSize, $rollAgain, $canContinue); #numeric
+my ($turnScore, $player, $rollAgain, $canContinue); #numeric
 
 use constant HUMAN => 0;
 use constant COMPUTER =>1;
