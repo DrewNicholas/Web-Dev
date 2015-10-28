@@ -11,7 +11,7 @@ my @data;
 #use constant DATAFILEOUT => "ghdljkdfljsg"; Put out file here
 
 sub main {
-     
+
 }
 
 main ();

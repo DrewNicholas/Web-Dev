@@ -12,11 +12,13 @@ my ($turnScore, $player, $scoreSize, $rollAgain, $canContinue); #numeric
 use constant HUMAN => 0;
 use constant COMPUTER =>1;
 use constant YES => 1;
+use constant PLAYERS => 2;
 
 sub main {
      use constant WIN => 100;
-
-     initializeElements();     
+     
+     setTotalScore();
+     setCounter();
      while ($totalScore[COMPUTER] < WIN && $totalScore[HUMAN] < WIN) {
           setPlayer();
           $rollAgain = YES;
@@ -27,28 +29,15 @@ sub main {
                 setCanContinue();
                 setRollAgain();                
           }
-          setScoreSize();
           setScore();
           setTotalScore();
           setCounter();
-          print "\n---------------------------------------------------------------";
+          print "\n-------------------------------------------------------------------------------";
      }
      printWinner();
 }
 
 main();
-
-sub initializeElements {
-     use constant PLAYERS => 2;
-     
-     $player = COMPUTER;
-     for (my $i = 0; $i < PLAYERS; $i++) {
-          $totalScore[$i] = 0;
-          $counter[$i] = 0;
-          $totalScore[$i] = 0;
-     }
-     
-}
 
 sub rollDie {
      use constant NUMBER_OF_DIE => 2;
@@ -63,15 +52,20 @@ sub rollDie {
 }
 
 sub setPlayer {
-     if ($player == HUMAN) {
-          $player = COMPUTER;
-          print "\n\nPlayer is computer ";
+     if (defined $player) {
+          if ($player == HUMAN) {
+               $player = COMPUTER;
+               print "\n\nPlayer is computer ";
+          } else {
+               $player = HUMAN;
+               print "\n\nPlayer is human ";
+          }
+          print "with a current total score of $totalScore[$player]";
+          sleep 1;
      } else {
           $player = HUMAN;
-          print "\n\nPlayer is human ";
+          print "Player is human";
      }
-     print "with a current total score of $totalScore[$player]";
-     sleep 1;
 }
 
 sub setRollAgain {
@@ -110,10 +104,6 @@ sub setCanContinue {
      }
 }
 
-sub setScoreSize {
-     $scoreSize = @score
-}
-
 sub setTurnScore {
      use constant LOSE_SCORE => 1;
      
@@ -127,6 +117,7 @@ sub setTurnScore {
 }
 
 sub setScore {
+     my $scoreSize = @score;
      if ($turnScore == 0 && $die[1] == $die[0]) {
           for (my $i = 0; $i < $scoreSize; $i++) {
                     $score[$i][$player] = 0;
@@ -138,23 +129,34 @@ sub setScore {
 }
 
 sub setCounter {
-          $counter[$player]++;
+          my $counterSize = @counter;
+          if ($counterSize != 0) {
+               $counter[$player]++;
+          } else {
+               for (my $i = 0; $i < PLAYERS; $i++) {
+                    $counter[$i] = 0;
+               }
+          }
+          
 }
 
 sub setTotalScore {
-     $totalScore[$player] = $totalScore[$player] + $turnScore;
-     #$totalScore[$player] = 0;
-     #for (my $i = 0; $i < $scoreSize; $i++) {
-          #$totalScore[$player] = $totalScore[$player] + $score[$i][$player];
-     #}
-     print "\nTotal score for ";
-     if ($player == HUMAN){
-          print "human ";
+     my $totalScoreSize = @totalScore;
+     if ($totalScoreSize != 0) {
+          $totalScore[$player] = $totalScore[$player] + $turnScore;
+          print "\nTotal score for ";
+          if ($player == HUMAN){
+               print "human ";
+          } else {
+               print "computer ";
+          }
+          print "is $totalScore[$player]";
+          sleep 1;
      } else {
-          print "computer ";
+          for (my $i = 0; $i < PLAYERS; $i++) {
+               $totalScore[$i] = 0
+          }
      }
-     print "is $totalScore[$player]";
-     sleep 1;
 }
 
 sub printWinner {
