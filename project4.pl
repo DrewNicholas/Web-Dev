@@ -105,8 +105,6 @@ sub setRollAgain {
 sub setCanContinue {
      if ($turnScore != 0) {
           $canContinue = YES;
-     } elsif ($die[0] == $die[1]) {
-          $canContinue = 0;
      } else {
           $canContinue = 0;
      }
