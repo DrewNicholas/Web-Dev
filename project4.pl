@@ -24,7 +24,7 @@ sub main {
           setPlayer();
           $rollAgain = YES;
           $turnScore = 0;
-          while ($rollAgain == YES) {
+          while ($rollAgain == YES && ($totalScore[$player] + $turnScore) < WIN) {
                 rollDie();
                 setTurnScore();
                 setCanContinue();
