@@ -13,6 +13,7 @@ use constant HUMAN => 0;
 use constant COMPUTER =>1;
 use constant YES => 1;
 use constant PLAYERS => 2;
+use constant LOSE_SCORE => 1;
 
 sub main {
      use constant WIN => 100;
@@ -104,9 +105,7 @@ sub setCanContinue {
      }
 }
 
-sub setTurnScore {
-     use constant LOSE_SCORE => 1;
-     
+sub setTurnScore {     
      if ($die[1] == LOSE_SCORE || $die[0] == LOSE_SCORE) {
           $turnScore = 0;
      } else {
@@ -142,7 +141,11 @@ sub setCounter {
 sub setTotalScore {
      my $totalScoreSize = @totalScore;
      if ($totalScoreSize != 0) {
-          $totalScore[$player] = $totalScore[$player] + $turnScore;
+          if (!($die[0] == LOSE_SCORE && $die[1] == LOSE_SCORE)) {
+               $totalScore[$player] = $totalScore[$player] + $turnScore;
+          } else {
+               $totalScore[$player] = 0;
+          }
           print "\nTotal score for ";
           if ($player == HUMAN){
                print "human ";
