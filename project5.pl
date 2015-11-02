@@ -13,7 +13,9 @@ use constant DATAFILEOUT => "./data.ApgarMedicalCombined.txt";
 use constant COLUMNS => 3;
 
 sub main {
-
+	readData();
+	modifyData();
+	printData();
 }
 
 main ();
@@ -45,16 +47,37 @@ sub readData {
 	close $IN;
 }
 
+#sub modifyData {
+#	use constant BIRTHYEAR => 2;
+#	my $size = @data;
+#	my $temp = 0;
+#	for (my $i = 1; $i < $size; $i++) {
+#		my $j = $i;
+#		while ($j > 0 && $data[$j][BIRTHYEAR] < $data[$j - 1][BIRTHYEAR]) {
+#			$temp = $data[$j];
+#			$data[$j] = $data[$j - 1];
+#			$data[$j - 1] = $temp;
+#			$j--;
+#		}
+#	}
+#}
+
 sub modifyData {
+	use constant BIRTHYEAR => 2;
 	my $size = @data;
-	my $temp = 0;
-	for (my $i = 1; $i < $size; $i++) {
+	my @temp;
+	for (my $i = 0; $i < $size; $i++) {
 		my $j = $i;
-		while ($j > 0 && $data[$j] < $data[$j - 1]) {
-			$temp = $data[$j];
-			$data[$j] = $data[$j - 1];
-			$data[$j - 1] = $temp;
-			$j--;
+		while ($j > 0 && $data[$j][BIRTHYEAR] < $data[$j - 1][BIRTHYEAR]) {
+			for (my $k = 0; $k < COLUMNS; $k++) {
+				$temp[$k] = $data[$j][$k];
+				$data[$j][$k] = $data[$j - 1][$k];
+				$data[$j - 1][$k] = $temp[$k];
+			}
 		}
 	}
+}
+
+sub printData {
+	
 }
