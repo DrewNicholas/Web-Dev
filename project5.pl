@@ -48,21 +48,6 @@ sub readData {
 	close $IN;
 }
 
-#sub modifyData {
-#	use constant BIRTHYEAR => 2;
-#	my $size = @data;
-#	my $temp = 0;
-#	for (my $i = 1; $i < $size; $i++) {
-#		my $j = $i;
-#		while ($j > 0 && $data[$j][BIRTHYEAR] < $data[$j - 1][BIRTHYEAR]) {
-#			$temp = $data[$j];
-#			$data[$j] = $data[$j - 1];
-#			$data[$j - 1] = $temp;
-#			$j--;
-#		}
-#	}
-#}
-
 sub modifyData {
 	use constant BIRTHYEAR => 2;
 	my $size = @data;
@@ -95,4 +80,11 @@ sub writeData {
 		print ($OUT "\n");
 	}
 	close $OUT;
+}
+
+sub printData {
+	my $size = @data;
+	for (my $i = 0; $i < $size; $i++) {
+		
+	}
 }
