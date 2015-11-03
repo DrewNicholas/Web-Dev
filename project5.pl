@@ -7,21 +7,22 @@ use 5.14.01;
 use warnings;
 
 my @data;
-use constant DATAFILEIN1 => "./data.Chapter07.ApgarMedicalBest.txt";
-use constant DATAFILEIN2 => "./data.Chapter07.ApgarMedicalCushing.txt";
-use constant DATAFILEOUT => "./data.ApgarMedicalCombined.txt";
+use constant DATAFILEIN1 => "./ApgarMedicalBest.txt";
+use constant DATAFILEIN2 => "./ApgarMedicalCushing.txt";
+use constant DATAFILEOUT => "./ApgarMedicalCombined.txt";
 use constant COLUMNS => 3;
 
 sub main {
 	readData();
 	modifyData();
-	printData();
+	writeData();
+	print "\nDone\n";
 }
 
 main ();
 
 sub readData {
-     my $IN;
+    my $IN;
 	my $counter = 0;
 	my @tempData = ();
 	@data = ();
@@ -74,6 +75,7 @@ sub modifyData {
 				$data[$j][$k] = $data[$j - 1][$k];
 				$data[$j - 1][$k] = $temp[$k];
 			}
+			$j--;
 		}
 	}
 }
@@ -84,7 +86,11 @@ sub writeData {
 	open ($OUT, '>', DATAFILEOUT);
 	for (my $i = 0; $i < $size; $i++) {
 		for (my $j = 0; $j < COLUMNS; $j++) {
-			print ($OUT "$data[$i][$j]");
+			if ($j == COLUMNS) {
+				print ($OUT "$data[$i][$j]");
+			} else {
+				print ($OUT "$data[$i][$j],");
+			}
 		}
 		print ($OUT "\n");
 	}
