@@ -78,6 +78,15 @@ sub modifyData {
 	}
 }
 
-sub printData {
-	
+sub writeData {
+	my $OUT;
+	my $size = @data;
+	open ($OUT, '>', DATAFILEOUT);
+	for (my $i = 0; $i < $size; $i++) {
+		for (my $j = 0; $j < COLUMNS; $j++) {
+			print ($OUT "$data[$i][$j]");
+		}
+		print ($OUT "\n");
+	}
+	close $OUT;
 }
