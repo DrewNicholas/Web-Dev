@@ -11,12 +11,13 @@ use constant DATAFILEIN1 => "./ApgarMedicalBest.txt";
 use constant DATAFILEIN2 => "./ApgarMedicalCushing.txt";
 use constant DATAFILEOUT => "./ApgarMedicalCombined.txt";
 use constant COLUMNS => 3;
+use constant BIRTHYEAR => 2;
 
 sub main {
 	readData();
 	modifyData();
 	writeData();
-	print "\nDone\n";
+     printData();
 }
 
 main ();
@@ -49,7 +50,6 @@ sub readData {
 }
 
 sub modifyData {
-	use constant BIRTHYEAR => 2;
 	my $size = @data;
 	my @temp;
 	for (my $i = 0; $i < $size; $i++) {
@@ -71,10 +71,10 @@ sub writeData {
 	open ($OUT, '>', DATAFILEOUT);
 	for (my $i = 0; $i < $size; $i++) {
 		for (my $j = 0; $j < COLUMNS; $j++) {
-			if ($j == COLUMNS) {
-				print ($OUT "$data[$i][$j]");
-			} else {
+			if (!($j == COLUMNS -1)) {
 				print ($OUT "$data[$i][$j],");
+			} else {
+				print ($OUT "$data[$i][$j]");
 			}
 		}
 		print ($OUT "\n");
@@ -83,8 +83,26 @@ sub writeData {
 }
 
 sub printData {
+     use constant YEAR => 0;
+     use constant NUMBER_BORN =>1;
 	my $size = @data;
+     my $counter = 0;
+     my @sameAge;
+     
+     system ("cls");
+     print "Number of patients born in the same year:\n\n";
+     $sameAge[0][YEAR] = $data[0][BIRTHYEAR];
 	for (my $i = 0; $i < $size; $i++) {
-		
+		if ($data[$i][BIRTHYEAR] == $sameAge[$counter][YEAR]) {
+               $sameAge[$counter][NUMBER_BORN]++;
+          } else {
+               $counter++;
+               $sameAge[$counter][YEAR] = $data[$i][BIRTHYEAR];
+               $sameAge[$counter][NUMBER_BORN] = 1;
+          }
 	}
+     $size = @sameAge;
+     for (my $i = 0; $i < $size; $i++) {
+          print "$sameAge[$i][YEAR]: $sameAge[$i][NUMBER_BORN]\n"
+     }
 }
