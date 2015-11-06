@@ -10,21 +10,25 @@ my @words;
 use constant DATAFILEIN => "./wordBank.txt";
 
 sub main {
-     print "\n     O";
-     print "\n    /|\\ ";
-     print "\n     |";
-     print "\n    / \\ ";
-     print "\n\n";
      readData();
      selectWord();
+     
 }
+#sub stickFigure {
+#     print "\n     O";
+#     print "\n    /|\\ ";
+#     print "\n     |";
+#     print "\n    / \\ ";
+#     print "\n\n";
+#     
+#}
 
 main();
 
 sub readData {
      my $IN;
-	@words = ();
-	my $counter = 0;
+     @words = ();
+     my $counter = 0;
 	open ($IN, '<', DATAFILEIN);
 	while (<$IN>) {
 		chomp ($words[$counter] = $_);
@@ -36,5 +40,5 @@ sub readData {
 sub selectWord {
      my $size = @words;
      my $answer = $words[int(rand($size))];
-     print "$answer";
+     
 }
