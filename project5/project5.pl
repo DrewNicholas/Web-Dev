@@ -23,7 +23,7 @@ sub main {
 main ();
 
 sub readData {
-    my $IN;
+     my $IN;
 	my $counter = 0;
 	my @tempData = ();
 	@data = ();
