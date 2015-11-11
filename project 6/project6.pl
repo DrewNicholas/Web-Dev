@@ -49,7 +49,7 @@ sub setAnswer {
 sub enterGuess {
      my $alreadyGuessed = 0;
      my $guess = 2;
-     while ($guess =~ /[0-9]/ || $alreadyGuessed == YES) {
+     while ($guess =~ /[0-9]/ || $alreadyGuessed == YES) {        #need to make sure input is only lower case
           print "\n\nGuess a letter. ";
           chomp ($guess = <STDIN>);
           $alreadyGuessed = 0;
