@@ -155,14 +155,14 @@ sub printGuesses {
 
 sub printGoodbye {
      if ($win == YES) {
-          #system ("cls");
+          system ("cls");
           print "\n\n\n\t\t\tCongratulations, you won!!!";
      } else {
-          #system ("cls");
+          system ("cls");
           print "\n\n\n\t\t\t\tYou Lose";
      }
      my $size = @answer;
-     print "\nThe word was ";
+     print "\n\n\t\t\tThe word was ";
      for (my $i = 0; $i < $size; $i++) {
           print "$answer[$i]";
      }
