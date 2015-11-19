@@ -13,12 +13,32 @@ body {
     background-color: #ff3f0c;
 }
 
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
 .container {
+    position: absolute;
     border:solid #e19f8b 7px;
     width:90%;
     margin:20px auto;
-    overflow: auto;
-    height: 500px;
+    left: 3%;
+    right: 3%;
+    height: 550px;
 }
 
 .textbox {
@@ -35,13 +55,10 @@ body {
 
 #logo {
     position: absolute;
-    right: 0;
-    bottom: 10vw;
-    width: 20%;
-    height: 20vw;
+    left: 80%;
+    bottom: -30%;
 }
 
 #logo img {
-    width: 20vw;
-    height: 20vw;
+    max-width: 100%;
 }
