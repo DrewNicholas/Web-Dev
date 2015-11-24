@@ -5,35 +5,28 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acro
   outline: 0;
   font-size: 100%;
   vertical-align: baseline;
-  background: transparent; }
+  background: transparent;
+}
 
 body {
   line-height: 1;
-  background-color: #ff6a19; }
+  background-color: #ff6a19;
+}
 
 ol, ul {
-  list-style: none; }
+  list-style: none;
+}
 
 blockquote, q {
-  quotes: none; }
+  quotes: none;
+}
 
 blockquote:before, blockquote:after, q:before, q:after {
   content: '';
-  content: none; }
+  content: none;
+}
 
 table {
   border-collapse: collapse;
-  border-spacing: 0; }
-
-#footer {
-  position: absolute;
-  max-width: 100%;
-  left: 40%;
-  right: 40%;
-  color: #ffffff;
-  font-weight: bold;
-  text-align: center;
-  bottom: 0;
-  border: solid white; }
-
-/*# sourceMappingURL=style.css.map */
+  border-spacing: 0;
+}
