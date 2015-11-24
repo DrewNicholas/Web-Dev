@@ -49,8 +49,8 @@ sub setAnswer {
 sub enterGuess {
      my $alreadyGuessed = 0;
      my $guess = 2;
-     while ($guess =~ /[0-9]/ || $alreadyGuessed == YES) {        #need to make sure input is only lower case
-          print "\n\nGuess a letter. ";
+     while ($guess =~ /[0-9]/ || $alreadyGuessed == YES || $guess !~ /[a-z]/) {
+          print "\n\nGuess a letter. (Lowercase only) ";
           chomp ($guess = <STDIN>);
           $alreadyGuessed = 0;
           my $size = @guesses;
@@ -63,8 +63,11 @@ sub enterGuess {
                say "Incorrect input. Please try again";
                sleep 1;
           } elsif ($alreadyGuessed == YES) {
-               print "\nThat letter was already guessed.";
-          } else {
+               print "\nThat letter was already guessed.";     
+          } elsif ($guess !~ /[a-z]/) {
+               print "\nPlease enter a lowercase letter.";
+          }
+          else {
                $guesses[$size] = $guess;
           }
      }
