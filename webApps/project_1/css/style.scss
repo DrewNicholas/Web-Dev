@@ -1,5 +1,47 @@
 @import "reset";
 
 body {
-    background: linear-gradient(#871910, #000000);
+    background: linear-gradient(#871910, #000000)no-repeat;
+}
+
+#container {
+    background-color: white;
+    margin: 30px;
+    padding: 3%;
+}
+
+h1 {
+    font-size: 6vh;
+    font:"Trebuchet MS";
+    font-weight: bold;
+}
+
+b {
+    color: #ff0000;
+}
+
+h2 {
+    font-size: 4vh;
+    font: "Trebuchet MS";
+    font-weight: bold;
+}
+
+h3 {
+    font: "Trebuchet MS";
+    font-size: 2vh;
+}
+
+.content {
+    margin: 3px;
+    font: Georgia;
+    font-size: 3vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+#t_overlay {
+    position: absolute;
+    background: ;
 }
