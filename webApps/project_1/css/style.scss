@@ -104,3 +104,20 @@ img {
   margin-left: 3em;
   font: $stdFont;
 }
+
+@media print {
+  a[href^=http]:after {
+    content:" <" attr(href) ">";
+  }
+
+  img {
+    page-break-inside:avoid;
+  }
+
+  @media print and (color) {
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+}
