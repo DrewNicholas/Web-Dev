@@ -3,122 +3,122 @@ $stdFont: Georgia;
 
 body {
   background: linear-gradient(#871910, #000000)no-repeat;
-}
 
-#container {
-  background-color: white;
-  border: solid black 5px;
-  margin: 5%;
-  padding: 3%;
-}
-
-h1 {
-  font-size: 6vh;
-  font: "Trebuchet MS";
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-b {
-  color: #ff0000;
-}
-
-h2 {
-  font-size: 4vh;
-  font: "Trebuchet MS";
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-h3 {
-  font: "Trebuchet MS";
-  font-size: 2vh;
-  margin-bottom: 20px;
-}
-
-.content {
-  position: relative;
-  margin-bottom: 3vh;
-  font: $stdFont;
-  font-size: 3vh;
-  line-height: 4vh;
-  color: #000;
-  text-align: justify;
-}
-
-img {
-  max-width: 100%;
-}
-
-#first_paragraph {
-  padding-left: 10%;
-  #t_background {
-    position: absolute;
-    top: 0;
-    right: 91%;
-    #t_overlay {
-      position: absolute;
-      right: 0;
-      left: 0;
-      top: 50%;
-      font-size: 5vw;
-      color: #ffffff;
-      transform: translate(0,-50%);
-      text-align: center;
-    }
+  #container {
+    background-color: white;
+    border: solid black 5px;
+    margin: 5%;
+    padding: 3%;
   }
-}
 
-#second_paragraph {
-  text-align: justify;
-  #comparison {
-    float: right;
-    width: 50%;
-    margin-left: 1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
+  h1 {
+    font-size: 6vh;
+    font: "Trebuchet MS";
+    font-weight: bold;
+    margin-bottom: 20px;
   }
-}
 
-#seventh_paragraph {
-  text-align: justify;
-  #xerxes {
-    float: left;
-    width: 60%;
-    margin-right: 1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
+  b {
+    color: #ff0000;
   }
-}
 
-.block {
-  margin-left: 2em;
-  margin-right: 2em;
-}
+  h2 {
+    font-size: 4vh;
+    font: "Trebuchet MS";
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
 
-#cliff {
-  width: 100%;
-  border: solid #871910 2px;
-}
+  h3 {
+    font: "Trebuchet MS";
+    font-size: 2vh;
+    margin-bottom: 20px;
+  }
 
-#footnote {
-  margin-left: 3em;
-  font: $stdFont;
-}
-
-@media print {
-  a[href^=http]:after {
-    content:" <" attr(href) ">";
+  .content {
+    position: relative;
+    margin-bottom: 3vh;
+    font: $stdFont;
+    font-size: 3vh;
+    line-height: 4vh;
+    color: #000;
+    text-align: justify;
   }
 
   img {
-    page-break-inside:avoid;
+    max-width: 100%;
   }
 
-  @media print and (color) {
-    * {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
+  #first_paragraph {
+    padding-left: 10%;
+    #t_background {
+      position: absolute;
+      top: 0;
+      right: 91%;
+      #t_overlay {
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 50%;
+        font-size: 5vw;
+        color: #ffffff;
+        transform: translate(0,-50%);
+        text-align: center;
+      }
+    }
+  }
+
+  #second_paragraph {
+    text-align: justify;
+    #comparison {
+      float: right;
+      width: 50%;
+      margin-left: 1em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+  }
+
+  #seventh_paragraph {
+    text-align: justify;
+    #xerxes {
+      float: left;
+      width: 60%;
+      margin-right: 1em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+  }
+
+  .block {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+
+  #cliff {
+    width: 100%;
+    border: solid #871910 2px;
+  }
+
+  #footnote {
+    margin-left: 3em;
+    font: $stdFont;
+  }
+
+  @media print {
+    a[href^=http]:after {
+      content:" <" attr(href) ">";
+    }
+
+    img {
+      page-break-inside:avoid;
+    }
+
+    @media print and (color) {
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
     }
   }
 }
