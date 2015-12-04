@@ -61,7 +61,6 @@ img {
       right: 0;
       left: 0;
       top: 50%;
-      bottom: 0;
       font-size: 5vw;
       color: #ffffff;
       transform: translate(0,-50%);
@@ -76,6 +75,7 @@ img {
     float: right;
     width: 50%;
     margin-left: 1em;
+    margin-top: 1em;
     margin-bottom: 1em;
   }
 }
@@ -86,6 +86,7 @@ img {
     float: left;
     width: 60%;
     margin-right: 1em;
+    margin-top: 1em;
     margin-bottom: 1em;
   }
 }

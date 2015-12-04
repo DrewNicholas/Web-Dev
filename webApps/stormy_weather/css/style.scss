@@ -1,0 +1,26 @@
+@import "reset";
+
+.container {
+  font-family: 'Oxygen', sans-serif;
+  .title_bar {
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    padding-top: 50%;
+    transform: translate(0,-50%);
+    background-color: rgba(47, 47, 47, 0.86);
+    color: #ffffff;
+    #title {
+      font-size: 7vh;
+      font-weight: bold;
+    }
+  }
+  #lyrics {
+    position: absolute;
+    top: 20%;
+    right: 65%;
+    background-color: rgba(47, 47, 47, 0.86);
+    color: #ffffff;
+
+  }
+}
