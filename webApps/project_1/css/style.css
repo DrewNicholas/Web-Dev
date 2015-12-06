@@ -57,6 +57,8 @@ body {
     text-align: justify; }
   body img {
     max-width: 100%; }
+  body #first_paragraph:first-line {
+    font-variant: small-caps; }
   body #first_paragraph {
     padding-left: 10.5%; }
     body #first_paragraph #t_background {
