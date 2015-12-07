@@ -86,5 +86,12 @@ body .container {
 
   .fa-desktop {
     color: #ffffff; } }
+@media print {
+  #icons {
+    color: rgba(0, 0, 0, 0.7); } }
+@media print and (color) {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact; } }
 
 /*# sourceMappingURL=style.css.map */
