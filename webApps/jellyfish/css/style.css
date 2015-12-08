@@ -24,4 +24,44 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+@font-face {
+  font-family: 'Aspira';
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/aspira.otf") format("opentype");
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/aspira.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'JaneAusten';
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/janeausten.woff") format("woff"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/janeausten.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Pesaro';
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/pesaro-light.otf") format("opentype");
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/pesaro-light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+body {
+  font-family: Pesaro, sans-serif; }
+  body #title_bar {
+    position: absolute;
+    top: 3%;
+    width: 100%; }
+    body #title_bar #journal {
+      font-family: Aspira, sans-serif;
+      border-top: solid black 2px;
+      border-bottom: solid black 2px;
+      text-align: center;
+      font-size: 4vh; }
+    body #title_bar #title {
+      font-size: 14vh;
+      font-weight: bold; }
+  body img {
+    position: absolute;
+    top: 30%; }
+  body #caption {
+    font-family: JaneAusten, sans-serif; }
+  body .footer {
+    font-family: Aspira,sans-serif; }
+
 /*# sourceMappingURL=style.css.map */
