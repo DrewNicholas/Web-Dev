@@ -27,25 +27,34 @@
 body {
   font-family: Pesaro, sans-serif;
   #title_bar {
-    position: absolute;
-    top: 3%;
+    position: relative;
+    margin-top: 2%;
     width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
     #journal {
-      font-family: Aspira, sans-serif;
+      position: relative;
+      left: 2%;
+      width: 38%;
+      height: 40%;
+      padding-top: 1%;
+      padding-bottom: 1%;
       border-top: solid black 2px;
       border-bottom: solid black 2px;
       text-align: center;
-      font-size: 4vh;
+      font-size: 3vw;
     }
 
     #title {
-      font-size: 14vh;
-      font-weight: bold;
+      position: relative;
+      left: 10%;
+      font-size: 15vh;
     }
   }
   
   .vertical {
-    
+
   }
   
   #volume_bar {
@@ -60,6 +69,13 @@ body {
   img {
     position: absolute;
     top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%,0);
+    -moz-transform: translate(-50%,0);
+    -ms-transform: translate(-50%,0);
+    -o-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    max-width: 100%;
   }
   
   #caption {
