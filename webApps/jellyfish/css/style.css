@@ -60,24 +60,60 @@ body {
       border-top: solid black 2px;
       border-bottom: solid black 2px;
       text-align: center;
-      font-size: 3vw; }
+      font-family: Aspira, sans-serif;
+      font-size: 3vh; }
     body #title_bar #title {
       position: relative;
       left: 10%;
-      font-size: 15vh; }
+      font-size: 15vmin; }
+  body .vertical {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transform-origin: right top 0; }
+  body #volume_bar {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    color: #9a9a9a; }
+    body #volume_bar #volume_text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 9vmin; }
+    body #volume_bar #number_label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 5vmin; }
   body img {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 50%;
     -webkit-transform: translate(-50%, 0);
     -moz-transform: translate(-50%, 0);
     -ms-transform: translate(-50%, 0);
     -o-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
-    max-width: 100%; }
+    max-width: 40vmin; }
   body #caption {
-    font-family: JaneAusten, sans-serif; }
+    position: absolute;
+    top: 35%;
+    right: 12%;
+    font-family: JaneAusten, sans-serif;
+    font-size: 2vmin;
+    color: #9a9a9a; }
   body .footer {
-    font-family: Aspira,sans-serif; }
+    position: absolute;
+    bottom: 0;
+    height: 3%;
+    width: 100%;
+    padding-top: .5%;
+    border-top: solid black 2px;
+    font-family: Aspira,sans-serif;
+    font-size: 2vmin;
+    text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
