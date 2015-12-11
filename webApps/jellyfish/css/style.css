@@ -75,19 +75,24 @@ body {
     transform-origin: right top 0; }
   body #volume_bar {
     position: absolute;
-    top: 35%;
+    top: 30%;
     left: 5%;
+    height: 45%;
+    width: 7%;
     color: #9a9a9a; }
     body #volume_bar #volume_text {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 100%;
       font-size: 9vmin; }
     body #volume_bar #number_label {
       position: absolute;
       bottom: 0;
       left: 0;
       font-size: 5vmin; }
+      body #volume_bar #number_label #period {
+        margin-left: -1.2rem;
+        margin-right: .4rem; }
   body img {
     position: absolute;
     top: 25%;
