@@ -5,7 +5,11 @@ body {
     font-size: 8vmin; }
     body h1 #ampersand {
       color: #ff0000; }
+  body h2 {
+    font-size: 3vh; }
+  body h6 {
+    font-size: 1.6vh; }
   body div {
-    font-size: inherit; }
+    font-size: 1.6vh; }
 
 /*# sourceMappingURL=style.css.map */
