@@ -1,0 +1,15 @@
+{
+  "name": "text_adventure",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "babel-preset-es2015": "latest",
+    "body-parser": "latest",
+    "webpack": "latest"
+  }
+}
