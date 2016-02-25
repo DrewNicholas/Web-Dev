@@ -1,0 +1,29 @@
+@import "reset";
+
+body {
+  background-color: #ff6400;
+}
+
+#title {
+  text-align: center;
+  font-family: "Comic Sans MS", sans-serif;
+  font-size: 5vmin;
+  margin-bottom: 3%;
+}
+
+#instructions {
+  text-align: center;
+  font-family: "Times New Roman", sans-serif;
+  font-size: 3vmin;
+  margin-bottom: 2%;
+}
+
+#left {
+  position: relative;
+  left: 30%;
+}
+
+#right {
+  position: relative;
+  left: 60%;
+}
