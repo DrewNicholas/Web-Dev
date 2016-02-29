@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+AUTHOR: DN
+VERSION: 1.0
+CREATED: 2.9.2016
+ASSIGNMENT: text adventure
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This Text Adventure</title>
+    <link href="frameworks/foundation.min.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="row">
+        <div id="title" class="small-9 small-centered column">
+            Welcome to this text adventure!!!
+        </div>
+    </div>
+    <div class="row">
+        <div id="instructions" class="small-8 small-centered column">
+            Before you are two doors: one to the right and one to the left. Which do you choose?
+        </div>
+    </div>
+    <form id="form" name="form" method="post">
+        <button type="button" id="left"  class="success button">Left</button>
+        <button type="button" id="right"  class="alert button">Right</button>
+    </form>
+
+    <!--SCRIPTS-->
+    <script src="scripts/bundle.js"></script>
+</body>
+</html>

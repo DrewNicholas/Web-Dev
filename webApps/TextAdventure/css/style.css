@@ -1,0 +1,52 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, img, ins, kbd, q, s, samp, small, strike, strong, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1;
+  background-color: #ff6a19; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background-color: #ff6400; }
+
+#title {
+  text-align: center;
+  font-family: "Comic Sans MS", sans-serif;
+  font-size: 5vmin;
+  margin-top: 2%;
+  margin-bottom: 3%; }
+
+#instructions {
+  text-align: center;
+  font-family: "Times New Roman", sans-serif;
+  font-size: 3vmin;
+  margin-bottom: 2%; }
+
+#left {
+  position: relative;
+  left: 30%; }
+
+#right {
+  position: relative;
+  left: 60%; }
+
+/*# sourceMappingURL=style.css.map */
