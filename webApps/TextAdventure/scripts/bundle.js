@@ -68,10 +68,10 @@
 
 	    this.counter = 0;
 	    document.getElementById("left").addEventListener("click", function () {
-	        new _Decision2.default('first', 'left').updateDOM();
+	        new _Decision2.default('first', 'left');
 	    }, false);
 	    document.getElementById("right").addEventListener("click", function () {
-	        new _Decision2.default('first', 'right').updateDOM();
+	        new _Decision2.default('first', 'right');
 	    }, false);
 	};
 

@@ -5,10 +5,13 @@
 
 "use strict";
 
+import FileLoader from "./FileLoader";
+
 export default class Decision {
     constructor(time, choice) {
         this.time = time;
         this.choice = choice;
+        new FileLoader().loadData('./data/instructions.csv', this.updateDOM());
     }
     updateDOM = function() {
         if (this.time == 'first' && this.choice == 'left') {

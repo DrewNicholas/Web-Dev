@@ -13,8 +13,8 @@ import Decision from "./Decision";
 class main {
     constructor() {
         this.counter = 0;
-        document.getElementById("left").addEventListener("click", function() {new Decision('first', 'left').updateDOM()}, false);
-        document.getElementById("right").addEventListener("click", function() {new Decision('first', 'right').updateDOM()}, false);
+        document.getElementById("left").addEventListener("click", function() {new Decision('first', 'left')}, false);
+        document.getElementById("right").addEventListener("click", function() {new Decision('first', 'right')}, false);
     }
 }
 
