@@ -11,12 +11,19 @@ export default class Decision {
     constructor(time, choice) {
         this.time = time;
         this.choice = choice;
-        new FileLoader().loadData('./data/instructions.csv', this.updateDOM());
+        Decision.data = "";
+        console.log("You clicked");
+        new FileLoader().loadData('./data/instructions.csv', this.setData);
+        Decision.updateDOM();
     }
-    updateDOM = function() {
+
+    static updateDOM() {
         if (this.time == 'first' && this.choice == 'left') {
             document.getElementById('instructions').innerHTML = 'some other bullshit';
         }
-    }
+    };
 
+    setData(data) {
+        Decision.data = data;
+    }
 }
