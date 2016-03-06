@@ -12,16 +12,18 @@ export default class Decision {
         this.time = time;
         this.choice = choice;
         Decision.data = "";
+        console.log("You clicked");
         new FileLoader().loadData('./data/instructions.csv', this.setData);
+        Decision.updateDOM();
     }
 
-    updateDOM = function() {
+    static updateDOM() {
         if (this.time == 'first' && this.choice == 'left') {
             document.getElementById('instructions').innerHTML = 'some other bullshit';
         }
-    }
+    };
 
-    setData = function {
-
+    setData(data) {
+        Decision.data = data;
     }
 }

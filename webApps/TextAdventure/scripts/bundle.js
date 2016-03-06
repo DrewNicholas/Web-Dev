@@ -52,16 +52,13 @@
 
 	"use strict";
 
-	var _Decision = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Decision\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Decision = __webpack_require__(1);
 
 	var _Decision2 = _interopRequireDefault(_Decision);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	//const FIRST = 1;
-	//const SECOND = 2;
 
 	var main = function main() {
 	    _classCallCheck(this, main);
@@ -73,11 +70,120 @@
 	    document.getElementById("right").addEventListener("click", function () {
 	        new _Decision2.default('first', 'right');
 	    }, false);
+	    console.log("Hi Drew!");
 	};
 
 	window.onload = function () {
 	    new main();
 	};
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* AUTHOR: dmnicholas@me.com
+	 * Version: 1.0.0
+	 * CREATED: 2.24.2016
+	 */
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _FileLoader = __webpack_require__(2);
+
+	var _FileLoader2 = _interopRequireDefault(_FileLoader);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Decision = function () {
+	    function Decision(time, choice) {
+	        _classCallCheck(this, Decision);
+
+	        this.time = time;
+	        this.choice = choice;
+	        Decision.data = "";
+	        console.log("You clicked");
+	        new _FileLoader2.default().loadData('./data/instructions.csv', this.setData);
+	        Decision.updateDOM();
+	    }
+
+	    _createClass(Decision, [{
+	        key: "setData",
+	        value: function setData(data) {
+	            Decision.data = data;
+	        }
+	    }], [{
+	        key: "updateDOM",
+	        value: function updateDOM() {
+	            if (this.time == 'first' && this.choice == 'left') {
+	                document.getElementById('instructions').innerHTML = 'some other bullshit';
+	            }
+	        }
+	    }]);
+
+	    return Decision;
+	}();
+
+	exports.default = Decision;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	/* AUTHOR: dmnicholas@me.com
+	 * Version: 1.0.0
+	 * CREATED: 2.24.2016
+	 */
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var FileLoader = function () {
+	    function FileLoader() {
+	        _classCallCheck(this, FileLoader);
+	    }
+
+	    _createClass(FileLoader, [{
+	        key: "loadData",
+	        value: function loadData(filePath, callback) {
+	            var request = new XMLHttpRequest();
+	            request.open("GET", filePath, true);
+	            request.send();
+	            request.onload = function () {
+	                var data = [];
+	                if (request.readyState === 4 && request.status === 200) {
+	                    data = request.responseText.split(/\n/);
+	                }
+	                /*for (let i = 0; i < data.length; i++) {
+	                    middleData = data[i].split(/,/);
+	                    finalData[i] = []; //makes it an MD array
+	                    for (let j = 0; j < COLUMNS; j++) {
+	                        finalData[i][j] = middleData[j];
+	                    }
+	                }*/
+	                callback(data);
+	            };
+	        }
+	    }]);
+
+	    return FileLoader;
+	}();
+
+	exports.default = FileLoader;
 
 /***/ }
 /******/ ]);
