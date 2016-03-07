@@ -63,12 +63,24 @@
 	var main = function main() {
 	    _classCallCheck(this, main);
 
-	    this.counter = 0;
+	    var game = new _Decision2.default();
 	    document.getElementById("left").addEventListener("click", function () {
-	        new _Decision2.default('first', 'left');
+	        game.updateDOM('left');
 	    }, false);
 	    document.getElementById("right").addEventListener("click", function () {
-	        new _Decision2.default('first', 'right');
+	        game.updateDOM('right');
+	    }, false);
+	    document.getElementById("knife").addEventListener("click", function () {
+	        game.updateDOM('knife');
+	    }, false);
+	    document.getElementById("cake").addEventListener("click", function () {
+	        game.updateDOM('cake');
+	    }, false);
+	    document.getElementById("dog").addEventListener("click", function () {
+	        game.updateDOM('dog');
+	    }, false);
+	    document.getElementById("cat").addEventListener("click", function () {
+	        game.updateDOM('cat');
 	    }, false);
 	    console.log("Hi Drew!");
 	};
@@ -103,28 +115,50 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Decision = function () {
-	    function Decision(time, choice) {
+	    function Decision() {
 	        _classCallCheck(this, Decision);
 
-	        this.time = time;
-	        this.choice = choice;
 	        Decision.data = "";
-	        console.log("You clicked");
-	        new _FileLoader2.default().loadData('./data/instructions.csv', this.setData);
-	        Decision.updateDOM();
+	        new _FileLoader2.default().loadData('./data/instructions.csv', Decision.setData);
 	    }
 
 	    _createClass(Decision, [{
+	        key: "updateDOM",
+	        value: function updateDOM(choice) {
+	            if (choice == 'left') {
+	                document.getElementById('instructions').innerHTML = Decision.data[0];
+	                document.getElementById('left').style.visibility = "hidden";
+	                document.getElementById('right').style.visibility = "hidden";
+	                document.getElementById('knife').style.visibility = "visible";
+	                document.getElementById('cake').style.visibility = "visible";
+	            } else if (choice == 'right') {
+	                document.getElementById('instructions').innerHTML = Decision.data[1];
+	                document.getElementById('left').style.visibility = "hidden";
+	                document.getElementById('right').style.visibility = "hidden";
+	                document.getElementById('dog').style.visibility = "visible";
+	                document.getElementById('cat').style.visibility = "visible";
+	            } else if (choice == 'knife') {
+	                document.getElementById('instructions').innerHTML = Decision.data[2];
+	                document.getElementById('knife').style.visibility = "hidden";
+	                document.getElementById('cake').style.visibility = "hidden";
+	            } else if (choice == "cake") {
+	                document.getElementById('instructions').innerHTML = Decision.data[3];
+	                document.getElementById('knife').style.visibility = "hidden";
+	                document.getElementById('cake').style.visibility = "hidden";
+	            } else if (choice == 'dog') {
+	                document.getElementById('instructions').innerHTML = Decision.data[4];
+	                document.getElementById('dog').style.visibility = "hidden";
+	                document.getElementById('cat').style.visibility = "hidden";
+	            } else if (choice == 'cat') {
+	                document.getElementById('instructions').innerHTML = Decision.data[5];
+	                document.getElementById('dog').style.visibility = "hidden";
+	                document.getElementById('cat').style.visibility = "hidden";
+	            }
+	        }
+	    }], [{
 	        key: "setData",
 	        value: function setData(data) {
 	            Decision.data = data;
-	        }
-	    }], [{
-	        key: "updateDOM",
-	        value: function updateDOM() {
-	            if (this.time == 'first' && this.choice == 'left') {
-	                document.getElementById('instructions').innerHTML = 'some other bullshit';
-	            }
 	        }
 	    }]);
 

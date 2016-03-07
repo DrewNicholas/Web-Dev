@@ -41,12 +41,32 @@ body {
   font-size: 3vmin;
   margin-bottom: 2%; }
 
+#right {
+  position: relative;
+  left: 60%; }
+
 #left {
   position: relative;
   left: 30%; }
 
-#right {
+#knife {
   position: relative;
-  left: 60%; }
+  left: 20%;
+  visibility: hidden; }
+
+#cake {
+  position: relative;
+  left: 50%;
+  visibility: hidden; }
+
+#dog {
+  position: relative;
+  left: 10%;
+  visibility: hidden; }
+
+#cat {
+  position: relative;
+  left: 40%;
+  visibility: hidden; }
 
 /*# sourceMappingURL=style.css.map */

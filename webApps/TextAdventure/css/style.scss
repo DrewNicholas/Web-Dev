@@ -19,12 +19,36 @@ body {
   margin-bottom: 2%;
 }
 
-#left {
-  position: relative;
-  left: 30%;
-}
-
 #right {
   position: relative;
   left: 60%;
+}
+
+#left {
+   position: relative;
+   left: 30%;
+ }
+
+#knife {
+  position: relative;
+  left: 20%;
+  visibility: hidden;
+}
+
+#cake {
+  position: relative;
+  left: 50%;
+  visibility: hidden;
+}
+
+#dog {
+  position: relative;
+  left: 10%;
+  visibility: hidden;
+}
+
+#cat {
+  position: relative;
+  left: 40%;
+  visibility: hidden;
 }
