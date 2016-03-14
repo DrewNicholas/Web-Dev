@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/* AUTHOR: dmnicholas@me.com
 	 * VERSION: 1.0.0
@@ -52,11 +52,44 @@
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _ScreenChanger = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"ScreenChanger\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _ScreenChanger2 = _interopRequireDefault(_ScreenChanger);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var main = function main() {
-	    _classCallCheck(this, main);
-	};
+	var main = function () {
+	    function main() {
+	        _classCallCheck(this, main);
+
+	        main.button0 = "";
+	        main.button1 = "";
+	        main.button2 = "";
+	        main.button3 = "";
+	        main.button4 = "";
+	        main.button5 = "";
+	        this.setButtons();
+	        button4.addEventListener('click', function () {});
+	    }
+
+	    _createClass(main, null, [{
+	        key: "setButtons",
+	        value: function setButtons() {
+	            main.button0 = document.getElementById('button0');
+	            main.button1 = document.getElementById('button1');
+	            main.button2 = document.getElementById('button2');
+	            main.button3 = document.getElementById('button3');
+	            main.button4 = document.getElementById('button4');
+	            main.button5 = document.getElementById('button5');
+	        }
+	    }]);
+
+	    return main;
+	}();
 
 	window.onload = function () {
 	    new main();

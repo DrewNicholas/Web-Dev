@@ -56,11 +56,11 @@ table {
   #leftButtonContainer .button {
     position: absolute;
     right: 25%; }
-  #leftButtonContainer #button1 {
+  #leftButtonContainer #button0 {
     top: 10%; }
-  #leftButtonContainer #button2 {
+  #leftButtonContainer #button1 {
     top: 40%; }
-  #leftButtonContainer #button3 {
+  #leftButtonContainer #button2 {
     top: 70%; }
 
 #rightButtonContainer {
@@ -70,11 +70,11 @@ table {
   #rightButtonContainer .button {
     position: absolute;
     left: 25%; }
-  #rightButtonContainer #button4 {
+  #rightButtonContainer #button3 {
     top: 10%; }
-  #rightButtonContainer #button5 {
+  #rightButtonContainer #button4 {
     top: 40%; }
-  #rightButtonContainer #button6 {
+  #rightButtonContainer #button5 {
     top: 70%; }
 
 /*# sourceMappingURL=style.css.map */
