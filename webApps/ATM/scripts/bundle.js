@@ -70,16 +70,18 @@
 	    function main() {
 	        _classCallCheck(this, main);
 
-	        new _LoadData2.default().loadData('./data/customers.csv', main.setData());
+	        new _LoadData2.default().loadData('./data/customers.csv', main.setData);
 	        main.button0 = "";
 	        main.button1 = "";
 	        main.button2 = "";
 	        main.button3 = "";
 	        main.button4 = "";
 	        main.button5 = "";
-	        main.data = [];
+	        main.data = [[]];
 	        this.setButtons();
-	        button4.addEventListener('click', function () {});
+	        button4.addEventListener('click', function () {
+	            new _ScreenChanger2.default().validate();
+	        });
 	    }
 
 	    _createClass(main, null, [{
@@ -96,6 +98,11 @@
 	        key: 'setData',
 	        value: function setData(inputData) {
 	            var COLUMNS = 6;
+	            for (var i = 0; i < inputData.length; i++) {
+	                for (var j = 0; j < COLUMNS; j++) {
+	                    main.data[i][j] = inputData[i][j];
+	                }
+	            }
 	        }
 	    }]);
 

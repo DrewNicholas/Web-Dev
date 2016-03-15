@@ -9,4 +9,12 @@ export default class ScreenChanger {
     constructor() {
         
     }
+
+    updateScreen() {
+
+    }
+
+    validate() {
+
+    }
 }

@@ -11,16 +11,16 @@ import LoadData from 'LoadData';
 
 class main {
     constructor() {
-        new LoadData().loadData('./data/customers.csv', main.setData());
+        new LoadData().loadData('./data/customers.csv', main.setData);
         main.button0 = "";
         main.button1 = "";
         main.button2 = "";
         main.button3 = "";
         main.button4 = "";
         main.button5 = "";
-        main.data = [];
+        main.data = [[]];
         this.setButtons();
-        button4.addEventListener('click', function() {});
+        button4.addEventListener('click', function() {new ScreenChanger().validate()});
     }
 
     static setButtons() {
@@ -33,7 +33,12 @@ class main {
     }
 
     static setData(inputData) {
-        const COLUMNS = 6
+        const COLUMNS = 6;
+        for (let i = 0; i < inputData.length; i++) {
+            for (let j = 0; j < COLUMNS; j++) {
+                main.data[i][j] = inputData[i][j];
+            }
+        }
     }
 }
 
