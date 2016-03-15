@@ -7,15 +7,18 @@
 "use strict";
 
 import ScreenChanger from 'ScreenChanger';
+import LoadData from 'LoadData';
 
 class main {
     constructor() {
+        new LoadData().loadData('./data/customers.csv', main.setData());
         main.button0 = "";
         main.button1 = "";
         main.button2 = "";
         main.button3 = "";
         main.button4 = "";
         main.button5 = "";
+        main.data = [];
         this.setButtons();
         button4.addEventListener('click', function() {});
     }
@@ -27,6 +30,10 @@ class main {
         main.button3 = document.getElementById('button3');
         main.button4 = document.getElementById('button4');
         main.button5 = document.getElementById('button5');
+    }
+
+    static setData(inputData) {
+        const COLUMNS = 6
     }
 }
 

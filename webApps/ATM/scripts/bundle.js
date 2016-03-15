@@ -58,6 +58,10 @@
 
 	var _ScreenChanger2 = _interopRequireDefault(_ScreenChanger);
 
+	var _LoadData = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"LoadData\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _LoadData2 = _interopRequireDefault(_LoadData);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66,18 +70,20 @@
 	    function main() {
 	        _classCallCheck(this, main);
 
+	        new _LoadData2.default().loadData('./data/customers.csv', main.setData());
 	        main.button0 = "";
 	        main.button1 = "";
 	        main.button2 = "";
 	        main.button3 = "";
 	        main.button4 = "";
 	        main.button5 = "";
+	        main.data = [];
 	        this.setButtons();
 	        button4.addEventListener('click', function () {});
 	    }
 
 	    _createClass(main, null, [{
-	        key: "setButtons",
+	        key: 'setButtons',
 	        value: function setButtons() {
 	            main.button0 = document.getElementById('button0');
 	            main.button1 = document.getElementById('button1');
@@ -85,6 +91,11 @@
 	            main.button3 = document.getElementById('button3');
 	            main.button4 = document.getElementById('button4');
 	            main.button5 = document.getElementById('button5');
+	        }
+	    }, {
+	        key: 'setData',
+	        value: function setData(inputData) {
+	            var COLUMNS = 6;
 	        }
 	    }]);
 
