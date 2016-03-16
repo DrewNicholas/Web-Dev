@@ -80,7 +80,7 @@
 	        main.data = [[]];
 	        this.setButtons();
 	        button4.addEventListener('click', function () {
-	            new _ScreenChanger2.default().validate();
+	            new _ScreenChanger2.default().validate('cardNum');
 	        });
 	    }
 

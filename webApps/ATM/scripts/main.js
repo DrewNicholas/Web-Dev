@@ -20,7 +20,7 @@ class main {
         main.button5 = "";
         main.data = [[]];
         this.setButtons();
-        button4.addEventListener('click', function() {new ScreenChanger().validate()});
+        button4.addEventListener('click', function() {new ScreenChanger().validate('cardNum')});
     }
 
     static setButtons() {
