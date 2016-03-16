@@ -12,18 +12,19 @@ export default class ScreenChanger {
 
     updateScreen(valid) {
         if (valid == true) {
-
+            console.log('card number valid');
         } else {
-
+            console.log('card invalid');
         }
     }
 
     validate(elementId) {
+        let data = main.getData();
         let checkNum = document.getElementById(elementId).value;
         let isValid = false;
         if (elementId == 'cardNum') {
-            for (let i = 0; i< main.data.length && isValid == false; i++) {
-                if (main.data[i][0] == checkNum) {
+            for (let i = 0; i< data.length && isValid == false; i++) {
+                if (data[i][0] == checkNum) {
                     isValid = true;
                 }
             }
