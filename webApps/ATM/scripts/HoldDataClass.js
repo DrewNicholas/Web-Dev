@@ -8,6 +8,7 @@
 export default class HoldDataClass {
     constructor() {
         this.data = [[]];
+        HoldDataClass.customer = '';
     }
 
     static setData(importData) {
@@ -16,5 +17,13 @@ export default class HoldDataClass {
 
     static getData() {
         return this.data;
+    }
+
+    static setCustomer(dataRowNum) {
+        HoldDataClass.customer = dataRowNum;
+    }
+
+    static getCustomer() {
+        return HoldDataClass.customer;
     }
 }

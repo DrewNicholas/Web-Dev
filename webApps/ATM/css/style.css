@@ -44,7 +44,7 @@ table {
   font-family: Helvetica, sans-serif;
   font-size: 7vmin;
   text-align: center; }
-  #screen #cardNum {
+  #screen input {
     position: absolute;
     width: 10%;
     left: 45%;

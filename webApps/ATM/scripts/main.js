@@ -18,35 +18,31 @@ class main {
         main.button = [];
         main.setButtons();
         main.button[3].addEventListener('click', function() {
-            new ScreenChanger().validate('cardNum');
-            console.log('button 4 clicked');
+            main.validate('cardNum');
+            console.log('button3 clicked');
         });
     }
 
     static setButtons() {
-        //main.button0 = document.getElementById('button0');
-        //main.button1 = document.getElementById('button1');
-        //main.button2 = document.getElementById('button2');
-        //main.button3 = document.getElementById('button3');
-        //main.button4 = document.getElementById('button4');
-        //main.button5 = document.getElementById('button5');
         for (let i = 0; i < 6; i++) {
             main.button[i] = document.getElementById('button' + i);
         }
     }
 
-    setData(inputData) {
-        //const COLUMNS = 6;
-        //for (let i = 0; i < inputData.length; i++) {
-        //    for (let j = 0; j < COLUMNS; j++) {
-        //        main.data[i][j] = inputData[i][j];
-        //    }
-        //}
-        main.data = inputData;
-    }
+    static validate(elementId) {
+        let data = HoldDataClass.getData();
+        let checkNum = document.getElementById(elementId).value;
+        let isValid = false;
+        if (elementId == 'cardNum') {
+            for (let i = 0; i< data.length && isValid == false; i++) {
+                if (data[i][0] == checkNum) {
+                    isValid = true;
+                    HoldDataClass.setCustomer(i);
+                }
+            }
 
-    static getData() {
-        return this.data;
+        }
+        new ScreenChanger().updateScreen(isValid);
     }
 }
 

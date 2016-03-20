@@ -80,39 +80,33 @@
 	        main.button = [];
 	        main.setButtons();
 	        main.button[3].addEventListener('click', function () {
-	            new _ScreenChanger2.default().validate('cardNum');
-	            console.log('button 4 clicked');
+	            main.validate('cardNum');
+	            console.log('button3 clicked');
 	        });
 	    }
 
-	    _createClass(main, [{
-	        key: 'setData',
-	        value: function setData(inputData) {
-	            //const COLUMNS = 6;
-	            //for (let i = 0; i < inputData.length; i++) {
-	            //    for (let j = 0; j < COLUMNS; j++) {
-	            //        main.data[i][j] = inputData[i][j];
-	            //    }
-	            //}
-	            main.data = inputData;
-	        }
-	    }], [{
+	    _createClass(main, null, [{
 	        key: 'setButtons',
 	        value: function setButtons() {
-	            //main.button0 = document.getElementById('button0');
-	            //main.button1 = document.getElementById('button1');
-	            //main.button2 = document.getElementById('button2');
-	            //main.button3 = document.getElementById('button3');
-	            //main.button4 = document.getElementById('button4');
-	            //main.button5 = document.getElementById('button5');
 	            for (var i = 0; i < 6; i++) {
 	                main.button[i] = document.getElementById('button' + i);
 	            }
 	        }
 	    }, {
-	        key: 'getData',
-	        value: function getData() {
-	            return this.data;
+	        key: 'validate',
+	        value: function validate(elementId) {
+	            var data = _HoldDataClass2.default.getData();
+	            var checkNum = document.getElementById(elementId).value;
+	            var isValid = false;
+	            if (elementId == 'cardNum') {
+	                for (var i = 0; i < data.length && isValid == false; i++) {
+	                    if (data[i][0] == checkNum) {
+	                        isValid = true;
+	                        _HoldDataClass2.default.setCustomer(i);
+	                    }
+	                }
+	            }
+	            new _ScreenChanger2.default().updateScreen(isValid);
 	        }
 	    }]);
 
@@ -160,25 +154,27 @@
 	        value: function updateScreen(valid) {
 	            if (valid == true) {
 	                console.log('card number valid');
+	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
 	            } else {
 	                console.log('card invalid');
+	                this.screen.innerHTML = 'Invalid card number, please try again' + '<input type="text" id="cardNum" placeholder="Card Number">';
 	            }
 	        }
-	    }, {
-	        key: 'validate',
-	        value: function validate(elementId) {
-	            var data = _HoldDataClass2.default.getData();
-	            var checkNum = document.getElementById(elementId).value;
-	            var isValid = false;
-	            if (elementId == 'cardNum') {
-	                for (var i = 0; i < data.length && isValid == false; i++) {
-	                    if (data[i][0] == checkNum) {
-	                        isValid = true;
-	                    }
-	                }
-	                this.updateScreen(isValid);
-	            }
-	        }
+
+	        //validate(elementId) {
+	        //    let data = HoldDataClass.getData();
+	        //    let checkNum = document.getElementById(elementId).value;
+	        //    let isValid = false;
+	        //    if (elementId == 'cardNum') {
+	        //        for (let i = 0; i< data.length && isValid == false; i++) {
+	        //            if (data[i][0] == checkNum) {
+	        //                isValid = true;
+	        //            }
+	        //        }
+	        //        this.updateScreen(isValid)
+	        //    }
+	        //}
+
 	    }]);
 
 	    return ScreenChanger;
@@ -210,6 +206,7 @@
 	        _classCallCheck(this, HoldDataClass);
 
 	        this.data = [[]];
+	        HoldDataClass.customer = '';
 	    }
 
 	    _createClass(HoldDataClass, null, [{
@@ -221,6 +218,16 @@
 	        key: "getData",
 	        value: function getData() {
 	            return this.data;
+	        }
+	    }, {
+	        key: "setCustomer",
+	        value: function setCustomer(dataRowNum) {
+	            HoldDataClass.customer = dataRowNum;
+	        }
+	    }, {
+	        key: "getCustomer",
+	        value: function getCustomer() {
+	            return HoldDataClass.customer;
 	        }
 	    }]);
 
