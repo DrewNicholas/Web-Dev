@@ -7,13 +7,15 @@
 "use strict";
 
 import ScreenChanger from './ScreenChanger';
-import LoadData from './LoadData';
+import LoadDataClass from './LoadDataClass';
+import HoldDataClass from './HoldDataClass';
 
 class main {
     constructor() {
-        new LoadData().loadData('./data/customers.csv', main.setData);
+        //let heldData = new HoldDataClass();
+        //this.data = [[]];
+        new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
         main.button = [];
-        main.data = [[]];
         main.setButtons();
         main.button[3].addEventListener('click', function() {
             new ScreenChanger().validate('cardNum');
@@ -33,7 +35,7 @@ class main {
         }
     }
 
-    static setData(inputData) {
+    setData(inputData) {
         //const COLUMNS = 6;
         //for (let i = 0; i < inputData.length; i++) {
         //    for (let j = 0; j < COLUMNS; j++) {

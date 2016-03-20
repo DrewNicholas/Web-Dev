@@ -58,9 +58,13 @@
 
 	var _ScreenChanger2 = _interopRequireDefault(_ScreenChanger);
 
-	var _LoadData = __webpack_require__(2);
+	var _LoadDataClass = __webpack_require__(3);
 
-	var _LoadData2 = _interopRequireDefault(_LoadData);
+	var _LoadDataClass2 = _interopRequireDefault(_LoadDataClass);
+
+	var _HoldDataClass = __webpack_require__(2);
+
+	var _HoldDataClass2 = _interopRequireDefault(_HoldDataClass);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,9 +74,10 @@
 	    function main() {
 	        _classCallCheck(this, main);
 
-	        new _LoadData2.default().loadData('./data/customers.csv', main.setData);
+	        //let heldData = new HoldDataClass();
+	        //this.data = [[]];
+	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
 	        main.button = [];
-	        main.data = [[]];
 	        main.setButtons();
 	        main.button[3].addEventListener('click', function () {
 	            new _ScreenChanger2.default().validate('cardNum');
@@ -80,7 +85,18 @@
 	        });
 	    }
 
-	    _createClass(main, null, [{
+	    _createClass(main, [{
+	        key: 'setData',
+	        value: function setData(inputData) {
+	            //const COLUMNS = 6;
+	            //for (let i = 0; i < inputData.length; i++) {
+	            //    for (let j = 0; j < COLUMNS; j++) {
+	            //        main.data[i][j] = inputData[i][j];
+	            //    }
+	            //}
+	            main.data = inputData;
+	        }
+	    }], [{
 	        key: 'setButtons',
 	        value: function setButtons() {
 	            //main.button0 = document.getElementById('button0');
@@ -92,17 +108,6 @@
 	            for (var i = 0; i < 6; i++) {
 	                main.button[i] = document.getElementById('button' + i);
 	            }
-	        }
-	    }, {
-	        key: 'setData',
-	        value: function setData(inputData) {
-	            //const COLUMNS = 6;
-	            //for (let i = 0; i < inputData.length; i++) {
-	            //    for (let j = 0; j < COLUMNS; j++) {
-	            //        main.data[i][j] = inputData[i][j];
-	            //    }
-	            //}
-	            main.data = inputData;
 	        }
 	    }, {
 	        key: 'getData',
@@ -120,7 +125,7 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/* AUTHOR: dmnicholas@me.com
 	 * VERSION: 1.0.0
@@ -134,6 +139,12 @@
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _HoldDataClass = __webpack_require__(2);
+
+	var _HoldDataClass2 = _interopRequireDefault(_HoldDataClass);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -156,7 +167,7 @@
 	    }, {
 	        key: 'validate',
 	        value: function validate(elementId) {
-	            var data = main.getData();
+	            var data = _HoldDataClass2.default.getData();
 	            var checkNum = document.getElementById(elementId).value;
 	            var isValid = false;
 	            if (elementId == 'cardNum') {
@@ -177,6 +188,49 @@
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	/* AUTHOR: dmnicholas@me.com
+	 * VERSION: 1.0.0
+	 * CREATED: 3.13.2016
+	 */
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var HoldDataClass = function () {
+	    function HoldDataClass() {
+	        _classCallCheck(this, HoldDataClass);
+
+	        this.data = [[]];
+	    }
+
+	    _createClass(HoldDataClass, null, [{
+	        key: "setData",
+	        value: function setData(importData) {
+	            HoldDataClass.data = importData;
+	        }
+	    }, {
+	        key: "getData",
+	        value: function getData() {
+	            return this.data;
+	        }
+	    }]);
+
+	    return HoldDataClass;
+	}();
+
+	exports.default = HoldDataClass;
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 	/* AUTHOR: dmnicholas@me.com

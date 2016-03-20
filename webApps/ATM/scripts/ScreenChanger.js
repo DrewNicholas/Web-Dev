@@ -5,6 +5,8 @@
 
 "use strict";
 
+import HoldDataClass from './HoldDataClass';
+
 export default class ScreenChanger {
     constructor() {
         this.screen = document.getElementById('screen');
@@ -19,7 +21,7 @@ export default class ScreenChanger {
     }
 
     validate(elementId) {
-        let data = main.getData();
+        let data = HoldDataClass.getData();
         let checkNum = document.getElementById(elementId).value;
         let isValid = false;
         if (elementId == 'cardNum') {
