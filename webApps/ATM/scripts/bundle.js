@@ -84,7 +84,16 @@
 	        });
 	    }
 
-	    _createClass(main, null, [{
+	    _createClass(main, [{
+	        key: 'addListener',
+	        value: function addListener(buttonNumber, addRemove, doWhat) {
+	            if (addRemove == 'add') {
+	                _HoldDataClass2.default.button[buttonNumber].addEventListener('click', doWhat);
+	            } else {
+	                _HoldDataClass2.default.button[buttonNumber].removeEventListener('click', doWhat);
+	            }
+	        }
+	    }], [{
 	        key: 'validate',
 	        value: function validate(elementId) {
 	            var data = _HoldDataClass2.default.getData();
@@ -144,13 +153,14 @@
 
 	    _createClass(ScreenChanger, [{
 	        key: 'updateScreen',
-	        value: function updateScreen(valid, whatNext) {
+	        value: function updateScreen(valid, whatNext, callback) {
 	            if (valid == true) {
 	                console.log('card number valid');
 	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
 	                _HoldDataClass2.default.button[3].addEventListener('click', function func() {
 	                    main.validate('PIN');
 	                });
+	                callback(3, 'remove', main.func);
 	            } else {
 	                console.log('card invalid');
 	                this.screen.innerHTML = 'Invalid card number, please try again' + '<input type="text" id="cardNum" placeholder="Card Number">';

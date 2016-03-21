@@ -38,6 +38,14 @@ class main {
         }
 
     }
+
+    addListener(buttonNumber, addRemove, doWhat) {
+        if (addRemove == 'add') {
+            HoldDataClass.button[buttonNumber].addEventListener('click', doWhat);
+        } else {
+            HoldDataClass.button[buttonNumber].removeEventListener('click', doWhat);
+        }
+    }
 }
 
 window.onload = function() {
