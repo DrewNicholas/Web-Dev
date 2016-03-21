@@ -77,22 +77,14 @@
 	        //let heldData = new HoldDataClass();
 	        //this.data = [[]];
 	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
-	        main.button = [];
-	        main.setButtons();
-	        main.button[3].addEventListener('click', function () {
+	        _HoldDataClass2.default.button = [];
+	        _HoldDataClass2.default.setButtons();
+	        _HoldDataClass2.default.button[3].addEventListener('click', function func() {
 	            main.validate('cardNum');
-	            console.log('button3 clicked');
 	        });
 	    }
 
 	    _createClass(main, null, [{
-	        key: 'setButtons',
-	        value: function setButtons() {
-	            for (var i = 0; i < 6; i++) {
-	                main.button[i] = document.getElementById('button' + i);
-	            }
-	        }
-	    }, {
 	        key: 'validate',
 	        value: function validate(elementId) {
 	            var data = _HoldDataClass2.default.getData();
@@ -103,10 +95,11 @@
 	                    if (data[i][0] == checkNum) {
 	                        isValid = true;
 	                        _HoldDataClass2.default.setCustomer(i);
+	                        _HoldDataClass2.default.button[3].removeEventListener('click', main.func);
 	                    }
 	                }
+	                new _ScreenChanger2.default().updateScreen(isValid, 'PIN');
 	            }
-	            new _ScreenChanger2.default().updateScreen(isValid);
 	        }
 	    }]);
 
@@ -151,10 +144,13 @@
 
 	    _createClass(ScreenChanger, [{
 	        key: 'updateScreen',
-	        value: function updateScreen(valid) {
+	        value: function updateScreen(valid, whatNext) {
 	            if (valid == true) {
 	                console.log('card number valid');
 	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
+	                _HoldDataClass2.default.button[3].addEventListener('click', function func() {
+	                    main.validate('PIN');
+	                });
 	            } else {
 	                console.log('card invalid');
 	                this.screen.innerHTML = 'Invalid card number, please try again' + '<input type="text" id="cardNum" placeholder="Card Number">';
@@ -207,27 +203,41 @@
 
 	        this.data = [[]];
 	        HoldDataClass.customer = '';
+	        //HoldDataClass.button = [];
 	    }
 
 	    _createClass(HoldDataClass, null, [{
-	        key: "setData",
+	        key: 'setData',
 	        value: function setData(importData) {
 	            HoldDataClass.data = importData;
 	        }
 	    }, {
-	        key: "getData",
+	        key: 'getData',
 	        value: function getData() {
 	            return this.data;
 	        }
 	    }, {
-	        key: "setCustomer",
+	        key: 'setCustomer',
 	        value: function setCustomer(dataRowNum) {
 	            HoldDataClass.customer = dataRowNum;
 	        }
 	    }, {
-	        key: "getCustomer",
+	        key: 'getCustomer',
 	        value: function getCustomer() {
 	            return HoldDataClass.customer;
+	        }
+	    }, {
+	        key: 'setButtons',
+	        value: function setButtons() {
+	            var NUM_OF_BUTTONS = 6;
+	            for (var i = 0; i < NUM_OF_BUTTONS; i++) {
+	                HoldDataClass.button[i] = document.getElementById('button' + i);
+	            }
+	        }
+	    }, {
+	        key: 'getbuttons',
+	        value: function getbuttons() {
+	            return HoldDataClass.button;
 	        }
 	    }]);
 

@@ -15,18 +15,11 @@ class main {
         //let heldData = new HoldDataClass();
         //this.data = [[]];
         new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
-        main.button = [];
-        main.setButtons();
-        main.button[3].addEventListener('click', function() {
+        HoldDataClass.button = [];
+        HoldDataClass.setButtons();
+        HoldDataClass.button[3].addEventListener('click', function func() {
             main.validate('cardNum');
-            console.log('button3 clicked');
         });
-    }
-
-    static setButtons() {
-        for (let i = 0; i < 6; i++) {
-            main.button[i] = document.getElementById('button' + i);
-        }
     }
 
     static validate(elementId) {
@@ -38,11 +31,12 @@ class main {
                 if (data[i][0] == checkNum) {
                     isValid = true;
                     HoldDataClass.setCustomer(i);
+                    HoldDataClass.button[3].removeEventListener('click', main.func);
                 }
             }
-
+            new ScreenChanger().updateScreen(isValid, 'PIN');
         }
-        new ScreenChanger().updateScreen(isValid);
+
     }
 }
 

@@ -12,11 +12,12 @@ export default class ScreenChanger {
         this.screen = document.getElementById('screen');
     }
 
-    updateScreen(valid) {
+    updateScreen(valid, whatNext) {
         if (valid == true) {
             console.log('card number valid');
             this.screen.innerHTML = 'Welcome' + ' ' + HoldDataClass.data[HoldDataClass.customer][3] + HoldDataClass.data[HoldDataClass.customer][2] + '. Please enter your one digit PIN'
-                                    + '<input type="password" id="PIN" placeholder="PIN">';
+                + '<input type="password" id="PIN" placeholder="PIN">';
+            HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
         } else {
             console.log('card invalid');
             this.screen.innerHTML = 'Invalid card number, please try again'
