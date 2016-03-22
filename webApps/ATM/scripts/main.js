@@ -10,6 +10,8 @@ import ScreenChanger from './ScreenChanger';
 import LoadDataClass from './LoadDataClass';
 import HoldDataClass from './HoldDataClass';
 
+//Thinking of how to properly dispatch all from main, I think I need a function that just sets or removes listeners that is called from validate alongside updateScreen if the number is valid. If invalid, just make an alert.
+
 class main {
     constructor() {
         //let heldData = new HoldDataClass();
@@ -17,9 +19,10 @@ class main {
         new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
-        HoldDataClass.button[3].addEventListener('click', function func() {
-            main.validate('cardNum');
-        });
+        //HoldDataClass.button[3].addEventListener('click', function func() {
+        //    main.validate('cardNum');
+        //});
+
     }
 
     static validate(elementId) {
@@ -34,9 +37,11 @@ class main {
                     HoldDataClass.button[3].removeEventListener('click', main.func);
                 }
             }
+            if (isValid == true) {
+                new ScreenChanger().updateScreen('PIN')
+            }
             new ScreenChanger().updateScreen(isValid, 'PIN');
         }
-
     }
 
     addListener(buttonNumber, addRemove, doWhat) {

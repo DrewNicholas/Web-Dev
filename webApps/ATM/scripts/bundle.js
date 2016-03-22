@@ -70,6 +70,8 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	//Thinking of how to properly dispatch all from main, I think I need a function that just sets or removes listeners that is called from validate alongside updateScreen if the number is valid. If invalid, just make an alert.
+
 	var main = function () {
 	    function main() {
 	        _classCallCheck(this, main);
@@ -79,9 +81,9 @@
 	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
 	        _HoldDataClass2.default.button = [];
 	        _HoldDataClass2.default.setButtons();
-	        _HoldDataClass2.default.button[3].addEventListener('click', function func() {
-	            main.validate('cardNum');
-	        });
+	        //HoldDataClass.button[3].addEventListener('click', function func() {
+	        //    main.validate('cardNum');
+	        //});
 	    }
 
 	    _createClass(main, [{
@@ -106,6 +108,9 @@
 	                        _HoldDataClass2.default.setCustomer(i);
 	                        _HoldDataClass2.default.button[3].removeEventListener('click', main.func);
 	                    }
+	                }
+	                if (isValid == true) {
+	                    new _ScreenChanger2.default().updateScreen('PIN');
 	                }
 	                new _ScreenChanger2.default().updateScreen(isValid, 'PIN');
 	            }
@@ -153,17 +158,11 @@
 
 	    _createClass(ScreenChanger, [{
 	        key: 'updateScreen',
-	        value: function updateScreen(valid, whatNext, callback) {
-	            if (valid == true) {
-	                console.log('card number valid');
+	        value: function updateScreen(whatNext) {
+	            if (whatNext == 'PIN') {
 	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
-	                _HoldDataClass2.default.button[3].addEventListener('click', function func() {
-	                    main.validate('PIN');
-	                });
-	                callback(3, 'remove', main.func);
-	            } else {
-	                console.log('card invalid');
-	                this.screen.innerHTML = 'Invalid card number, please try again' + '<input type="text" id="cardNum" placeholder="Card Number">';
+	                //HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
+	                //callback(3, 'remove', main.func);
 	            }
 	        }
 
