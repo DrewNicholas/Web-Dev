@@ -17,7 +17,7 @@ export default class HoldDataClass {
     }
 
     static getData() {
-        return this.data;
+        return HoldDataClass.data;
     }
 
     static setCustomer(dataRowNum) {
@@ -37,5 +37,35 @@ export default class HoldDataClass {
 
     static getbuttons() {
         return HoldDataClass.button;
+    }
+
+    static getAccountNum(whichAccount) {
+        let account;
+        if (whichAccount == 'savings') {
+            account = 4;
+        } else {
+            account = 6;
+        }
+        return this.data[this.customer][account];
+    }
+
+    static getAccountAmount(whichAccount) {
+        let account;
+        if (whichAccount == 'savings') {
+            account = 5;
+        } else {
+            account = 7;
+        }
+        return this.data[this.customer][account];
+    }
+
+    static setAccountAmount(whichAccount, changeBy) {
+        let account;
+        if (whichAccount == 'savings') {
+            account = 5;
+        } else {
+            account = 7;
+        }
+        this.data[this.customer][account] = this.data[this.customer][account] + changeBy;
     }
 }

@@ -22,34 +22,48 @@ class main {
         //HoldDataClass.button[3].addEventListener('click', function func() {
         //    main.validate('cardNum');
         //});
-
+        this.editListener(3, 'add', 'cardNum');
     }
 
     static validate(elementId) {
+        console.log('running validation');
         let data = HoldDataClass.getData();
         let checkNum = document.getElementById(elementId).value;
         let isValid = false;
         if (elementId == 'cardNum') {
-            for (let i = 0; i< data.length && isValid == false; i++) {
+            for (let i = 0; i < data.length && isValid == false; i++) {
                 if (data[i][0] == checkNum) {
                     isValid = true;
                     HoldDataClass.setCustomer(i);
-                    HoldDataClass.button[3].removeEventListener('click', main.func);
+                    this.editListener(3, 'remove', _func);
+                    //HoldDataClass.button[3].removeEventListener('click', main.func);
                 }
             }
             if (isValid == true) {
                 new ScreenChanger().updateScreen('PIN')
+            } else {
+                alert('Invalid card number, please try again');
             }
-            new ScreenChanger().updateScreen(isValid, 'PIN');
+            //new ScreenChanger().updateScreen(isValid, 'PIN');
         }
     }
 
-    addListener(buttonNumber, addRemove, doWhat) {
-        if (addRemove == 'add') {
-            HoldDataClass.button[buttonNumber].addEventListener('click', doWhat);
-        } else {
-            HoldDataClass.button[buttonNumber].removeEventListener('click', doWhat);
+    editListener(buttonNumber, addRemove, elementId) {
+        console.log('editing listener');
+        if (elementId == 'cardNum' || elementId == 'PIN') {
+            if (addRemove == 'add') {
+                HoldDataClass.button[buttonNumber].addEventListener('click', function() {main.validate(elementId)});
+            } else {
+                HoldDataClass.button[buttonNumber].removeEventListener('click', function() {main.validate(elementId)});
+            }
+        } else if (elementId == "something else I currently can't think of") {
+            if (addRemove == 'add') {
+                HoldDataClass.button[buttonNumber].addEventListener('click', );
+            } else {
+                HoldDataClass.button[buttonNumber].removeEventListener('click', );
+            }
         }
+
     }
 }
 

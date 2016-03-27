@@ -84,20 +84,33 @@
 	        //HoldDataClass.button[3].addEventListener('click', function func() {
 	        //    main.validate('cardNum');
 	        //});
+	        this.editListener(3, 'add', 'cardNum');
 	    }
 
 	    _createClass(main, [{
-	        key: 'addListener',
-	        value: function addListener(buttonNumber, addRemove, doWhat) {
-	            if (addRemove == 'add') {
-	                _HoldDataClass2.default.button[buttonNumber].addEventListener('click', doWhat);
+	        key: 'editListener',
+
+	        //new ScreenChanger().updateScreen(isValid, 'PIN');
+	        value: function editListener(buttonNumber, addRemove, elementId) {
+	            console.log('editing listener');
+	            if (elementId == 'cardNum' || elementId == 'PIN') {
+	                if (addRemove == 'add') {
+	                    _HoldDataClass2.default.button[buttonNumber].addEventListener('click', main.validate(elementId));
+	                } else {
+	                    _HoldDataClass2.default.button[buttonNumber].removeEventListener('click', main.validate(elementId));
+	                }
 	            } else {
-	                _HoldDataClass2.default.button[buttonNumber].removeEventListener('click', doWhat);
+	                if (addRemove == 'add') {
+	                    _HoldDataClass2.default.button[buttonNumber].addEventListener('click', main.validate(elementId));
+	                } else {
+	                    _HoldDataClass2.default.button[buttonNumber].removeEventListener('click', main.validate(elementId));
+	                }
 	            }
 	        }
 	    }], [{
 	        key: 'validate',
 	        value: function validate(elementId) {
+	            console.log('running validation');
 	            var data = _HoldDataClass2.default.getData();
 	            var checkNum = document.getElementById(elementId).value;
 	            var isValid = false;
@@ -106,13 +119,15 @@
 	                    if (data[i][0] == checkNum) {
 	                        isValid = true;
 	                        _HoldDataClass2.default.setCustomer(i);
-	                        _HoldDataClass2.default.button[3].removeEventListener('click', main.func);
+	                        this.editListener(3, 'remove', _func);
+	                        //HoldDataClass.button[3].removeEventListener('click', main.func);
 	                    }
 	                }
 	                if (isValid == true) {
 	                    new _ScreenChanger2.default().updateScreen('PIN');
+	                } else {
+	                    alert('Invalid card number, please try again');
 	                }
-	                new _ScreenChanger2.default().updateScreen(isValid, 'PIN');
 	            }
 	        }
 	    }]);
