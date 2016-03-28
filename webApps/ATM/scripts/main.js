@@ -45,6 +45,13 @@ class main {
                 alert('Invalid card number, please try again');
             }
             //new ScreenChanger().updateScreen(isValid, 'PIN');
+        } else if (elementId == 'PIN'){
+            const PIN = 1;
+            if (data[HoldDataClass.customer][PIN] == checkNum) {
+                isValid = true; //maybe unnecessary
+                //do something with a listener
+                new ScreenChanger().updateScreen('mainScreen')
+            }
         }
     }
 

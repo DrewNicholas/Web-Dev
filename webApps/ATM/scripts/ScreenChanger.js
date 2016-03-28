@@ -19,7 +19,7 @@ export default class ScreenChanger {
                 + '<input type="password" id="PIN" placeholder="PIN">';
             //HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
             //callback(3, 'remove', main.func);
-        } else if (whatNext == 'mainscreen') {
+        } else if (whatNext == 'mainScreen') {
             this.screen.innerHTML = 'What would you like to do?';
             HoldDataClass.button[4].value = 'Withdrawal';
             HoldDataClass.button[5].value = 'Account Inquiry';
