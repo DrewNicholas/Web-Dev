@@ -19,6 +19,8 @@ class main {
         new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
+
+        main.currentScreen = "";
         //HoldDataClass.button[3].addEventListener('click', function func() {
         //    main.validate('cardNum');
         //});
@@ -40,7 +42,8 @@ class main {
                 }
             }
             if (isValid == true) {
-                new ScreenChanger().updateScreen('PIN')
+                new ScreenChanger().updateScreen('PIN');
+                main.currentScreen = 'PIN';
             } else {
                 alert('Invalid card number, please try again');
             }
@@ -52,6 +55,12 @@ class main {
                 //do something with a listener
                 new ScreenChanger().updateScreen('mainScreen')
             }
+        }
+    }
+
+    listenButton0() {
+        if (main.currentScreen == 'cardNum') {
+            HoldDataClass.button[0].addEventListener('click', function() {main.validate('cardNum')});
         }
     }
 
