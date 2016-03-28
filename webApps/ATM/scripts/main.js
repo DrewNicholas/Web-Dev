@@ -19,7 +19,12 @@ class main {
         new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
-
+        this.listenButton0();
+        this.listenButton1();
+        this.listenButton2();
+        this.listenButton3();
+        this.listenButton4();
+        this.listenButton5();
         main.currentScreen = "";
         //HoldDataClass.button[3].addEventListener('click', function func() {
         //    main.validate('cardNum');
@@ -53,7 +58,10 @@ class main {
             if (data[HoldDataClass.customer][PIN] == checkNum) {
                 isValid = true; //maybe unnecessary
                 //do something with a listener
+                main.currentScreen = 'mainScreen';
                 new ScreenChanger().updateScreen('mainScreen')
+            } else {
+                alert('Incorrect PIN, please try again');
             }
         }
     }
@@ -61,10 +69,33 @@ class main {
     listenButton0() {
         if (main.currentScreen == 'cardNum') {
             HoldDataClass.button[0].addEventListener('click', function() {main.validate('cardNum')});
+        } else if (main.currentScreen == 'PIN') {
+            HoldDataClass.button[3].addEventListener('click', function() {main.validate('PIN')});
         }
     }
 
-    editListener(buttonNumber, addRemove, elementId) {
+    listenButton1() {
+
+    }
+
+    listenButton2() {
+
+    }
+
+    listenButton3() {
+
+    }
+
+    listenButton4() {
+
+    }
+
+    listenButton5() {
+
+    }
+
+    //Old way of changing listener that didn't seem to work
+    /*editListener(buttonNumber, addRemove, elementId) {
         console.log('editing listener');
         if (elementId == 'cardNum' || elementId == 'PIN') {
             if (addRemove == 'add') {
@@ -80,7 +111,7 @@ class main {
             }
         }
 
-    }
+    }*/
 }
 
 window.onload = function() {

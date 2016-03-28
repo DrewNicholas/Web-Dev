@@ -81,6 +81,13 @@
 	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
 	        _HoldDataClass2.default.button = [];
 	        _HoldDataClass2.default.setButtons();
+	        this.listenButton0();
+	        this.listenButton1();
+	        this.listenButton2();
+	        this.listenButton3();
+	        this.listenButton4();
+	        this.listenButton5();
+	        main.currentScreen = "";
 	        //HoldDataClass.button[3].addEventListener('click', function func() {
 	        //    main.validate('cardNum');
 	        //});
@@ -88,25 +95,52 @@
 	    }
 
 	    _createClass(main, [{
-	        key: 'editListener',
+	        key: 'listenButton0',
+	        value: function listenButton0() {
+	            if (main.currentScreen == 'cardNum') {
+	                _HoldDataClass2.default.button[0].addEventListener('click', function () {
+	                    main.validate('cardNum');
+	                });
+	            } else if (main.currentScreen == 'PIN') {
+	                _HoldDataClass2.default.button[3].addEventListener('click', function () {
+	                    main.validate('PIN');
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'listenButton1',
+	        value: function listenButton1() {}
+	    }, {
+	        key: 'listenButton2',
+	        value: function listenButton2() {}
+	    }, {
+	        key: 'listenButton3',
+	        value: function listenButton3() {}
+	    }, {
+	        key: 'listenButton4',
+	        value: function listenButton4() {}
+	    }, {
+	        key: 'listenButton5',
+	        value: function listenButton5() {}
 
-	        //new ScreenChanger().updateScreen(isValid, 'PIN');
-	        value: function editListener(buttonNumber, addRemove, elementId) {
+	        //Old way of changing listener that didn't seem to work
+	        /*editListener(buttonNumber, addRemove, elementId) {
 	            console.log('editing listener');
 	            if (elementId == 'cardNum' || elementId == 'PIN') {
 	                if (addRemove == 'add') {
-	                    _HoldDataClass2.default.button[buttonNumber].addEventListener('click', main.validate(elementId));
+	                    HoldDataClass.button[buttonNumber].addEventListener('click', function() {main.validate(elementId)});
 	                } else {
-	                    _HoldDataClass2.default.button[buttonNumber].removeEventListener('click', main.validate(elementId));
+	                    HoldDataClass.button[buttonNumber].removeEventListener('click', function() {main.validate(elementId)});
 	                }
-	            } else {
+	            } else if (elementId == "something else I currently can't think of") {
 	                if (addRemove == 'add') {
-	                    _HoldDataClass2.default.button[buttonNumber].addEventListener('click', main.validate(elementId));
+	                    HoldDataClass.button[buttonNumber].addEventListener('click', );
 	                } else {
-	                    _HoldDataClass2.default.button[buttonNumber].removeEventListener('click', main.validate(elementId));
+	                    HoldDataClass.button[buttonNumber].removeEventListener('click', );
 	                }
 	            }
-	        }
+	          }*/
+
 	    }], [{
 	        key: 'validate',
 	        value: function validate(elementId) {
@@ -125,10 +159,22 @@
 	                }
 	                if (isValid == true) {
 	                    new _ScreenChanger2.default().updateScreen('PIN');
+	                    main.currentScreen = 'PIN';
 	                } else {
 	                    alert('Invalid card number, please try again');
 	                }
-	            }
+	                //new ScreenChanger().updateScreen(isValid, 'PIN');
+	            } else if (elementId == 'PIN') {
+	                    var PIN = 1;
+	                    if (data[_HoldDataClass2.default.customer][PIN] == checkNum) {
+	                        isValid = true; //maybe unnecessary
+	                        //do something with a listener
+	                        main.currentScreen = 'mainScreen';
+	                        new _ScreenChanger2.default().updateScreen('mainScreen');
+	                    } else {
+	                        alert('Incorrect PIN, please try again');
+	                    }
+	                }
 	        }
 	    }]);
 
@@ -174,11 +220,102 @@
 	    _createClass(ScreenChanger, [{
 	        key: 'updateScreen',
 	        value: function updateScreen(whatNext) {
+	            var NUM_OF_BUTTONS = 6;
 	            if (whatNext == 'PIN') {
 	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
+	                _HoldDataClass2.default.button[0].setAttribute('value', 'Exit');
 	                //HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
 	                //callback(3, 'remove', main.func);
-	            }
+	            } else if (whatNext == 'mainScreen') {
+	                    this.screen.innerHTML = 'What would you like to do?';
+	                    _HoldDataClass2.default.button[4].setAttribute('value', 'Withdrawal');
+	                    _HoldDataClass2.default.button[5].setAttribute('value', 'Account Balance');
+	                    _HoldDataClass2.default.button[1].setAttribute('value', 'Deposit');
+	                    _HoldDataClass2.default.button[2].setAttribute('value', 'Transfer');
+	                    _HoldDataClass2.default.button[0].setAttribute('value', 'Exit');
+	                    _HoldDataClass2.default.button[3].setAttribute('value', '...');
+	                } else if (whatNext == 'withdraw') {
+	                    this.screen.innerHTML = 'Which account would you like to withdraw from?';
+	                    _HoldDataClass2.default.button[0].setAttribute('value', 'Back');
+	                    _HoldDataClass2.default.button[4].setAttribute('value', 'Checking');
+	                    _HoldDataClass2.default.button[5].setAttribute('value', 'Savings');
+	                } else if (whatNext == 'withdraw checking') {
+	                    this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00' + '?<input type="number" id="withdrawAmount" placeholder="Amount">';
+	                    _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                    for (var i = 1; i < NUM_OF_BUTTONS; i++) {
+	                        if (i != 3) {
+	                            _HoldDataClass2.default.button[i].setAttribute('value', '...');
+	                        }
+	                    }
+	                } else if (whatNext == 'withdraw savings') {
+	                    this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00' + '$<input type="number" id="withdrawAmount" placeholder="Amount">';
+	                    _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                    for (var _i = 1; _i < NUM_OF_BUTTONS; _i++) {
+	                        if (_i != 3) {
+	                            _HoldDataClass2.default.button[_i].setAttribute('value', '...');
+	                        }
+	                    }
+	                } else if (whatNext == 'account inquiry') {
+	                    this.screen.innerHTML = 'Which account would you like to see?';
+	                    _HoldDataClass2.default.button[0].setAttribute('value', 'Back');
+	                    _HoldDataClass2.default.button[4].setAttribute('value', 'Checking');
+	                    _HoldDataClass2.default.button[5].setAttribute('value', 'Savings');
+	                    for (var _i2 = 0; _i2 < NUM_OF_BUTTONS; _i2++) {
+	                        if (_i2 != 0 || _i2 != 4 || _i2 != 5) {
+	                            _HoldDataClass2.default.button[_i2].value = '...';
+	                        }
+	                    }
+	                } else if (whatNext == 'savings inquiry') {
+	                    var savingsAmt = _HoldDataClass2.default.getAccountAmount('savings');
+	                    var savingsNum = _HoldDataClass2.default.getAccountNum('savings');
+	                    this.screen.innerHTML = 'In savings account #' + savingsNum + ' there is $' + savingsAmt;
+	                    for (var _i3 = 1; _i3 < NUM_OF_BUTTONS; _i3++) {
+	                        _HoldDataClass2.default.button[_i3].setAttribute('value', '...'); //Keeps back button as button0, but listener will need to be changed
+	                    }
+	                } else if (whatNext == 'checking inquiry') {
+	                        var checkingAmt = _HoldDataClass2.default.getAccountAmount('checking');
+	                        var checkingNum = _HoldDataClass2.default.getAccountNum('checking');
+	                        this.screen.innerHTML = 'In checking account #' + checkingNum + ' there is $' + checkingAmt;
+	                        for (var _i4 = 1; _i4 < NUM_OF_BUTTONS; _i4++) {
+	                            _HoldDataClass2.default.button[_i4].setAttribute('value', '...'); //Keeps back button as button0, but listener will need to be changed
+	                        }
+	                    } else if (whatNext == 'deposit') {
+	                            this.screen.innerHTML = 'Which account would you like to deposit to?';
+	                            _HoldDataClass2.default.button[0].setAttribute('value', 'Back');
+	                            _HoldDataClass2.default.button[4].setAttribute('value', 'Checking');
+	                            _HoldDataClass2.default.button[5].setAttribute('value', 'Savings');
+	                        } else if (whatNext == 'deposit checking') {
+	                            this.screen.innerHTML = 'How much would you like to deposit in your checking account?' + '$<input type="number" id="depositChecking" placeholder="Amount">';
+	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                            for (var _i5 = 1; _i5 < NUM_OF_BUTTONS; _i5++) {
+	                                if (_i5 != 3) {
+	                                    _HoldDataClass2.default.button[_i5].setAttribute('value', '...');
+	                                }
+	                            }
+	                        } else if (whatNext == 'deposit savings') {
+	                            this.screen.innerHTML = 'How much would you like to deposit in your savings account?' + '$<input type="number" id="depositSavings" placeholder="Amount">';
+	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                            for (var _i6 = 1; _i6 < NUM_OF_BUTTONS; _i6++) {
+	                                if (_i6 != 3) {
+	                                    _HoldDataClass2.default.button[_i6].setAttribute('value', '...');
+	                                }
+	                            }
+	                        } else if (whatNext == 'transfer') {
+	                            this.screen.innerHTML = 'Which account do you wish to transfer money out of?';
+	                            _HoldDataClass2.default.button[0].value = 'Back';
+	                            _HoldDataClass2.default.button[4].value = 'Checking';
+	                            _HoldDataClass2.default.button[5].value = 'Savings';
+	                        } else if (whatNext == 'transfer from savings') {
+	                            this.screen.innerHTML = 'How much would you like to transfer out of savings and into checking?' + '$<input type="number" id="transferToChecking" placeholder="Amount">';
+	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                            _HoldDataClass2.default.button[4].setAttribute('value', '...');
+	                            _HoldDataClass2.default.button[5].setAttribute('value', '...');
+	                        } else if (whatNext == 'transfer from checking') {
+	                            this.screen.innerHTML = 'How much would you like to transfer out of checking and into savings?' + '$<input type="number" id="transferToSavingings" placeholder="Amount">';
+	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                            _HoldDataClass2.default.button[4].setAttribute('value', '...');
+	                            _HoldDataClass2.default.button[5].setAttribute('value', '...');
+	                        }
 	        }
 
 	        //validate(elementId) {
@@ -238,7 +375,7 @@
 	    }, {
 	        key: 'getData',
 	        value: function getData() {
-	            return this.data;
+	            return HoldDataClass.data;
 	        }
 	    }, {
 	        key: 'setCustomer',
@@ -262,6 +399,39 @@
 	        key: 'getbuttons',
 	        value: function getbuttons() {
 	            return HoldDataClass.button;
+	        }
+	    }, {
+	        key: 'getAccountNum',
+	        value: function getAccountNum(whichAccount) {
+	            var account = void 0;
+	            if (whichAccount == 'savings') {
+	                account = 4;
+	            } else {
+	                account = 6;
+	            }
+	            return this.data[this.customer][account];
+	        }
+	    }, {
+	        key: 'getAccountAmount',
+	        value: function getAccountAmount(whichAccount) {
+	            var account = void 0;
+	            if (whichAccount == 'savings') {
+	                account = 5;
+	            } else {
+	                account = 7;
+	            }
+	            return this.data[this.customer][account];
+	        }
+	    }, {
+	        key: 'setAccountAmount',
+	        value: function setAccountAmount(whichAccount, changeBy) {
+	            var account = void 0;
+	            if (whichAccount == 'savings') {
+	                account = 5;
+	            } else {
+	                account = 7;
+	            }
+	            this.data[this.customer][account] = this.data[this.customer][account] + changeBy;
 	        }
 	    }]);
 
