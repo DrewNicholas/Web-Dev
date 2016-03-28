@@ -15,19 +15,18 @@ export default class ScreenChanger {
     updateScreen(whatNext) {
         const NUM_OF_BUTTONS = 6;
         if (whatNext == 'PIN') {
-            this.screen.innerHTML = 'Welcome' + ' ' + HoldDataClass.data[HoldDataClass.customer][3] + HoldDataClass.data[HoldDataClass.customer][2] + '. Please enter your one digit PIN'
+            this.screen.innerHTML = 'Welcome' + ' ' + HoldDataClass.data[HoldDataClass.customer][3] + ' ' + HoldDataClass.data[HoldDataClass.customer][2] + '. Please enter your one digit PIN'
                 + '<input type="password" id="PIN" placeholder="PIN">';
             HoldDataClass.button[0].setAttribute('value', 'Exit');
             //HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
             //callback(3, 'remove', main.func);
         } else if (whatNext == 'mainScreen') {
             this.screen.innerHTML = 'What would you like to do?';
-            HoldDataClass.button[4].setAttribute('value', 'Withdrawal');
-            HoldDataClass.button[5].setAttribute('value', 'Account Balance');
             HoldDataClass.button[1].setAttribute('value', 'Deposit');
             HoldDataClass.button[2].setAttribute('value', 'Transfer');
-            HoldDataClass.button[0].setAttribute('value', 'Exit');
             HoldDataClass.button[3].setAttribute('value', '...');
+            HoldDataClass.button[4].setAttribute('value', 'Withdrawal');
+            HoldDataClass.button[5].setAttribute('value', 'Account Balance');
         } else if (whatNext == 'withdraw') {
             this.screen.innerHTML = 'Which account would you like to withdraw from?';
             HoldDataClass.button[0].setAttribute('value', 'Back');
@@ -115,6 +114,11 @@ export default class ScreenChanger {
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             HoldDataClass.button[4].setAttribute('value', '...');
             HoldDataClass.button[5].setAttribute('value', '...');
+        } else if (whatNext == 'cardNum') {
+            this.screen.innerHTML = 'Welcome to this ATM. Please enter your 3 digit card number on the keyboard.'
+                + '<input type="text" id="cardNum" placeholder="Card Number">';
+            HoldDataClass.button[0].setAttribute('value', '...');
+            HoldDataClass.button[3].setAttribute('value', 'Enter');
         }
     }
 

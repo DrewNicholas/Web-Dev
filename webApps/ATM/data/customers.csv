@@ -1,3 +1,3 @@
-card#, pin, last, first, saving account #, saving account $, checking account #, checking account $
-111, 0, Bates, Howard, 140000000, 20456, 789, 36
-000, 5, Flynn, Kyle, 123, 0, 666, 0
+card#,pin,last,first,saving account #,saving account $,checking account #,checking account $
+111,0,Bates,Howard,140000000,20456,789,36
+000,5,Flynn,Kyle,123,0,666,0

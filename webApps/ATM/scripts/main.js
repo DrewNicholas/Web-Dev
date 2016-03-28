@@ -10,56 +10,56 @@ import ScreenChanger from './ScreenChanger';
 import LoadDataClass from './LoadDataClass';
 import HoldDataClass from './HoldDataClass';
 
-//Thinking of how to properly dispatch all from main, I think I need a function that just sets or removes listeners that is called from validate alongside updateScreen if the number is valid. If invalid, just make an alert.
-
 class main {
     constructor() {
-        //let heldData = new HoldDataClass();
-        //this.data = [[]];
         new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
-        this.listenButton0();
+        main.currentScreen = "cardNum";
+        HoldDataClass.button[0].addEventListener('click', this.listenButton0);
+        HoldDataClass.button[1].addEventListener('click', this.listenButton1);
+        HoldDataClass.button[2].addEventListener('click', this.listenButton2);
+        HoldDataClass.button[3].addEventListener('click', this.listenButton3);
+        HoldDataClass.button[4].addEventListener('click', this.listenButton4);
+        HoldDataClass.button[5].addEventListener('click', this.listenButton5);
+        /*this.listenButton0();
         this.listenButton1();
         this.listenButton2();
         this.listenButton3();
         this.listenButton4();
-        this.listenButton5();
-        main.currentScreen = "";
-        //HoldDataClass.button[3].addEventListener('click', function func() {
-        //    main.validate('cardNum');
-        //});
-        this.editListener(3, 'add', 'cardNum');
+        this.listenButton5();*/
+        //this.editListener(3, 'add', 'cardNum');
+
     }
 
     static validate(elementId) {
-        console.log('running validation');
+        console.log('running validation on ' + elementId);
         let data = HoldDataClass.getData();
         let checkNum = document.getElementById(elementId).value;
+        console.log('checkNum is ' + checkNum);
         let isValid = false;
         if (elementId == 'cardNum') {
             for (let i = 0; i < data.length && isValid == false; i++) {
                 if (data[i][0] == checkNum) {
                     isValid = true;
                     HoldDataClass.setCustomer(i);
-                    this.editListener(3, 'remove', _func);
-                    //HoldDataClass.button[3].removeEventListener('click', main.func);
                 }
             }
             if (isValid == true) {
-                new ScreenChanger().updateScreen('PIN');
                 main.currentScreen = 'PIN';
+                new ScreenChanger().updateScreen('PIN');
+
             } else {
                 alert('Invalid card number, please try again');
             }
-            //new ScreenChanger().updateScreen(isValid, 'PIN');
         } else if (elementId == 'PIN'){
             const PIN = 1;
+            console.log('The PIN for ' + data[HoldDataClass.customer][3] + ' ' + data[HoldDataClass.customer][2] + ' is ' + data[HoldDataClass.customer][PIN])
             if (data[HoldDataClass.customer][PIN] == checkNum) {
                 isValid = true; //maybe unnecessary
                 //do something with a listener
                 main.currentScreen = 'mainScreen';
-                new ScreenChanger().updateScreen('mainScreen')
+                new ScreenChanger().updateScreen('mainScreen');
             } else {
                 alert('Incorrect PIN, please try again');
             }
@@ -67,32 +67,93 @@ class main {
     }
 
     listenButton0() {
-        if (main.currentScreen == 'cardNum') {
-            HoldDataClass.button[0].addEventListener('click', function() {main.validate('cardNum')});
-        } else if (main.currentScreen == 'PIN') {
-            HoldDataClass.button[3].addEventListener('click', function() {main.validate('PIN')});
+        if (main.currentScreen == 'PIN') {
+            new ScreenChanger().updateScreen('cardNum');
         }
     }
 
     listenButton1() {
-
+        if (main.currentScreen == 'mainScreen') {
+            new ScreenChanger().updateScreen('deposit');
+        }
     }
 
     listenButton2() {
-
+        if (main.currentScreen == 'mainScreen') {
+            new ScreenChanger().updateScreen('transfer');
+        }
     }
 
     listenButton3() {
-
+        if (main.currentScreen == 'cardNum') {
+            main.validate('cardNum');
+        } else if (main.currentScreen == 'PIN') {
+            main.validate('PIN');
+        }
     }
 
     listenButton4() {
-
+        if (main.currentScreen == 'mainScreen') {
+            new ScreenChanger().updateScreen('withdraw');
+        }
     }
 
     listenButton5() {
-
+        if (main.currentScreen == 'mainScreen') {
+            new ScreenChanger().updateScreen('account inquiry');
+        }
     }
+
+    /*listenButton0() {
+        if (main.currentScreen == 'cardNum') {
+            //HoldDataClass.button[3].addEventListener('click', function() {main.validate('cardNum')});
+        } else if (main.currentScreen == 'PIN') {
+            //HoldDataClass.button[3].addEventListener('click', function() {main.validate('PIN')});
+            HoldDataClass.button[0].addEventListener('click', function() {new ScreenChanger().updateScreen('cardNum')});
+        } else if (main.currentScreen == 'mainScreen') {
+            HoldDataClass.button[0].addEventListener('click', function() {new ScreenChanger().updateScreen('cardNum')});
+            //HoldDataClass.button[1].addEventListener('click', function() {new ScreenChanger().updateScreen('deposit')});
+            //HoldDataClass.button[2].addEventListener('click', function() {new ScreenChanger().updateScreen('transfer')});
+            //HoldDataClass.button[4].addEventListener('click', function() {new ScreenChanger().updateScreen('withdraw')});
+            //HoldDataClass.button[5].addEventListener('click', function() {new ScreenChanger().updateScreen('account inquiry')});
+        }
+    }
+
+    listenButton1() {
+        if (main.currentScreen == 'mainScreen') {
+            HoldDataClass.button[1].addEventListener('click', function() {new ScreenChanger().updateScreen('deposit')});
+        }
+    }
+
+    listenButton2() {
+        if (main.currentScreen == 'mainScreen') {
+            HoldDataClass.button[2].addEventListener('click', function() {new ScreenChanger().updateScreen('transfer')});
+        }
+    }
+
+    listenButton3() {
+        if (main.currentScreen == 'cardNum') {
+            HoldDataClass.button[3].addEventListener('click', function () {
+                main.validate('cardNum')
+            });
+        } else if (main.currentScreen == 'PIN') {
+            HoldDataClass.button[3].addEventListener('click', function () {
+                main.validate('PIN')
+            });
+        }
+    }
+
+    listenButton4() {
+        if (main.currentScreen == 'mainScreen') {
+            HoldDataClass.button[4].addEventListener('click', function() {new ScreenChanger().updateScreen('withdraw')});
+        }
+    }
+
+    listenButton5() {
+        if (main.currentScreen == 'mainScreen') {
+            HoldDataClass.button[5].addEventListener('click', function() {new ScreenChanger().updateScreen('account inquiry')});
+        }
+    }*/
 
     //Old way of changing listener that didn't seem to work
     /*editListener(buttonNumber, addRemove, elementId) {

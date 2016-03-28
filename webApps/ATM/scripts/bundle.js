@@ -70,58 +70,119 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	//Thinking of how to properly dispatch all from main, I think I need a function that just sets or removes listeners that is called from validate alongside updateScreen if the number is valid. If invalid, just make an alert.
-
 	var main = function () {
 	    function main() {
 	        _classCallCheck(this, main);
 
-	        //let heldData = new HoldDataClass();
-	        //this.data = [[]];
 	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
 	        _HoldDataClass2.default.button = [];
 	        _HoldDataClass2.default.setButtons();
-	        this.listenButton0();
+	        main.currentScreen = "cardNum";
+	        _HoldDataClass2.default.button[0].addEventListener('click', this.listenButton0);
+	        _HoldDataClass2.default.button[1].addEventListener('click', this.listenButton1);
+	        _HoldDataClass2.default.button[2].addEventListener('click', this.listenButton2);
+	        _HoldDataClass2.default.button[3].addEventListener('click', this.listenButton3);
+	        _HoldDataClass2.default.button[4].addEventListener('click', this.listenButton4);
+	        _HoldDataClass2.default.button[5].addEventListener('click', this.listenButton5);
+	        /*this.listenButton0();
 	        this.listenButton1();
 	        this.listenButton2();
 	        this.listenButton3();
 	        this.listenButton4();
-	        this.listenButton5();
-	        main.currentScreen = "";
-	        //HoldDataClass.button[3].addEventListener('click', function func() {
-	        //    main.validate('cardNum');
-	        //});
-	        this.editListener(3, 'add', 'cardNum');
+	        this.listenButton5();*/
+	        //this.editListener(3, 'add', 'cardNum');
 	    }
 
 	    _createClass(main, [{
 	        key: 'listenButton0',
 	        value: function listenButton0() {
-	            if (main.currentScreen == 'cardNum') {
-	                _HoldDataClass2.default.button[0].addEventListener('click', function () {
-	                    main.validate('cardNum');
-	                });
-	            } else if (main.currentScreen == 'PIN') {
-	                _HoldDataClass2.default.button[3].addEventListener('click', function () {
-	                    main.validate('PIN');
-	                });
+	            if (main.currentScreen == 'PIN') {
+	                new _ScreenChanger2.default().updateScreen('cardNum');
 	            }
 	        }
 	    }, {
 	        key: 'listenButton1',
-	        value: function listenButton1() {}
+	        value: function listenButton1() {
+	            if (main.currentScreen == 'mainScreen') {
+	                new _ScreenChanger2.default().updateScreen('deposit');
+	            }
+	        }
 	    }, {
 	        key: 'listenButton2',
-	        value: function listenButton2() {}
+	        value: function listenButton2() {
+	            if (main.currentScreen == 'mainScreen') {
+	                new _ScreenChanger2.default().updateScreen('transfer');
+	            }
+	        }
 	    }, {
 	        key: 'listenButton3',
-	        value: function listenButton3() {}
+	        value: function listenButton3() {
+	            if (main.currentScreen == 'cardNum') {
+	                main.validate('cardNum');
+	            } else if (main.currentScreen == 'PIN') {
+	                main.validate('PIN');
+	            }
+	        }
 	    }, {
 	        key: 'listenButton4',
-	        value: function listenButton4() {}
+	        value: function listenButton4() {
+	            if (main.currentScreen == 'mainScreen') {
+	                new _ScreenChanger2.default().updateScreen('withdraw');
+	            }
+	        }
 	    }, {
 	        key: 'listenButton5',
-	        value: function listenButton5() {}
+	        value: function listenButton5() {
+	            if (main.currentScreen == 'mainScreen') {
+	                new _ScreenChanger2.default().updateScreen('account inquiry');
+	            }
+	        }
+
+	        /*listenButton0() {
+	            if (main.currentScreen == 'cardNum') {
+	                //HoldDataClass.button[3].addEventListener('click', function() {main.validate('cardNum')});
+	            } else if (main.currentScreen == 'PIN') {
+	                //HoldDataClass.button[3].addEventListener('click', function() {main.validate('PIN')});
+	                HoldDataClass.button[0].addEventListener('click', function() {new ScreenChanger().updateScreen('cardNum')});
+	            } else if (main.currentScreen == 'mainScreen') {
+	                HoldDataClass.button[0].addEventListener('click', function() {new ScreenChanger().updateScreen('cardNum')});
+	                //HoldDataClass.button[1].addEventListener('click', function() {new ScreenChanger().updateScreen('deposit')});
+	                //HoldDataClass.button[2].addEventListener('click', function() {new ScreenChanger().updateScreen('transfer')});
+	                //HoldDataClass.button[4].addEventListener('click', function() {new ScreenChanger().updateScreen('withdraw')});
+	                //HoldDataClass.button[5].addEventListener('click', function() {new ScreenChanger().updateScreen('account inquiry')});
+	            }
+	        }
+	          listenButton1() {
+	            if (main.currentScreen == 'mainScreen') {
+	                HoldDataClass.button[1].addEventListener('click', function() {new ScreenChanger().updateScreen('deposit')});
+	            }
+	        }
+	          listenButton2() {
+	            if (main.currentScreen == 'mainScreen') {
+	                HoldDataClass.button[2].addEventListener('click', function() {new ScreenChanger().updateScreen('transfer')});
+	            }
+	        }
+	          listenButton3() {
+	            if (main.currentScreen == 'cardNum') {
+	                HoldDataClass.button[3].addEventListener('click', function () {
+	                    main.validate('cardNum')
+	                });
+	            } else if (main.currentScreen == 'PIN') {
+	                HoldDataClass.button[3].addEventListener('click', function () {
+	                    main.validate('PIN')
+	                });
+	            }
+	        }
+	          listenButton4() {
+	            if (main.currentScreen == 'mainScreen') {
+	                HoldDataClass.button[4].addEventListener('click', function() {new ScreenChanger().updateScreen('withdraw')});
+	            }
+	        }
+	          listenButton5() {
+	            if (main.currentScreen == 'mainScreen') {
+	                HoldDataClass.button[5].addEventListener('click', function() {new ScreenChanger().updateScreen('account inquiry')});
+	            }
+	        }*/
 
 	        //Old way of changing listener that didn't seem to work
 	        /*editListener(buttonNumber, addRemove, elementId) {
@@ -144,37 +205,36 @@
 	    }], [{
 	        key: 'validate',
 	        value: function validate(elementId) {
-	            console.log('running validation');
+	            console.log('running validation on ' + elementId);
 	            var data = _HoldDataClass2.default.getData();
 	            var checkNum = document.getElementById(elementId).value;
+	            console.log('checkNum is ' + checkNum);
 	            var isValid = false;
 	            if (elementId == 'cardNum') {
 	                for (var i = 0; i < data.length && isValid == false; i++) {
 	                    if (data[i][0] == checkNum) {
 	                        isValid = true;
 	                        _HoldDataClass2.default.setCustomer(i);
-	                        this.editListener(3, 'remove', _func);
-	                        //HoldDataClass.button[3].removeEventListener('click', main.func);
 	                    }
 	                }
 	                if (isValid == true) {
-	                    new _ScreenChanger2.default().updateScreen('PIN');
 	                    main.currentScreen = 'PIN';
+	                    new _ScreenChanger2.default().updateScreen('PIN');
 	                } else {
 	                    alert('Invalid card number, please try again');
 	                }
-	                //new ScreenChanger().updateScreen(isValid, 'PIN');
 	            } else if (elementId == 'PIN') {
-	                    var PIN = 1;
-	                    if (data[_HoldDataClass2.default.customer][PIN] == checkNum) {
-	                        isValid = true; //maybe unnecessary
-	                        //do something with a listener
-	                        main.currentScreen = 'mainScreen';
-	                        new _ScreenChanger2.default().updateScreen('mainScreen');
-	                    } else {
-	                        alert('Incorrect PIN, please try again');
-	                    }
+	                var PIN = 1;
+	                console.log('The PIN for ' + data[_HoldDataClass2.default.customer][3] + ' ' + data[_HoldDataClass2.default.customer][2] + ' is ' + data[_HoldDataClass2.default.customer][PIN]);
+	                if (data[_HoldDataClass2.default.customer][PIN] == checkNum) {
+	                    isValid = true; //maybe unnecessary
+	                    //do something with a listener
+	                    main.currentScreen = 'mainScreen';
+	                    new _ScreenChanger2.default().updateScreen('mainScreen');
+	                } else {
+	                    alert('Incorrect PIN, please try again');
 	                }
+	            }
 	        }
 	    }]);
 
@@ -222,18 +282,17 @@
 	        value: function updateScreen(whatNext) {
 	            var NUM_OF_BUTTONS = 6;
 	            if (whatNext == 'PIN') {
-	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
+	                this.screen.innerHTML = 'Welcome' + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][3] + ' ' + _HoldDataClass2.default.data[_HoldDataClass2.default.customer][2] + '. Please enter your one digit PIN' + '<input type="password" id="PIN" placeholder="PIN">';
 	                _HoldDataClass2.default.button[0].setAttribute('value', 'Exit');
 	                //HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
 	                //callback(3, 'remove', main.func);
 	            } else if (whatNext == 'mainScreen') {
 	                    this.screen.innerHTML = 'What would you like to do?';
-	                    _HoldDataClass2.default.button[4].setAttribute('value', 'Withdrawal');
-	                    _HoldDataClass2.default.button[5].setAttribute('value', 'Account Balance');
 	                    _HoldDataClass2.default.button[1].setAttribute('value', 'Deposit');
 	                    _HoldDataClass2.default.button[2].setAttribute('value', 'Transfer');
-	                    _HoldDataClass2.default.button[0].setAttribute('value', 'Exit');
 	                    _HoldDataClass2.default.button[3].setAttribute('value', '...');
+	                    _HoldDataClass2.default.button[4].setAttribute('value', 'Withdrawal');
+	                    _HoldDataClass2.default.button[5].setAttribute('value', 'Account Balance');
 	                } else if (whatNext == 'withdraw') {
 	                    this.screen.innerHTML = 'Which account would you like to withdraw from?';
 	                    _HoldDataClass2.default.button[0].setAttribute('value', 'Back');
@@ -315,6 +374,10 @@
 	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                            _HoldDataClass2.default.button[4].setAttribute('value', '...');
 	                            _HoldDataClass2.default.button[5].setAttribute('value', '...');
+	                        } else if (whatNext == 'cardNum') {
+	                            this.screen.innerHTML = 'Welcome to this ATM. Please enter your 3 digit card number on the keyboard.' + '<input type="text" id="cardNum" placeholder="Card Number">';
+	                            _HoldDataClass2.default.button[0].setAttribute('value', '...');
+	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                        }
 	        }
 
@@ -370,6 +433,7 @@
 	    _createClass(HoldDataClass, null, [{
 	        key: 'setData',
 	        value: function setData(importData) {
+	            console.log('data set in HoldDataClass');
 	            HoldDataClass.data = importData;
 	        }
 	    }, {
