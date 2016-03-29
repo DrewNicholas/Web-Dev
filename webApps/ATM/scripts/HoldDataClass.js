@@ -44,7 +44,7 @@ export default class HoldDataClass {
         let account;
         if (whichAccount == 'savings') {
             account = 4;
-        } else {
+        } else if (whichAccount == 'checking') {
             account = 6;
         }
         return this.data[this.customer][account];
@@ -54,7 +54,7 @@ export default class HoldDataClass {
         let account;
         if (whichAccount == 'savings') {
             account = 5;
-        } else {
+        } else if (whichAccount == 'checking') {
             account = 7;
         }
         return this.data[this.customer][account];

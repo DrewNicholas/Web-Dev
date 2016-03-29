@@ -33,6 +33,7 @@ class main {
     }
 
     static validate(elementId) {
+        //Need to add validation on withdraw and transfer to ensure an account doesn't drop below $0
         console.log('running validation on ' + elementId);
         let data = HoldDataClass.getData();
         let checkNum = document.getElementById(elementId).value;
@@ -67,20 +68,38 @@ class main {
     }
 
     listenButton0() {
-        if (main.currentScreen == 'PIN') {
+        if (main.currentScreen == 'PIN' || main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('cardNum');
+            main.currentScreen = 'cardNum';
+        } else if (main.currentScreen == 'withdraw' || main.currentScreen == 'account inquiry' || main.currentScreen == 'deposit' || main.currentScreen == 'transfer') {
+            new ScreenChanger().updateScreen('mainScreen');
+            main.currentScreen = 'mainScreen';
+        } else if (main.currentScreen == 'withdraw checking' || main.currentScreen == 'withdraw savings') {
+            new ScreenChanger().updateScreen('withdraw');
+            main.currentScreen = 'withdraw';
+        } else if (main.currentScreen == 'checking inquiry' || main.currentScreen == 'savings inquiry') {
+            new ScreenChanger().updateScreen('account inquiry');
+            main.currentScreen = 'account inquiry';
+        } else if (main.currentScreen == 'deposit checking' || main.currentScreen == 'deposit savings') {
+            new ScreenChanger().updateScreen('deposit');
+            main.currentScreen = 'deposit';
+        } else if (main.currentScreen == 'transfer from checking' || main.currentScreen == 'transfer from savings') {
+            new ScreenChanger().updateScreen('transfer');
+            main.currentScreen = 'transfer';
         }
     }
 
     listenButton1() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('deposit');
+            main.currentScreen = 'deposit';
         }
     }
 
     listenButton2() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('transfer');
+            main.currentScreen = 'transfer';
         }
     }
 
@@ -89,18 +108,58 @@ class main {
             main.validate('cardNum');
         } else if (main.currentScreen == 'PIN') {
             main.validate('PIN');
+        } else if (main.currentScreen == 'withdraw checking') {
+            main.validate('withdrawCheckingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
+        } else if (main.currentScreen == 'withdraw savings') {
+            main.validate('withdrawSavingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
+        } else if (main.currentScreen == 'deposit checking') {
+            main.validate('depositChecking'); //needed?
+            HoldDataClass.setAccountAmount('checking', document.getElementById('depositChecking').value);
+        } else if (main.currentScreen == 'deposit savings') {
+            main.validate('depositSavings'); //needed?
+            HoldDataClass.setAccountAmount('savings', document.getElementById('depositSavings').value);
+        } else if (main.currentScreen == 'transfer from savings') {
+            main.validate('transferToChecking');
+        } else if (main.currentScreen == 'transfer from checking') {
+            main.validate('transferToSavings');
         }
     }
 
     listenButton4() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('withdraw');
+            main.currentScreen = 'withdraw';
+        } else if (main.currentScreen == 'withdraw') {
+            new ScreenChanger().updateScreen('withdraw checking');
+            main.currentScreen = 'withdraw checking';
+        } else if (main.currentScreen == 'account inquiry') {
+            new ScreenChanger().updateScreen('checking inquiry');
+            main.currentScreen = 'checking inquiry';
+        } else if (main.currentScreen == 'deposit') {
+            new ScreenChanger().updateScreen('deposit checking');
+            main.currentScreen = 'deposit checking';
+        } else if (main.currentScreen == 'transfer') {
+            new ScreenChanger().updateScreen('transfer from checking');
+            main.currentScreen = 'transfer from checking';
         }
     }
 
     listenButton5() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('account inquiry');
+            main.currentScreen = 'account inquiry';
+        } else if (main.currentScreen == 'withdraw') {
+            new ScreenChanger().updateScreen('withdraw savings');
+            main.currentScreen = 'withdraw savings';
+        } else if (main.currentScreen == 'account inquiry') {
+            new ScreenChanger().updateScreen('savings inquiry');
+            main.currentScreen = 'savings inquiry';
+        } else if (main.currentScreen == 'deposit') {
+            new ScreenChanger().updateScreen('deposit savings');
+            main.currentScreen = 'deposit savings';
+        } else if (main.currentScreen == 'transfer') {
+            new ScreenChanger().updateScreen('transfer from savings');
+            main.currentScreen = 'transfer from savings';
         }
     }
 

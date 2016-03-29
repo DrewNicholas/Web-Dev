@@ -30,11 +30,14 @@ export default class ScreenChanger {
         } else if (whatNext == 'withdraw') {
             this.screen.innerHTML = 'Which account would you like to withdraw from?';
             HoldDataClass.button[0].setAttribute('value', 'Back');
+            HoldDataClass.button[1].setAttribute('value', '...');
+            HoldDataClass.button[2].setAttribute('value', '...');
+            HoldDataClass.button[3].setAttribute('value', '...');
             HoldDataClass.button[4].setAttribute('value', 'Checking');
             HoldDataClass.button[5].setAttribute('value', 'Savings');
         } else if (whatNext == 'withdraw checking') {
             this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00'
-                + '?<input type="number" id="withdrawAmount" placeholder="Amount">';
+                + '?<input type="number" id="withdrawCheckingAmount" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -43,7 +46,7 @@ export default class ScreenChanger {
             }
         } else if (whatNext == 'withdraw savings') {
             this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00'
-                + '$<input type="number" id="withdrawAmount" placeholder="Amount">';
+                + '$<input type="number" id="withdrawSavingAmount" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -53,13 +56,16 @@ export default class ScreenChanger {
         } else if (whatNext == 'account inquiry') {
             this.screen.innerHTML = 'Which account would you like to see?';
             HoldDataClass.button[0].setAttribute('value', 'Back');
+            HoldDataClass.button[1].setAttribute('value', '...');
+            HoldDataClass.button[2].setAttribute('value', '...');
+            HoldDataClass.button[3].setAttribute('value', '...');
             HoldDataClass.button[4].setAttribute('value', 'Checking');
             HoldDataClass.button[5].setAttribute('value', 'Savings');
-            for (let i = 0; i < NUM_OF_BUTTONS; i++) {
-                if (i != 0 || i != 4 || i != 5) {
+            /*for (let i = 1; i < NUM_OF_BUTTONS; i++) {
+                if (i != 4 || i != 5) {
                     HoldDataClass.button[i].value = '...';
                 }
-            }
+            }*/
         } else if (whatNext == 'savings inquiry') {
             let savingsAmt = HoldDataClass.getAccountAmount('savings');
             let savingsNum = HoldDataClass.getAccountNum('savings');
@@ -77,8 +83,14 @@ export default class ScreenChanger {
         } else if (whatNext == 'deposit') {
             this.screen.innerHTML = 'Which account would you like to deposit to?';
             HoldDataClass.button[0].setAttribute('value', 'Back');
+            HoldDataClass.button[1].setAttribute('value', '...');
+            HoldDataClass.button[2].setAttribute('value', '...');
+            HoldDataClass.button[3].setAttribute('value', '...');
             HoldDataClass.button[4].setAttribute('value', 'Checking');
             HoldDataClass.button[5].setAttribute('value', 'Savings');
+            for (let i = 1; i < 3; i++) {
+                HoldDataClass.button[i].setAttribute('value', '...');
+            }
         } else if (whatNext == 'deposit checking') {
             this.screen.innerHTML = 'How much would you like to deposit in your checking account?'
                 + '$<input type="number" id="depositChecking" placeholder="Amount">';
@@ -100,6 +112,9 @@ export default class ScreenChanger {
         } else if (whatNext == 'transfer') {
             this.screen.innerHTML = 'Which account do you wish to transfer money out of?'
             HoldDataClass.button[0].value = 'Back';
+            HoldDataClass.button[1].setAttribute('value', '...');
+            HoldDataClass.button[2].setAttribute('value', '...');
+            HoldDataClass.button[3].setAttribute('value', '...');
             HoldDataClass.button[4].value = 'Checking';
             HoldDataClass.button[5].value = 'Savings';
         } else if (whatNext == 'transfer from savings') {
@@ -110,14 +125,18 @@ export default class ScreenChanger {
             HoldDataClass.button[5].setAttribute('value', '...');
         } else if (whatNext == 'transfer from checking') {
             this.screen.innerHTML = 'How much would you like to transfer out of checking and into savings?'
-                + '$<input type="number" id="transferToSavingings" placeholder="Amount">';
+                + '$<input type="number" id="transferToSavings" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             HoldDataClass.button[4].setAttribute('value', '...');
             HoldDataClass.button[5].setAttribute('value', '...');
         } else if (whatNext == 'cardNum') {
             this.screen.innerHTML = 'Welcome to this ATM. Please enter your 3 digit card number on the keyboard.'
                 + '<input type="text" id="cardNum" placeholder="Card Number">';
-            HoldDataClass.button[0].setAttribute('value', '...');
+            for (let i = 0; i < NUM_OF_BUTTONS; i++) {
+                if (i != 3) {
+                    HoldDataClass.button[i].setAttribute('value', '...');
+                }
+            }
             HoldDataClass.button[3].setAttribute('value', 'Enter');
         }
     }
