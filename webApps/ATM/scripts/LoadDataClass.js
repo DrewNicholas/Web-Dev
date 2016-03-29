@@ -15,7 +15,7 @@ export default class LoadData {
         request.open("GET", filePath, true);
         request.send();
         request.onload = function() {
-            const COLUMNS = 6;
+            const COLUMNS = 8;
             let data, middleData, finalData = [];
             if (request.readyState === 4 && request.status === 200) {
                 data = request.responseText.split(/\n/);

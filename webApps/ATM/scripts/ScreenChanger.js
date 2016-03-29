@@ -18,10 +18,10 @@ export default class ScreenChanger {
             this.screen.innerHTML = 'Welcome' + ' ' + HoldDataClass.data[HoldDataClass.customer][3] + ' ' + HoldDataClass.data[HoldDataClass.customer][2] + '. Please enter your one digit PIN'
                 + '<input type="password" id="PIN" placeholder="PIN">';
             HoldDataClass.button[0].setAttribute('value', 'Exit');
-            //HoldDataClass.button[3].addEventListener('click', function func() {main.validate('PIN')});
-            //callback(3, 'remove', main.func);
         } else if (whatNext == 'mainScreen') {
-            this.screen.innerHTML = 'What would you like to do?';
+            const NAME = 3;
+            this.screen.innerHTML = 'What would you like to do, ' + HoldDataClass.data[HoldDataClass.customer][NAME] + '?';
+            HoldDataClass.button[0].setAttribute('value', 'Exit');
             HoldDataClass.button[1].setAttribute('value', 'Deposit');
             HoldDataClass.button[2].setAttribute('value', 'Transfer');
             HoldDataClass.button[3].setAttribute('value', '...');
@@ -140,18 +140,4 @@ export default class ScreenChanger {
             HoldDataClass.button[3].setAttribute('value', 'Enter');
         }
     }
-
-    //validate(elementId) {
-    //    let data = HoldDataClass.getData();
-    //    let checkNum = document.getElementById(elementId).value;
-    //    let isValid = false;
-    //    if (elementId == 'cardNum') {
-    //        for (let i = 0; i< data.length && isValid == false; i++) {
-    //            if (data[i][0] == checkNum) {
-    //                isValid = true;
-    //            }
-    //        }
-    //        this.updateScreen(isValid)
-    //    }
-    //}
 }
