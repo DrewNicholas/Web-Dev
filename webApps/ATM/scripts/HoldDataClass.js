@@ -71,6 +71,6 @@ export default class HoldDataClass {
         } else {
             account = 7;
         }
-        this.data[this.customer][account] = this.data[this.customer][account] + changeBy;
+        this.data[this.customer][account] = Number(this.data[this.customer][account]) + changeBy;
     }
 }

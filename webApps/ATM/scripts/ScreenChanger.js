@@ -37,7 +37,7 @@ export default class ScreenChanger {
             HoldDataClass.button[5].setAttribute('value', 'Savings');
         } else if (whatNext == 'withdraw checking') {
             this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00'
-                + '?<input type="number" id="withdrawCheckingAmount" placeholder="Amount">';
+                + '<input type="number" id="withdrawCheckingAmount" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -46,7 +46,7 @@ export default class ScreenChanger {
             }
         } else if (whatNext == 'withdraw savings') {
             this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00'
-                + '$<input type="number" id="withdrawSavingAmount" placeholder="Amount">';
+                + '<input type="number" id="withdrawSavingAmount" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -93,7 +93,7 @@ export default class ScreenChanger {
             }
         } else if (whatNext == 'deposit checking') {
             this.screen.innerHTML = 'How much would you like to deposit in your checking account?'
-                + '$<input type="number" id="depositChecking" placeholder="Amount">';
+                + '<input type="number" id="depositChecking" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -102,7 +102,7 @@ export default class ScreenChanger {
             }
         } else if (whatNext == 'deposit savings') {
             this.screen.innerHTML = 'How much would you like to deposit in your savings account?'
-                + '$<input type="number" id="depositSavings" placeholder="Amount">';
+                + '<input type="number" id="depositSavings" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -119,13 +119,13 @@ export default class ScreenChanger {
             HoldDataClass.button[5].value = 'Savings';
         } else if (whatNext == 'transfer from savings') {
             this.screen.innerHTML = 'How much would you like to transfer out of savings and into checking?'
-                + '$<input type="number" id="transferToChecking" placeholder="Amount">';
+                + '<input type="number" id="transferToChecking" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             HoldDataClass.button[4].setAttribute('value', '...');
             HoldDataClass.button[5].setAttribute('value', '...');
         } else if (whatNext == 'transfer from checking') {
             this.screen.innerHTML = 'How much would you like to transfer out of checking and into savings?'
-                + '$<input type="number" id="transferToSavings" placeholder="Amount">';
+                + '<input type="number" id="transferToSavings" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             HoldDataClass.button[4].setAttribute('value', '...');
             HoldDataClass.button[5].setAttribute('value', '...');
@@ -138,6 +138,12 @@ export default class ScreenChanger {
                 }
             }
             HoldDataClass.button[3].setAttribute('value', 'Enter');
+        } else if (whatNext == 'announce withdrawn checking') {
+            this.screen.innerHTML = 'You have withdrawn from checking';
+            HoldDataClass.button[0].setAttribute('value', 'Menu');
+        } else if (whatNext == 'announce withdrawn savings') {
+            this.screen.innerHTML = 'You have withdrawn from savings';
+            HoldDataClass.button[0].setAttribute('value', 'Menu');
         }
     }
 }

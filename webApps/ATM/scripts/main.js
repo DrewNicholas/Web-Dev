@@ -64,6 +64,20 @@ class main {
             } else {
                 alert('Incorrect PIN, please try again');
             }
+        } else if(elementId == 'transferToChecking') {
+
+        } else if (elementId == 'transferToSavings') {
+
+        } else if (elementId == 'withdrawCheckingAmount') {
+            let checkingAmt = HoldDataClass.getAccountAmount('checking');
+            if (Number(checkNum) <= Number(checkingAmt)) {
+                HoldDataClass.setAccountAmount('checking', -Number(checkingAmt));
+                //change screen to say how much withdrawn and only a "back to main" button
+            } else {
+                alert('This would overdraw your account, please enter a valid amount');
+            }
+        } else if (elementId == 'withdrawSavingsAmount') {
+
         }
     }
 
@@ -86,6 +100,9 @@ class main {
         } else if (main.currentScreen == 'transfer from checking' || main.currentScreen == 'transfer from savings') {
             new ScreenChanger().updateScreen('transfer');
             main.currentScreen = 'transfer';
+        } else if(main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings') {
+            new ScreenChanger().updateScreen('mainScreen');
+            main.currentScreen = 'mainScreen';
         }
     }
 
@@ -111,7 +128,7 @@ class main {
         } else if (main.currentScreen == 'withdraw checking') {
             main.validate('withdrawCheckingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
         } else if (main.currentScreen == 'withdraw savings') {
-            main.validate('withdrawSavingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
+            main.validate('withdrawSavingsAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
         } else if (main.currentScreen == 'deposit checking') {
             main.validate('depositChecking'); //needed?
             HoldDataClass.setAccountAmount('checking', document.getElementById('depositChecking').value);

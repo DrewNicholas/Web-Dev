@@ -114,6 +114,9 @@
 	            } else if (main.currentScreen == 'transfer from checking' || main.currentScreen == 'transfer from savings') {
 	                new _ScreenChanger2.default().updateScreen('transfer');
 	                main.currentScreen = 'transfer';
+	            } else if (main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings') {
+	                new _ScreenChanger2.default().updateScreen('mainScreen');
+	                main.currentScreen = 'mainScreen';
 	            }
 	        }
 	    }, {
@@ -142,7 +145,7 @@
 	            } else if (main.currentScreen == 'withdraw checking') {
 	                main.validate('withdrawCheckingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
 	            } else if (main.currentScreen == 'withdraw savings') {
-	                    main.validate('withdrawSavingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
+	                    main.validate('withdrawSavingsAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
 	                } else if (main.currentScreen == 'deposit checking') {
 	                        main.validate('depositChecking'); //needed?
 	                        _HoldDataClass2.default.setAccountAmount('checking', document.getElementById('depositChecking').value);
@@ -247,7 +250,15 @@
 	                } else {
 	                    alert('Incorrect PIN, please try again');
 	                }
-	            }
+	            } else if (elementId == 'transferToChecking') {} else if (elementId == 'transferToSavings') {} else if (elementId == 'withdrawCheckingAmount') {
+	                var checkingAmt = _HoldDataClass2.default.getAccountAmount('checking');
+	                if (Number(checkNum) <= Number(checkingAmt)) {
+	                    _HoldDataClass2.default.setAccountAmount('checking', -Number(checkingAmt));
+	                    //change screen to say how much withdrawn and only a "back to main" button
+	                } else {
+	                        alert('This would overdraw your account, please enter a valid amount');
+	                    }
+	            } else if (elementId == 'withdrawSavingsAmount') {}
 	        }
 	    }]);
 
@@ -315,7 +326,7 @@
 	                _HoldDataClass2.default.button[4].setAttribute('value', 'Checking');
 	                _HoldDataClass2.default.button[5].setAttribute('value', 'Savings');
 	            } else if (whatNext == 'withdraw checking') {
-	                this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00' + '?<input type="number" id="withdrawCheckingAmount" placeholder="Amount">';
+	                this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00' + '<input type="number" id="withdrawCheckingAmount" placeholder="Amount">';
 	                _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                for (var i = 1; i < NUM_OF_BUTTONS; i++) {
 	                    if (i != 3) {
@@ -323,7 +334,7 @@
 	                    }
 	                }
 	            } else if (whatNext == 'withdraw savings') {
-	                this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00' + '$<input type="number" id="withdrawSavingAmount" placeholder="Amount">';
+	                this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00' + '<input type="number" id="withdrawSavingAmount" placeholder="Amount">';
 	                _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                for (var _i = 1; _i < NUM_OF_BUTTONS; _i++) {
 	                    if (_i != 3) {
@@ -369,7 +380,7 @@
 	                                _HoldDataClass2.default.button[_i4].setAttribute('value', '...');
 	                            }
 	                        } else if (whatNext == 'deposit checking') {
-	                            this.screen.innerHTML = 'How much would you like to deposit in your checking account?' + '$<input type="number" id="depositChecking" placeholder="Amount">';
+	                            this.screen.innerHTML = 'How much would you like to deposit in your checking account?' + '<input type="number" id="depositChecking" placeholder="Amount">';
 	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                            for (var _i5 = 1; _i5 < NUM_OF_BUTTONS; _i5++) {
 	                                if (_i5 != 3) {
@@ -377,7 +388,7 @@
 	                                }
 	                            }
 	                        } else if (whatNext == 'deposit savings') {
-	                            this.screen.innerHTML = 'How much would you like to deposit in your savings account?' + '$<input type="number" id="depositSavings" placeholder="Amount">';
+	                            this.screen.innerHTML = 'How much would you like to deposit in your savings account?' + '<input type="number" id="depositSavings" placeholder="Amount">';
 	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                            for (var _i6 = 1; _i6 < NUM_OF_BUTTONS; _i6++) {
 	                                if (_i6 != 3) {
@@ -393,12 +404,12 @@
 	                            _HoldDataClass2.default.button[4].value = 'Checking';
 	                            _HoldDataClass2.default.button[5].value = 'Savings';
 	                        } else if (whatNext == 'transfer from savings') {
-	                            this.screen.innerHTML = 'How much would you like to transfer out of savings and into checking?' + '$<input type="number" id="transferToChecking" placeholder="Amount">';
+	                            this.screen.innerHTML = 'How much would you like to transfer out of savings and into checking?' + '<input type="number" id="transferToChecking" placeholder="Amount">';
 	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                            _HoldDataClass2.default.button[4].setAttribute('value', '...');
 	                            _HoldDataClass2.default.button[5].setAttribute('value', '...');
 	                        } else if (whatNext == 'transfer from checking') {
-	                            this.screen.innerHTML = 'How much would you like to transfer out of checking and into savings?' + '$<input type="number" id="transferToSavings" placeholder="Amount">';
+	                            this.screen.innerHTML = 'How much would you like to transfer out of checking and into savings?' + '<input type="number" id="transferToSavings" placeholder="Amount">';
 	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
 	                            _HoldDataClass2.default.button[4].setAttribute('value', '...');
 	                            _HoldDataClass2.default.button[5].setAttribute('value', '...');
@@ -410,6 +421,12 @@
 	                                }
 	                            }
 	                            _HoldDataClass2.default.button[3].setAttribute('value', 'Enter');
+	                        } else if (whatNext == 'announce withdrawn checking') {
+	                            this.screen.innerHTML = 'You have withdrawn from checking';
+	                            _HoldDataClass2.default.button[0].setAttribute('value', 'Menu');
+	                        } else if (whatNext == 'announce withdrawn savings') {
+	                            this.screen.innerHTML = 'You have withdrawn from savings';
+	                            _HoldDataClass2.default.button[0].setAttribute('value', 'Menu');
 	                        }
 	        }
 	    }]);
@@ -516,7 +533,7 @@
 	            } else {
 	                account = 7;
 	            }
-	            this.data[this.customer][account] = this.data[this.customer][account] + changeBy;
+	            this.data[this.customer][account] = Number(this.data[this.customer][account]) + changeBy;
 	        }
 	    }]);
 
