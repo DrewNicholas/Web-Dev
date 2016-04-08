@@ -68,9 +68,9 @@ export default class HoldDataClass {
         let account;
         if (whichAccount == 'savings') {
             account = 5;
-        } else {
+        } else if (whichAccount == 'checking') {
             account = 7;
         }
-        this.data[this.customer][account] = Number(this.data[this.customer][account]) + changeBy;
+        this.data[this.customer][account] = Number(this.data[this.customer][account]) + Number(changeBy);
     }
 }

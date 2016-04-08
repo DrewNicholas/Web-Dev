@@ -36,7 +36,7 @@ export default class ScreenChanger {
             HoldDataClass.button[4].setAttribute('value', 'Checking');
             HoldDataClass.button[5].setAttribute('value', 'Savings');
         } else if (whatNext == 'withdraw checking') {
-            this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00'
+            this.screen.innerHTML = 'How much would you like to withdraw?'
                 + '<input type="number" id="withdrawCheckingAmount" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
@@ -45,8 +45,8 @@ export default class ScreenChanger {
                 }
             }
         } else if (whatNext == 'withdraw savings') {
-            this.screen.innerHTML = 'How much would you like to withdraw? Must be in multiples of $20.00'
-                + '<input type="number" id="withdrawSavingAmount" placeholder="Amount">';
+            this.screen.innerHTML = 'How much would you like to withdraw?'
+                + '<input type="number" id="withdrawSavingsAmount" placeholder="Amount">';
             HoldDataClass.button[3].setAttribute('value', 'Enter');
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
                 if (i != 3) {
@@ -61,11 +61,6 @@ export default class ScreenChanger {
             HoldDataClass.button[3].setAttribute('value', '...');
             HoldDataClass.button[4].setAttribute('value', 'Checking');
             HoldDataClass.button[5].setAttribute('value', 'Savings');
-            /*for (let i = 1; i < NUM_OF_BUTTONS; i++) {
-                if (i != 4 || i != 5) {
-                    HoldDataClass.button[i].value = '...';
-                }
-            }*/
         } else if (whatNext == 'savings inquiry') {
             let savingsAmt = HoldDataClass.getAccountAmount('savings');
             let savingsNum = HoldDataClass.getAccountNum('savings');
@@ -141,9 +136,23 @@ export default class ScreenChanger {
         } else if (whatNext == 'announce withdrawn checking') {
             this.screen.innerHTML = 'You have withdrawn from checking';
             HoldDataClass.button[0].setAttribute('value', 'Menu');
+            HoldDataClass.button[3].setAttribute('value', '...');
         } else if (whatNext == 'announce withdrawn savings') {
             this.screen.innerHTML = 'You have withdrawn from savings';
             HoldDataClass.button[0].setAttribute('value', 'Menu');
+            HoldDataClass.button[3].setAttribute('value', '...');
+        } else if (whatNext == 'announce deposit checking') {
+            this.screen.innerHTML = 'Deposit to checking complete';
+            HoldDataClass.button[0].setAttribute('value', 'Menu');
+            HoldDataClass.button[3].setAttribute('value', '...');
+        } else if (whatNext == 'announce deposit savings') {
+            this.screen.innerHTML = 'Deposit to savings complete';
+            HoldDataClass.button[0].setAttribute('value', 'Menu');
+            HoldDataClass.button[3].setAttribute('value', '...');
+        } else if (whatNext == 'announce transfer') {
+            this.screen.innerHTML = 'Transfer complete';
+            HoldDataClass.button[0].setAttribute('value', 'Menu');
+            HoldDataClass.button[3].setAttribute('value', '...');
         }
     }
 }

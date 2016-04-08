@@ -65,19 +65,42 @@ class main {
                 alert('Incorrect PIN, please try again');
             }
         } else if(elementId == 'transferToChecking') {
-
+            let savingsAmt = Number(HoldDataClass.getAccountAmount('savings'));
+            if (Number(checkNum) <= savingsAmt) {
+                HoldDataClass.setAccountAmount('savings', -checkNum);
+                HoldDataClass.setAccountAmount('checking', checkNum);
+                new ScreenChanger().updateScreen('announce transfer');
+                main.currentScreen = 'announce transfer';
+            } else {
+                alert('This would overdraw your savings, please enter a valid amount');
+            }
         } else if (elementId == 'transferToSavings') {
-
+            let checkingAmt = Number(HoldDataClass.getAccountAmount('checking'));
+            if (Number(checkNum) <= checkingAmt) {
+                HoldDataClass.setAccountAmount('checking', -checkNum);
+                HoldDataClass.setAccountAmount('savings', checkNum);
+                new ScreenChanger().updateScreen('announce transfer');
+                main.currentScreen = 'announce transfer';
+            }
         } else if (elementId == 'withdrawCheckingAmount') {
-            let checkingAmt = HoldDataClass.getAccountAmount('checking');
-            if (Number(checkNum) <= Number(checkingAmt)) {
-                HoldDataClass.setAccountAmount('checking', -Number(checkingAmt));
+            let checkingAmt = Number(HoldDataClass.getAccountAmount('checking'));
+            if (Number(checkNum) <= checkingAmt) {
+                HoldDataClass.setAccountAmount('checking', -checkNum);
                 //change screen to say how much withdrawn and only a "back to main" button
+                new ScreenChanger().updateScreen('announce withdrawn checking');
+                main.currentScreen = 'announce withdrawn checking';
             } else {
                 alert('This would overdraw your account, please enter a valid amount');
             }
         } else if (elementId == 'withdrawSavingsAmount') {
-
+            let savingsAmt = Number(HoldDataClass.getAccountAmount('savings'));
+            if (Number(checkNum) <= savingsAmt) {
+                HoldDataClass.setAccountAmount('savings', -checkNum);
+                new ScreenChanger().updateScreen('announce withdrawn savings');
+                main.currentScreen = 'announce withdrawn savings';
+            } else {
+                alert('This would overdraw your account, please enter a valid amount');
+            }
         }
     }
 
@@ -100,7 +123,7 @@ class main {
         } else if (main.currentScreen == 'transfer from checking' || main.currentScreen == 'transfer from savings') {
             new ScreenChanger().updateScreen('transfer');
             main.currentScreen = 'transfer';
-        } else if(main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings') {
+        } else if(main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings' || main.currentScreen == 'announce deposit checking' || main.currentScreen == 'announce deposit savings' || main.currentScreen == 'announce transfer') {
             new ScreenChanger().updateScreen('mainScreen');
             main.currentScreen = 'mainScreen';
         }
@@ -126,19 +149,23 @@ class main {
         } else if (main.currentScreen == 'PIN') {
             main.validate('PIN');
         } else if (main.currentScreen == 'withdraw checking') {
-            main.validate('withdrawCheckingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
+            main.validate('withdrawCheckingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid and change to announcement screen
         } else if (main.currentScreen == 'withdraw savings') {
-            main.validate('withdrawSavingsAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid
+            main.validate('withdrawSavingsAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid and change to announcement screen
         } else if (main.currentScreen == 'deposit checking') {
             main.validate('depositChecking'); //needed?
             HoldDataClass.setAccountAmount('checking', document.getElementById('depositChecking').value);
+            new ScreenChanger().updateScreen('announce deposit checking');
+            main.currentScreen = 'announce deposit checking';
         } else if (main.currentScreen == 'deposit savings') {
             main.validate('depositSavings'); //needed?
             HoldDataClass.setAccountAmount('savings', document.getElementById('depositSavings').value);
+            new ScreenChanger().updateScreen('announce deposit savings');
+            main.currentScreen = 'announce deposit savings';
         } else if (main.currentScreen == 'transfer from savings') {
-            main.validate('transferToChecking');
+            main.validate('transferToChecking'); //remember to set account amount if valid and change to announcement screen
         } else if (main.currentScreen == 'transfer from checking') {
-            main.validate('transferToSavings');
+            main.validate('transferToSavings'); //remember to set account amount if valid and change to announcement screen
         }
     }
 
