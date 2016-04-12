@@ -9,7 +9,6 @@ export default class HoldDataClass {
     constructor() {
         this.data = [[]];
         HoldDataClass.customer = '';
-        //HoldDataClass.button = [];
     }
 
     static setData(importData) {
@@ -45,10 +44,8 @@ export default class HoldDataClass {
         if (whichAccount == 'savings') {
             account = 4;
         } else if (whichAccount == 'checking') {
-            console.log('returning checking account number');
             account = 6;
         }
-        console.log(whichAccount + ' is account ' + this.data[this.customer][account]);
         return this.data[this.customer][account];
     }
 
@@ -57,10 +54,8 @@ export default class HoldDataClass {
         if (whichAccount == 'savings') {
             account = 5;
         } else if (whichAccount == 'checking') {
-            console.log('returning checking amount');
             account = 7;
         }
-        console.log(whichAccount + ' has ' + this.data[this.customer][account] + ' dollars');
         return this.data[this.customer][account];
     }
 

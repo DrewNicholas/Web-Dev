@@ -66,14 +66,14 @@ export default class ScreenChanger {
             let savingsNum = HoldDataClass.getAccountNum('savings');
             this.screen.innerHTML = 'In savings account #' + savingsNum + ' there is $' + savingsAmt;
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
-                HoldDataClass.button[i].setAttribute('value', '...'); //Keeps back button as button0, but listener will need to be changed
+                HoldDataClass.button[i].setAttribute('value', '...');
             }
         } else if (whatNext == 'checking inquiry') {
             let checkingAmt = HoldDataClass.getAccountAmount('checking');
             let checkingNum = HoldDataClass.getAccountNum('checking');
             this.screen.innerHTML = 'In checking account #' + checkingNum + ' there is $' + checkingAmt;
             for (let i = 1; i < NUM_OF_BUTTONS; i++) {
-                HoldDataClass.button[i].setAttribute('value', '...'); //Keeps back button as button0, but listener will need to be changed
+                HoldDataClass.button[i].setAttribute('value', '...');
             }
         } else if (whatNext == 'deposit') {
             this.screen.innerHTML = 'Which account would you like to deposit to?';
@@ -105,7 +105,7 @@ export default class ScreenChanger {
                 }
             }
         } else if (whatNext == 'transfer') {
-            this.screen.innerHTML = 'Which account do you wish to transfer money out of?'
+            this.screen.innerHTML = 'Which account do you wish to transfer money out of?';
             HoldDataClass.button[0].value = 'Back';
             HoldDataClass.button[1].setAttribute('value', '...');
             HoldDataClass.button[2].setAttribute('value', '...');

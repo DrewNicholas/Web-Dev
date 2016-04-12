@@ -16,30 +16,20 @@ class main {
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
         main.currentScreen = "cardNum";
-        HoldDataClass.button[0].addEventListener('click', this.listenButton0);
-        HoldDataClass.button[1].addEventListener('click', this.listenButton1);
-        HoldDataClass.button[2].addEventListener('click', this.listenButton2);
-        HoldDataClass.button[3].addEventListener('click', this.listenButton3);
-        HoldDataClass.button[4].addEventListener('click', this.listenButton4);
-        HoldDataClass.button[5].addEventListener('click', this.listenButton5);
-        /*this.listenButton0();
-        this.listenButton1();
-        this.listenButton2();
-        this.listenButton3();
-        this.listenButton4();
-        this.listenButton5();*/
-        //this.editListener(3, 'add', 'cardNum');
-
+        HoldDataClass.button[0].addEventListener('click', main.listenButton0);
+        HoldDataClass.button[1].addEventListener('click', main.listenButton1);
+        HoldDataClass.button[2].addEventListener('click', main.listenButton2);
+        HoldDataClass.button[3].addEventListener('click', main.listenButton3);
+        HoldDataClass.button[4].addEventListener('click', main.listenButton4);
+        HoldDataClass.button[5].addEventListener('click', main.listenButton5);
     }
 
     static validate(elementId) {
-        //Need to add validation on withdraw and transfer to ensure an account doesn't drop below $0
         console.log('running validation on ' + elementId);
         let data = HoldDataClass.getData();
         let checkNum = document.getElementById(elementId).value;
-        console.log('checkNum is ' + checkNum);
-        let isValid = false;
         if (elementId == 'cardNum') {
+            let isValid = false;
             for (let i = 0; i < data.length && isValid == false; i++) {
                 if (data[i][0] == checkNum) {
                     isValid = true;
@@ -55,10 +45,7 @@ class main {
             }
         } else if (elementId == 'PIN'){
             const PIN = 1;
-            console.log('The PIN for ' + data[HoldDataClass.customer][3] + ' ' + data[HoldDataClass.customer][2] + ' is ' + data[HoldDataClass.customer][PIN]);
             if (data[HoldDataClass.customer][PIN] == checkNum) {
-                isValid = true; //maybe unnecessary
-                //do something with a listener
                 main.currentScreen = 'mainScreen';
                 new ScreenChanger().updateScreen('mainScreen');
             } else {
@@ -86,7 +73,6 @@ class main {
             let checkingAmt = Number(HoldDataClass.getAccountAmount('checking'));
             if (Number(checkNum) <= checkingAmt) {
                 HoldDataClass.setAccountAmount('checking', -checkNum);
-                //change screen to say how much withdrawn and only a "back to main" button
                 new ScreenChanger().updateScreen('announce withdrawn checking');
                 main.currentScreen = 'announce withdrawn checking';
             } else {
@@ -104,7 +90,7 @@ class main {
         }
     }
 
-    listenButton0() {
+    static listenButton0() {
         if (main.currentScreen == 'PIN' || main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('cardNum');
             main.currentScreen = 'cardNum';
@@ -129,47 +115,45 @@ class main {
         }
     }
 
-    listenButton1() {
+    static listenButton1() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('deposit');
             main.currentScreen = 'deposit';
         }
     }
 
-    listenButton2() {
+    static listenButton2() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('transfer');
             main.currentScreen = 'transfer';
         }
     }
 
-    listenButton3() {
+    static listenButton3() {
         if (main.currentScreen == 'cardNum') {
             main.validate('cardNum');
         } else if (main.currentScreen == 'PIN') {
             main.validate('PIN');
         } else if (main.currentScreen == 'withdraw checking') {
-            main.validate('withdrawCheckingAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid and change to announcement screen
+            main.validate('withdrawCheckingAmount');
         } else if (main.currentScreen == 'withdraw savings') {
-            main.validate('withdrawSavingsAmount'); //Remember to use HoldDataClass.setAccountAmount after confirming valid and change to announcement screen
+            main.validate('withdrawSavingsAmount');
         } else if (main.currentScreen == 'deposit checking') {
-            main.validate('depositChecking'); //needed?
             HoldDataClass.setAccountAmount('checking', document.getElementById('depositChecking').value);
             new ScreenChanger().updateScreen('announce deposit checking');
             main.currentScreen = 'announce deposit checking';
         } else if (main.currentScreen == 'deposit savings') {
-            main.validate('depositSavings'); //needed?
             HoldDataClass.setAccountAmount('savings', document.getElementById('depositSavings').value);
             new ScreenChanger().updateScreen('announce deposit savings');
             main.currentScreen = 'announce deposit savings';
         } else if (main.currentScreen == 'transfer from savings') {
-            main.validate('transferToChecking'); //remember to set account amount if valid and change to announcement screen
+            main.validate('transferToChecking');
         } else if (main.currentScreen == 'transfer from checking') {
-            main.validate('transferToSavings'); //remember to set account amount if valid and change to announcement screen
+            main.validate('transferToSavings');
         }
     }
 
-    listenButton4() {
+    static listenButton4() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('withdraw');
             main.currentScreen = 'withdraw';
@@ -188,7 +172,7 @@ class main {
         }
     }
 
-    listenButton5() {
+    static listenButton5() {
         if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('account inquiry');
             main.currentScreen = 'account inquiry';
@@ -206,25 +190,6 @@ class main {
             main.currentScreen = 'transfer from savings';
         }
     }
-
-    //Old way of changing listener that didn't seem to work
-    /*editListener(buttonNumber, addRemove, elementId) {
-        console.log('editing listener');
-        if (elementId == 'cardNum' || elementId == 'PIN') {
-            if (addRemove == 'add') {
-                HoldDataClass.button[buttonNumber].addEventListener('click', function() {main.validate(elementId)});
-            } else {
-                HoldDataClass.button[buttonNumber].removeEventListener('click', function() {main.validate(elementId)});
-            }
-        } else if (elementId == "something else I currently can't think of") {
-            if (addRemove == 'add') {
-                HoldDataClass.button[buttonNumber].addEventListener('click', );
-            } else {
-                HoldDataClass.button[buttonNumber].removeEventListener('click', );
-            }
-        }
-
-    }*/
 }
 
 window.onload = function() {
