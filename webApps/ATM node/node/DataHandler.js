@@ -1,8 +1,8 @@
-/** AUTHOR: dmnicholas@me.com
+/*  AUTHOR: dmnicholas@me.com
  *  VERSION: 1.0.0
  *  CREATED: 5.7.2016
  *  PURPOSE: Library class for handling file I/O
- */
+*/
 
 "use strict";
 
