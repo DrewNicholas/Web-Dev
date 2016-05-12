@@ -44,25 +44,33 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(1);
+	module.exports = __webpack_require__(5);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* AUTHOR: dmnicholas@me.com
 	 * VERSION: 1.0.0
-	 * CREATED: 3.13.2016
-	 * PURPOSE: ATM
+	 * CREATED: 5.7.2016
+	 * PURPOSE: ATM with server read/write
 	 */
 
 	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _ScreenChanger = __webpack_require__(1);
+	var _ScreenChanger = __webpack_require__(2);
 
 	var _ScreenChanger2 = _interopRequireDefault(_ScreenChanger);
 
-	var _LoadDataClass = __webpack_require__(3);
+	var _LoadDataClass = __webpack_require__(4);
 
 	var _LoadDataClass2 = _interopRequireDefault(_LoadDataClass);
 
-	var _HoldDataClass = __webpack_require__(2);
+	var _HoldDataClass = __webpack_require__(3);
 
 	var _HoldDataClass2 = _interopRequireDefault(_HoldDataClass);
 
@@ -75,6 +83,7 @@
 	        _classCallCheck(this, main);
 
 	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
+	        //main.doDataShit();
 	        _HoldDataClass2.default.button = [];
 	        _HoldDataClass2.default.setButtons();
 	        main.currentScreen = "cardNum";
@@ -155,7 +164,7 @@
 	    }, {
 	        key: 'listenButton0',
 	        value: function listenButton0() {
-	            if (main.currentScreen == 'PIN' || main.currentScreen == 'mainScreen') {
+	            if (main.currentScreen == 'PIN') {
 	                new _ScreenChanger2.default().updateScreen('cardNum');
 	                main.currentScreen = 'cardNum';
 	            } else if (main.currentScreen == 'withdraw' || main.currentScreen == 'account inquiry' || main.currentScreen == 'deposit' || main.currentScreen == 'transfer') {
@@ -176,6 +185,10 @@
 	            } else if (main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings' || main.currentScreen == 'announce deposit checking' || main.currentScreen == 'announce deposit savings' || main.currentScreen == 'announce transfer') {
 	                new _ScreenChanger2.default().updateScreen('mainScreen');
 	                main.currentScreen = 'mainScreen';
+	            } else if (main.currentScreen == 'mainscreen') {
+	                new _ScreenChanger2.default().updateScreen('cardNum');
+	                main.currentScreen = 'cardNum';
+	                //main.writeDataShit();
 	            }
 	        }
 	    }, {
@@ -259,6 +272,11 @@
 	                main.currentScreen = 'transfer from savings';
 	            }
 	        }
+	    }, {
+	        key: 'writeDataShit',
+	        value: function writeDataShit() {
+	            //write stuff here
+	        }
 	    }]);
 
 	    return main;
@@ -269,12 +287,12 @@
 	};
 
 /***/ },
-/* 1 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* AUTHOR: dmnicholas@me.com
 	 * VERSION: 1.0.0
-	 * CREATED: 3.13.2016
+	 * CREATED: 5.7.2016
 	 */
 
 	"use strict";
@@ -285,7 +303,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _HoldDataClass = __webpack_require__(2);
+	var _HoldDataClass = __webpack_require__(3);
 
 	var _HoldDataClass2 = _interopRequireDefault(_HoldDataClass);
 
@@ -445,12 +463,12 @@
 	exports.default = ScreenChanger;
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	/* AUTHOR: dmnicholas@me.com
 	 * VERSION: 1.0.0
-	 * CREATED: 3.13.2016
+	 * CREATED: 5.7.2016
 	 */
 
 	"use strict";
@@ -546,12 +564,12 @@
 	exports.default = HoldDataClass;
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	/* AUTHOR: dmnicholas@me.com
 	* VERSION: 1.0.0
-	* CREATED: 3.13.2016
+	* CREATED: 5.7.2016
 	*/
 
 	"use strict";
@@ -599,6 +617,24 @@
 	}();
 
 	exports.default = LoadData;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(__dirname) {"use strict";
+
+	module.exports = {
+	    entry: "./main.js",
+	    output: {
+	        path: __dirname,
+	        filename: "bundle.js"
+	    },
+	    module: {
+	        loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }]
+	    }
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }
 /******/ ]);

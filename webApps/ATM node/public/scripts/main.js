@@ -12,8 +12,8 @@ import HoldDataClass from './HoldDataClass';
 
 class main {
     constructor() {
-        //new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
-        main.doDataShit();
+        new LoadDataClass().loadData('./data/customers.csv', HoldDataClass.setData);
+        //main.doDataShit();
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
         main.currentScreen = "cardNum";
@@ -92,7 +92,7 @@ class main {
     }
 
     static listenButton0() {
-        if (main.currentScreen == 'PIN' || main.currentScreen == 'mainScreen') {
+        if (main.currentScreen == 'PIN') {
             new ScreenChanger().updateScreen('cardNum');
             main.currentScreen = 'cardNum';
         } else if (main.currentScreen == 'withdraw' || main.currentScreen == 'account inquiry' || main.currentScreen == 'deposit' || main.currentScreen == 'transfer') {
@@ -113,6 +113,10 @@ class main {
         } else if(main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings' || main.currentScreen == 'announce deposit checking' || main.currentScreen == 'announce deposit savings' || main.currentScreen == 'announce transfer') {
             new ScreenChanger().updateScreen('mainScreen');
             main.currentScreen = 'mainScreen';
+        } else if (main.currentScreen == 'mainscreen') {
+            new ScreenChanger().updateScreen('cardNum');
+            main.currentScreen = 'cardNum';
+            //main.writeDataShit();
         }
     }
 
@@ -193,7 +197,7 @@ class main {
     }
 
     static writeDataShit() {
-
+        //write stuff here
     }
 }
 

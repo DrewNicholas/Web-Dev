@@ -28,7 +28,7 @@ class app {
 
                 if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
                     if (req.method == 'POST') {
-                        app.getFormData(req, res);
+                        app.writeStuff(req, res);
                     } else {
                         console.log("[405] " + req.method + " to " + req.url);
                         res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html' });
@@ -74,6 +74,10 @@ class app {
                 res.end(finalName.getFirstName() + ' ' + finalName.getLastName());
                 finalName.writeData();
             });
+    }
+
+    static writeStuff(req,res) {
+        const WRITER = require('./node/DataHandler');
     }
 }
 
