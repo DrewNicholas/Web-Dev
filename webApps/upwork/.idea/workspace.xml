@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0b1b12f-39f8-4564-a8d6-a9bdd1f9f873" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ATM node/public/scripts/LoadDataClass.js" afterPath="$PROJECT_DIR$/../ATM node/public/scripts/LoadDataClass.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ATM node/public/scripts/bundle.js" afterPath="$PROJECT_DIR$/../ATM node/public/scripts/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ATM node/public/scripts/main.js" afterPath="$PROJECT_DIR$/../ATM node/public/scripts/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="upwork.iws" />
     <ignored path=".idea/workspace.xml" />

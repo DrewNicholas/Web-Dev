@@ -587,14 +587,35 @@
 	        _classCallCheck(this, LoadData);
 	    }
 
-	    _createClass(LoadData, [{
+	    //loadData(filePath, callback) {
+	    //    let request = new XMLHttpRequest();
+	    //    request.open("GET", filePath, true);
+	    //    request.send();
+	    //    request.onload = function() {
+	    //        const COLUMNS = 8;
+	    //        let data, middleData, finalData = [];
+	    //        if (request.readyState === 4 && request.status === 200) {
+	    //            data = request.responseText.split(/\n/);
+	    //        }
+	    //        for (let i = 0; i < data.length; i++) {
+	    //            middleData = data[i].split(/,/);
+	    //            finalData[i] = []; //makes it an MD array
+	    //            for (let j = 0; j < COLUMNS; j++) {
+	    //                finalData[i][j] = middleData[j];
+	    //            }
+	    //        }
+	    //        callback(finalData);
+	    //    };
+	    //}
+
+	    _createClass(LoadData, null, [{
 	        key: "loadData",
 	        value: function loadData(filePath, callback) {
 	            var request = new XMLHttpRequest();
 	            request.open("GET", filePath, true);
 	            request.send();
 	            request.onload = function () {
-	                var COLUMNS = 8;
+	                var COLUMNS = 7;
 	                var data = void 0,
 	                    middleData = void 0,
 	                    finalData = [];
