@@ -282,9 +282,9 @@
 	    return main;
 	}();
 
-	window.onload = function () {
+	window.addEventListener('load', function () {
 	    new main();
-	};
+	});
 
 /***/ },
 /* 2 */
