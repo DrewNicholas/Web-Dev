@@ -34,6 +34,8 @@ class app {
                         res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html' });
                         res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
                     }
+                } else if(req.headers['x-requested-with'] === 'loadData') {
+                    app.readData(req, res);
                 } else if (req.url.indexOf('/data/') >= 0) {
                     app.render(req.url.slice(1), 'text/csv', httpHandler, 'utf-8');
                 } else if (req.url.indexOf('/scripts/') >= 0) {
@@ -78,8 +80,18 @@ class app {
             });
     }
 
+    static readData(req, res) {
+        const LOADER = require('./node/DataHandler');
+        const COLUMNS = 8;
+        let loadedData = new LOADER(COLUMNS);
+        loadedData.setFinalData('data/customers.csv');
+        loadedData.getFinalData();
+    }
+
     static writeStuff(req,res) {
         const WRITER = require('./node/DataHandler');
+        let output = new WRITER;
+        //output.writeDataFile_MD('data/customers.csv');
     }
 }
 

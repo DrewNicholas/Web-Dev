@@ -34,7 +34,6 @@ export default class LoadDataClass {
     loadData(filePath, callback) {
         let request = new XMLHttpRequest();
         request.open("POST", filePath, true);
-        request.send();
         request.onload = function() {
             const COLUMNS = 8;
             let data, middleData, finalData = [];
@@ -50,5 +49,7 @@ export default class LoadDataClass {
             }
             callback(finalData);
         };
+        request.setRequestHeader('x-requested-with', 'loadData');
+        request.send();
     }
 }

@@ -623,7 +623,6 @@
 	        value: function loadData(filePath, callback) {
 	            var request = new XMLHttpRequest();
 	            request.open("POST", filePath, true);
-	            request.send();
 	            request.onload = function () {
 	                var COLUMNS = 8;
 	                var data = void 0,
@@ -641,6 +640,8 @@
 	                }
 	                callback(finalData);
 	            };
+	            request.setRequestHeader('x-requested-with', 'loadData');
+	            request.send();
 	        }
 	    }]);
 
