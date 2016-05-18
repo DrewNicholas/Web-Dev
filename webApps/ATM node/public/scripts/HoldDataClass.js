@@ -14,6 +14,7 @@ export default class HoldDataClass {
     static setData(importData) {
         console.log('data set in HoldDataClass');
         HoldDataClass.data = importData;
+        HoldDataClass.printData();
     }
 
     static getData() {
@@ -67,5 +68,13 @@ export default class HoldDataClass {
             account = 7;
         }
         this.data[this.customer][account] = Number(this.data[this.customer][account]) + Number(changeBy);
+    }
+
+    static printData() {
+        for(let i = 0; i < this.data.length; i++) {
+            for(let j = 0; j < 8; j++) {
+                console.log(this.data[i][j]);
+            }
+        }
     }
 }

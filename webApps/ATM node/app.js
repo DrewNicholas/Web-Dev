@@ -34,7 +34,9 @@ class app {
                         res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html' });
                         res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
                     }
-                } else if (req.url.indexOf('/javascripts/') >= 0) {
+                } else if (req.url.indexOf('/data/') >= 0) {
+                    app.render(req.url.slice(1), 'text/csv', httpHandler, 'utf-8');
+                } else if (req.url.indexOf('/scripts/') >= 0) {
                     app.render(req.url.slice(1), 'application/ecmascript', httpHandler, 'utf-8');
                 } else if (req.url.indexOf('/css/') >= 0) {
                     app.render(req.url.slice(1), 'text/css', httpHandler, 'utf-8');

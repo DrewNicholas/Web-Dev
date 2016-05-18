@@ -82,7 +82,7 @@
 	    function main() {
 	        _classCallCheck(this, main);
 
-	        new _LoadDataClass2.default().loadData('./data/customers.csv', _HoldDataClass2.default.setData);
+	        new _LoadDataClass2.default().loadData('data/customers.csv', _HoldDataClass2.default.setData);
 	        //main.doDataShit();
 	        _HoldDataClass2.default.button = [];
 	        _HoldDataClass2.default.setButtons();
@@ -494,6 +494,7 @@
 	        value: function setData(importData) {
 	            console.log('data set in HoldDataClass');
 	            HoldDataClass.data = importData;
+	            HoldDataClass.printData();
 	        }
 	    }, {
 	        key: 'getData',
@@ -556,6 +557,15 @@
 	            }
 	            this.data[this.customer][account] = Number(this.data[this.customer][account]) + Number(changeBy);
 	        }
+	    }, {
+	        key: 'printData',
+	        value: function printData() {
+	            for (var i = 0; i < this.data.length; i++) {
+	                for (var j = 0; j < 8; j++) {
+	                    console.log(this.data[i][j]);
+	                }
+	            }
+	        }
 	    }]);
 
 	    return HoldDataClass;
@@ -582,40 +592,40 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var LoadData = function () {
-	    function LoadData() {
-	        _classCallCheck(this, LoadData);
+	var LoadDataClass = function () {
+	    function LoadDataClass() {
+	        _classCallCheck(this, LoadDataClass);
 	    }
 
-	    //loadData(filePath, callback) {
-	    //    let request = new XMLHttpRequest();
-	    //    request.open("GET", filePath, true);
-	    //    request.send();
-	    //    request.onload = function() {
-	    //        const COLUMNS = 8;
-	    //        let data, middleData, finalData = [];
-	    //        if (request.readyState === 4 && request.status === 200) {
-	    //            data = request.responseText.split(/\n/);
-	    //        }
-	    //        for (let i = 0; i < data.length; i++) {
-	    //            middleData = data[i].split(/,/);
-	    //            finalData[i] = []; //makes it an MD array
-	    //            for (let j = 0; j < COLUMNS; j++) {
-	    //                finalData[i][j] = middleData[j];
-	    //            }
-	    //        }
-	    //        callback(finalData);
-	    //    };
-	    //}
+	    /*loadData(filePath, callback) {
+	        let request = new XMLHttpRequest();
+	        request.open("GET", filePath, true);
+	        request.send();
+	        request.onload = function() {
+	            const COLUMNS = 8;
+	            let data, middleData, finalData = [];
+	            if (request.readyState === 4 && request.status === 200) {
+	                data = request.responseText.split(/\n/);
+	            }
+	            for (let i = 0; i < data.length; i++) {
+	                middleData = data[i].split(/,/);
+	                finalData[i] = []; //makes it an MD array
+	                for (let j = 0; j < COLUMNS; j++) {
+	                    finalData[i][j] = middleData[j];
+	                }
+	            }
+	            callback(finalData);
+	        };
+	    }*/
 
-	    _createClass(LoadData, null, [{
+	    _createClass(LoadDataClass, [{
 	        key: "loadData",
 	        value: function loadData(filePath, callback) {
 	            var request = new XMLHttpRequest();
-	            request.open("GET", filePath, true);
+	            request.open("POST", filePath, true);
 	            request.send();
 	            request.onload = function () {
-	                var COLUMNS = 7;
+	                var COLUMNS = 8;
 	                var data = void 0,
 	                    middleData = void 0,
 	                    finalData = [];
@@ -634,10 +644,10 @@
 	        }
 	    }]);
 
-	    return LoadData;
+	    return LoadDataClass;
 	}();
 
-	exports.default = LoadData;
+	exports.default = LoadDataClass;
 
 /***/ },
 /* 5 */
