@@ -85,7 +85,8 @@ class app {
         const COLUMNS = 8;
         let loadedData = new LOADER(COLUMNS);
         loadedData.setFinalData('data/customers.csv');
-        loadedData.getFinalData();
+        res.writeHead(200, {'content-type': 'text/plain'});
+        res.end(loadedData.getFinalData());
     }
 
     static writeStuff(req,res) {
