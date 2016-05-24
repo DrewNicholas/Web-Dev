@@ -49,6 +49,8 @@ export default class LoadDataClass {
             }
             callback(finalData);
         };*/
+        let request = new XMLHttpRequest();
+        request.open("POST", filePath, true);
         request.setRequestHeader('x-requested-with', 'loadData');
         request.send();
     }

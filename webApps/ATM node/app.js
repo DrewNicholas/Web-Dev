@@ -35,7 +35,13 @@ class app {
                         res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
                     }
                 } else if(req.headers['x-requested-with'] === 'loadData') {
-                    app.readData(req, res);
+                    if (req.method == 'POST') {
+                        app.readData(req, res);
+                    } else {
+                        console.log("[405] " + req.method + " to " + req.url);
+                        res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html'});
+                        res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supportted.</h1></body></html>');
+                    }
                 } else if (req.url.indexOf('/data/') >= 0) {
                     app.render(req.url.slice(1), 'text/csv', httpHandler, 'utf-8');
                 } else if (req.url.indexOf('/scripts/') >= 0) {

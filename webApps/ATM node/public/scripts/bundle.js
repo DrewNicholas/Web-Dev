@@ -619,7 +619,7 @@
 	    }*/
 
 	    _createClass(LoadDataClass, [{
-	        key: 'loadData',
+	        key: "loadData",
 	        value: function loadData(filePath, callback) {
 	            /*let request = new XMLHttpRequest();
 	            request.open("POST", filePath, true);
@@ -638,6 +638,8 @@
 	                }
 	                callback(finalData);
 	            };*/
+	            var request = new XMLHttpRequest();
+	            request.open("POST", filePath, true);
 	            request.setRequestHeader('x-requested-with', 'loadData');
 	            request.send();
 	        }

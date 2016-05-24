@@ -53,3 +53,21 @@ class DataHandler {
 }
 
 module.exports = DataHandler;
+
+/*
+Stuff from Mr. Bates on how to pass string in AJAX
+
+let myarray = [];
+let myJSON = "";
+for (let i = 0; i < 10; i++) {
+
+    let item = {
+        "value": i,
+        "label": i
+    };
+
+    myarray.push(item);
+}
+
+myJSON = JSON.stringify({myarray: myarray});
+*/
