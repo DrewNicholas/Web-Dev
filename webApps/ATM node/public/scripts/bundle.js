@@ -82,7 +82,7 @@
 	    function main() {
 	        _classCallCheck(this, main);
 
-	        new _LoadDataClass2.default().loadData('data/customers.csv', _HoldDataClass2.default.setData);
+	        new _LoadDataClass2.default().loadData('/data/customers.csv', _HoldDataClass2.default.setData);
 	        //main.doDataShit();
 	        _HoldDataClass2.default.button = [];
 	        _HoldDataClass2.default.setButtons();
@@ -638,10 +638,11 @@
 	                }
 	                callback(finalData);
 	            };*/
-	            var request = new XMLHttpRequest();
-	            request.open("POST", filePath, true);
-	            request.setRequestHeader('x-requested-with', 'loadData');
-	            request.send();
+	            var bustCache = '?' + new Date().getTime();
+	            var XHR = new XMLHttpRequest();
+	            XHR.open("POST", document.url + bustCache, true);
+	            XHR.setRequestHeader('x-requested-LOAD', 'XMLHttpRequest');
+	            XHR.send();
 	        }
 	    }]);
 

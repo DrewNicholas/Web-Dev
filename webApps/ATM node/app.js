@@ -34,7 +34,7 @@ class app {
                         res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html' });
                         res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
                     }
-                } else if(req.headers['x-requested-with'] === 'loadData') {
+                } else if(req.headers['x-requested-LOAD'] === 'XMLHttpRequest') {
                     if (req.method == 'POST') {
                         app.readData(req, res);
                     } else {
@@ -90,6 +90,7 @@ class app {
         const LOADER = require('./node/DataHandler');
         const COLUMNS = 8;
         let loadedData = new LOADER(COLUMNS);
+        console.log('reading data in on server');
         loadedData.setFinalData('data/customers.csv');
         res.writeHead(200, {'content-type': 'text/plain'});
         res.end(loadedData.getFinalData());

@@ -12,7 +12,7 @@ import HoldDataClass from './HoldDataClass';
 
 class main {
     constructor() {
-        new LoadDataClass().loadData('data/customers.csv', HoldDataClass.setData);
+        new LoadDataClass().loadData('/data/customers.csv', HoldDataClass.setData);
         //main.doDataShit();
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
