@@ -28,15 +28,19 @@ class DataHandler {
 
     stringifyData() {
         const COLUMNS = 8;
-        for (i = 0; i < this.finalData.length; i++) {
-            for (j = 0; j < COLUMNS; j++) {
+        for (let i = 0; i < this.finalData.length; i++) {
+            for (let j = 0; j < COLUMNS; j++) {
                 if (j < COLUMNS - 1) {
-
+                    this.stringData = this.stringData + this.finalData[i][j] + ",";
                 } else {
-
+                    this.stringData = this.stringData + this.finalData[i][j] + "\n";
                 }
             }
         }
+    }
+
+    getStringData() {
+        return this.stringData;
     }
 
     writeDataFile_MD(dataPath, data, COLUMNS) {

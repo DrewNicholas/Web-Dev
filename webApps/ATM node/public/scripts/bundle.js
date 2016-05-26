@@ -188,7 +188,7 @@
 	            } else if (main.currentScreen == 'mainscreen') {
 	                new _ScreenChanger2.default().updateScreen('cardNum');
 	                main.currentScreen = 'cardNum';
-	                //main.writeDataShit();
+	                //main.writeData();
 	            }
 	        }
 	    }, {
@@ -273,8 +273,8 @@
 	            }
 	        }
 	    }, {
-	        key: 'writeDataShit',
-	        value: function writeDataShit() {
+	        key: 'writeData',
+	        value: function writeData() {
 	            //write stuff here
 	        }
 	    }]);
@@ -494,7 +494,7 @@
 	        value: function setData(importData) {
 	            console.log('data set in HoldDataClass');
 	            HoldDataClass.data = importData;
-	            HoldDataClass.printData();
+	            //HoldDataClass.printData();
 	        }
 	    }, {
 	        key: 'getData',
@@ -644,6 +644,27 @@
 	            XHR.setRequestHeader('x-requested-load', 'XMLHttpRequest');
 	            console.log('sending request');
 	            XHR.send();
+	            XHR.onload = function () {
+	                console.log(XHR.responseText);
+	                callback(LoadDataClass.unstring(XHR.responseText));
+	            };
+	        }
+	    }], [{
+	        key: "unstring",
+	        value: function unstring(toInterpret) {
+	            var COLUMNS = 8;
+	            var data = void 0,
+	                middleData = void 0,
+	                finalData = [];
+	            data = toInterpret.split(/\n/);
+	            for (var i = 0; i < data.length; i++) {
+	                middleData = data[i].split(/,/);
+	                finalData[i] = [];
+	                for (var j = 0; j < COLUMNS; j++) {
+	                    finalData[i][j] = middleData[j];
+	                }
+	            }
+	            return finalData;
 	        }
 	    }]);
 

@@ -14,7 +14,7 @@ export default class HoldDataClass {
     static setData(importData) {
         console.log('data set in HoldDataClass');
         HoldDataClass.data = importData;
-        HoldDataClass.printData();
+        //HoldDataClass.printData();
     }
 
     static getData() {

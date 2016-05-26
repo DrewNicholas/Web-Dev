@@ -116,7 +116,7 @@ class main {
         } else if (main.currentScreen == 'mainscreen') {
             new ScreenChanger().updateScreen('cardNum');
             main.currentScreen = 'cardNum';
-            //main.writeDataShit();
+            //main.writeData();
         }
     }
 
@@ -196,7 +196,7 @@ class main {
         }
     }
 
-    static writeDataShit() {
+    static writeData() {
         //write stuff here
     }
 }

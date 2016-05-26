@@ -25,7 +25,7 @@ class app {
                         res.end(str);
                     }
                 };
-                console.log(req.headers);
+                //console.log(req.headers);
                 if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
                     if (req.method == 'POST') {
                         app.writeStuff(req, res);
@@ -95,7 +95,7 @@ class app {
         loadedData.setFinalData('data/customers.csv');
         loadedData.stringifyData();
         res.writeHead(200, {'content-type': 'text/plain'});
-        res.end(loadedData.getFinalData());
+        res.end(loadedData.getStringData());
     }
 
     static writeStuff(req,res) {
