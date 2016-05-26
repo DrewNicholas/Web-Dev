@@ -641,7 +641,8 @@
 	            var bustCache = '?' + new Date().getTime();
 	            var XHR = new XMLHttpRequest();
 	            XHR.open("POST", document.url + bustCache, true);
-	            XHR.setRequestHeader('x-requested-LOAD', 'XMLHttpRequest');
+	            XHR.setRequestHeader('x-requested-load', 'XMLHttpRequest');
+	            console.log('sending request');
 	            XHR.send();
 	        }
 	    }]);

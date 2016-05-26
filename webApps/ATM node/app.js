@@ -25,7 +25,7 @@ class app {
                         res.end(str);
                     }
                 };
-
+                console.log(req.headers);
                 if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
                     if (req.method == 'POST') {
                         app.writeStuff(req, res);
@@ -34,7 +34,8 @@ class app {
                         res.writeHead(405, "Method not supported", { 'Content-Type': 'text/html' });
                         res.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
                     }
-                } else if(req.headers['x-requested-LOAD'] === 'XMLHttpRequest') {
+                } else if(req.headers['x-requested-load'] === 'XMLHttpRequest') {
+                    console.log('received load request');
                     if (req.method == 'POST') {
                         app.readData(req, res);
                     } else {
@@ -92,6 +93,7 @@ class app {
         let loadedData = new LOADER(COLUMNS);
         console.log('reading data in on server');
         loadedData.setFinalData('data/customers.csv');
+        loadedData.stringifyData();
         res.writeHead(200, {'content-type': 'text/plain'});
         res.end(loadedData.getFinalData());
     }

@@ -52,7 +52,8 @@ export default class LoadDataClass {
         let bustCache = '?' + new Date().getTime();
         let XHR = new XMLHttpRequest();
         XHR.open("POST", document.url + bustCache, true);
-        XHR.setRequestHeader('x-requested-LOAD', 'XMLHttpRequest');
+        XHR.setRequestHeader('x-requested-load', 'XMLHttpRequest');
+        console.log('sending request');
         XHR.send();
     }
 }

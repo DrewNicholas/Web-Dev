@@ -10,6 +10,7 @@ class DataHandler {
     constructor(columns) {
         this.columns = columns;
         this.finalData = [];
+        this.stringData = "";
     }
 
     setFinalData(dataPath) {
@@ -23,6 +24,19 @@ class DataHandler {
 
     getFinalData() {
         return this.finalData;
+    }
+
+    stringifyData() {
+        const COLUMNS = 8;
+        for (i = 0; i < this.finalData.length; i++) {
+            for (j = 0; j < COLUMNS; j++) {
+                if (j < COLUMNS - 1) {
+
+                } else {
+
+                }
+            }
+        }
     }
 
     writeDataFile_MD(dataPath, data, COLUMNS) {
