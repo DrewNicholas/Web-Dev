@@ -12,8 +12,7 @@ import HoldDataClass from './HoldDataClass';
 
 class main {
     constructor() {
-        new LoadDataClass().loadData('/data/customers.csv', HoldDataClass.setData);
-        //main.doDataShit();
+        new LoadDataClass().loadData(HoldDataClass.setData);
         HoldDataClass.button = [];
         HoldDataClass.setButtons();
         main.currentScreen = "cardNum";
@@ -113,10 +112,10 @@ class main {
         } else if(main.currentScreen == 'announce withdrawn checking' || main.currentScreen == 'announce withdrawn savings' || main.currentScreen == 'announce deposit checking' || main.currentScreen == 'announce deposit savings' || main.currentScreen == 'announce transfer') {
             new ScreenChanger().updateScreen('mainScreen');
             main.currentScreen = 'mainScreen';
-        } else if (main.currentScreen == 'mainscreen') {
+        } else if (main.currentScreen == 'mainScreen') {
             new ScreenChanger().updateScreen('cardNum');
             main.currentScreen = 'cardNum';
-            //main.writeData();
+            main.writeData();
         }
     }
 
@@ -197,7 +196,11 @@ class main {
     }
 
     static writeData() {
-        //write stuff here
+        let bustCache = '?' + new Date().getTime();
+        let XHR = new XMLHttpRequest();
+        XHR.open("POST", document.url + bustCache, true);
+        XHR.setRequestHeader('x-requested-write', 'XMLHttpRequest');
+        XHR.send(HoldDataClass.restringData());
     }
 }
 

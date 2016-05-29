@@ -33,7 +33,11 @@ class DataHandler {
                 if (j < COLUMNS - 1) {
                     this.stringData = this.stringData + this.finalData[i][j] + ",";
                 } else {
-                    this.stringData = this.stringData + this.finalData[i][j] + "\n";
+                    if (i < this.finalData.length -1) {
+                        this.stringData = this.stringData + this.finalData[i][j] + "\n";
+                    } else {
+                        this.stringData = this.stringData + this.finalData[i][j];
+                    }
                 }
             }
         }
@@ -41,6 +45,11 @@ class DataHandler {
 
     getStringData() {
         return this.stringData;
+    }
+
+    writeDataFileString(dataPath, stringData) {
+        const FS = require('fs');
+        let fileHandle = FS.writeFileSync(dataPath, stringData, 'utf8');
     }
 
     writeDataFile_MD(dataPath, data, COLUMNS) {
@@ -68,6 +77,8 @@ class DataHandler {
             }
         }
     }
+
+
 }
 
 module.exports = DataHandler;

@@ -25,9 +25,9 @@ class app {
                         res.end(str);
                     }
                 };
-                //console.log(req.headers);
-                if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+                if (req.headers['x-requested-write'] === 'XMLHttpRequest') {
                     if (req.method == 'POST') {
+                        console.log('received write request');
                         app.writeStuff(req, res);
                     } else {
                         console.log("[405] " + req.method + " to " + req.url);
@@ -101,7 +101,13 @@ class app {
     static writeStuff(req,res) {
         const WRITER = require('./node/DataHandler');
         let output = new WRITER;
-        //output.writeDataFile_MD('data/customers.csv');
+        let data = '';
+        req.on('data', function(chunk) {
+            data += chunk;
+            //console.log(data);
+        }).on('end', function() {
+            output.writeDataFileString('./data/customers.csv', data);
+        });
     }
 }
 

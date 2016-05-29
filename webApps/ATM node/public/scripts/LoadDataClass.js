@@ -10,45 +10,7 @@ export default class LoadDataClass {
 
     }
 
-    /*loadData(filePath, callback) {
-        let request = new XMLHttpRequest();
-        request.open("GET", filePath, true);
-        request.send();
-        request.onload = function() {
-            const COLUMNS = 8;
-            let data, middleData, finalData = [];
-            if (request.readyState === 4 && request.status === 200) {
-                data = request.responseText.split(/\n/);
-            }
-            for (let i = 0; i < data.length; i++) {
-                middleData = data[i].split(/,/);
-                finalData[i] = []; //makes it an MD array
-                for (let j = 0; j < COLUMNS; j++) {
-                    finalData[i][j] = middleData[j];
-                }
-            }
-            callback(finalData);
-        };
-    }*/
-
-    loadData(filePath, callback) {
-        /*let request = new XMLHttpRequest();
-        request.open("POST", filePath, true);
-        request.onload = function() {
-            const COLUMNS = 8;
-            let data, middleData, finalData = [];
-            if (request.readyState === 4 && request.status === 200) {
-                data = request.responseText.split(/\n/);
-            }
-            for (let i = 0; i < data.length; i++) {
-                middleData = data[i].split(/,/);
-                finalData[i] = []; //makes it an MD array
-                for (let j = 0; j < COLUMNS; j++) {
-                    finalData[i][j] = middleData[j];
-                }
-            }
-            callback(finalData);
-        };*/
+    loadData(callback) {
         let bustCache = '?' + new Date().getTime();
         let XHR = new XMLHttpRequest();
         XHR.open("POST", document.url + bustCache, true);
@@ -56,7 +18,7 @@ export default class LoadDataClass {
         console.log('sending request');
         XHR.send();
         XHR.onload = function() {
-            console.log(XHR.responseText);
+            //console.log(XHR.responseText);
             callback(LoadDataClass.unstring(XHR.responseText));
         };
     }

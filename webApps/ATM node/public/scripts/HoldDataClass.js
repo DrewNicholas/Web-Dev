@@ -14,7 +14,6 @@ export default class HoldDataClass {
     static setData(importData) {
         console.log('data set in HoldDataClass');
         HoldDataClass.data = importData;
-        //HoldDataClass.printData();
     }
 
     static getData() {
@@ -76,5 +75,25 @@ export default class HoldDataClass {
                 console.log(this.data[i][j]);
             }
         }
+    }
+
+    static restringData() {
+        const COLUMNS = 8;
+        this.stringData = "";
+        for (let i = 0; i < this.data.length; i++) {
+            for (let j = 0; j < COLUMNS; j++) {
+                if (j < COLUMNS - 1) {
+                    this.stringData = this.stringData + this.data[i][j] + ",";
+                } else {
+                    if (i < this.data.length -1) {
+                        this.stringData = this.stringData + this.data[i][j] + "\n";
+                    } else {
+                        this.stringData = this.stringData + this.data[i][j];
+                    }
+                }
+            }
+        }
+        //console.log(this.stringData);
+        return this.stringData;
     }
 }
